@@ -1,0 +1,95 @@
+@startuml
+class User {
+  name : String
+  emailAddress : String
+}
+
+class Student {
+}
+
+class Tutor {
+  bankAccount : String
+}
+
+class Subject {
+  name : String
+}
+
+class TutoringOffer {
+  expertiseLevel : String
+  hourlyPrice : Decimal
+}
+
+class WeeklyAvailability {
+  dayOfWeek : String
+  startTime : Time
+  endTime : Time
+}
+
+class TutoringRequest {
+  requestedLevel : String
+  requestedDateTime : DateTime
+  alternativeDateTime : DateTime
+  status : String
+}
+
+class TutoringSession {
+  scheduledDateTime : DateTime
+  price : Decimal
+  status : String
+}
+
+class Payment {
+  amount : Decimal
+  paymentDateTime : DateTime
+  method : PaymentMethod
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  WIRE_TRANSFER
+}
+
+class Cancellation {
+  cancellationDateTime : DateTime
+  chargePercentage : Decimal
+}
+
+class DiscountOffer {
+  percentage : Decimal
+}
+
+class TutorOfTheMonthAward {
+  awardMonth : YearMonth
+}
+
+User <|-- Student
+User <|-- Tutor
+
+Tutor "1" -- "0..*" TutoringOffer
+Subject "1" -- "0..*" TutoringOffer
+Tutor "1" -- "0..*" WeeklyAvailability
+
+Student "1" -- "0..*" TutoringRequest
+TutoringOffer "1" -- "0..*" TutoringRequest
+TutoringRequest "0..1" -- "0..1" TutoringSession
+
+Tutor "1" -- "0..*" TutoringSession
+Student "1" -- "0..*" TutoringSession
+Subject "1" -- "0..*" TutoringSession
+TutoringSession "0..1" -- "0..*" TutoringSession
+
+TutoringSession "1" -- "0..1" Payment
+Student "1" -- "0..*" Payment
+
+TutoringSession "1" -- "0..1" Cancellation
+User "1" -- "0..*" Cancellation
+
+Cancellation "0..1" -- "0..1" DiscountOffer
+Tutor "1" -- "0..*" DiscountOffer
+Student "1" -- "0..*" DiscountOffer
+TutoringSession "0..1" -- "0..1" DiscountOffer
+
+Tutor "1" -- "0..*" TutorOfTheMonthAward
+Subject "1" -- "0..*" TutorOfTheMonthAward
+@enduml

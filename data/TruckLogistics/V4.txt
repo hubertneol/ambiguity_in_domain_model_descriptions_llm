@@ -1,0 +1,5 @@
+Locations include vehicles and drivers, with each driver's first and last names recorded. Every location has an address of its own. Vehicles come in three categories: trucks, cars, and vans. All have vehicle numbers; trucks additionally have a weight, while passenger cars have a seat count.
+
+Orders are managed along with the drivers and vehicles. Drivers execute orders, but a driver may work on no more than one assigned order at once. Every order has an origin location, a destination location, at least one assigned driver, and an execution date.
+
+The system also keeps track of the vehicles driven by each driver. For this purpose, a vehicle is assigned to at most one driver who drives it.

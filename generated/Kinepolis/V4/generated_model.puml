@@ -1,0 +1,123 @@
+@startuml
+class Kinepolis {
+}
+
+class Town {
+}
+
+class Cinema {
+}
+
+class Theatre {
+}
+
+class Seat {
+  seatNumber : String
+}
+
+class Movie {
+}
+
+class MovieCopy {
+}
+
+class WeeklyProgram {
+  publicationDate : Date
+  startDate : Date
+  endDate : Date
+}
+
+class Show {
+  startDateTime : DateTime
+  publishedAt : DateTime
+  reservationDeadline : DateTime
+  status : ShowStatus
+}
+
+class Customer {
+  homeAddress : String
+}
+
+class CreditCard {
+}
+
+class SeatReservation {
+  reservedAt : DateTime
+  cancellationDeadline : DateTime
+  status : ReservationStatus
+}
+
+class CreditCardCharge {
+  chargedAt : DateTime
+}
+
+class SeatOffer {
+  expiresAt : DateTime
+  status : SeatOfferStatus
+}
+
+class Ticket {
+}
+
+class EntranceTicket {
+  purchasedAt : DateTime
+}
+
+class FreeTicket {
+  sentAt : DateTime
+}
+
+class TicketingDeskDisplay {
+}
+
+class ShowAvailability {
+  availableSeatCount : Integer
+}
+
+enum ShowStatus {
+  SCHEDULED
+  PUBLISHED
+  CANCELLED
+}
+
+enum ReservationStatus {
+  ACTIVE
+  CANCELLED
+}
+
+enum SeatOfferStatus {
+  PENDING
+  ACCEPTED
+  REFUSED
+  EXPIRED
+}
+
+Kinepolis "1" *-- "2..*" Cinema
+Town "1" -- "0..*" Cinema
+Cinema "1" *-- "2..*" Theatre
+Theatre "1" *-- "1..*" Seat
+Movie "1" -- "1..*" MovieCopy
+Cinema "1" -- "0..*" MovieCopy
+Theatre "1" -- "0..*" Show
+MovieCopy "1" -- "0..*" Show
+Kinepolis "1" -- "0..*" WeeklyProgram
+WeeklyProgram "0..1" -- "1..*" Show
+Customer "1" -- "0..*" SeatReservation
+Show "1" -- "0..*" SeatReservation
+Seat "1" -- "0..*" SeatReservation
+CreditCard "1" -- "0..*" SeatReservation
+SeatReservation "1" -- "0..1" CreditCardCharge
+CreditCard "1" -- "0..*" CreditCardCharge
+SeatReservation "1" -- "0..1" SeatOffer
+Show "1" -- "0..*" SeatOffer
+Seat "1" -- "0..*" SeatOffer
+Ticket <|-- EntranceTicket
+Ticket <|-- FreeTicket
+Show "1" -- "0..*" EntranceTicket
+Seat "1" -- "0..*" EntranceTicket
+SeatReservation "1" -- "0..1" FreeTicket
+Customer "1" -- "0..*" FreeTicket
+Cinema "1" *-- "1" TicketingDeskDisplay
+TicketingDeskDisplay "1" *-- "0..*" ShowAvailability
+Show "1" -- "0..1" ShowAvailability
+@enduml

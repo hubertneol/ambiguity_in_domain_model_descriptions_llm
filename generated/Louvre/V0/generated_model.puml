@@ -1,0 +1,56 @@
+@startuml
+class Museum {
+  name : String
+  city : String
+}
+
+class Location {
+  name : String
+}
+
+class Exhibition {
+  planningStartDate : Date
+  openingDate : Date
+  stageOfAdvancement : String
+}
+
+class ExhibitionItem {
+  description : String
+}
+
+class Piece {
+  description : String
+}
+
+class Collector {
+  name : String
+}
+
+class PieceRequest {
+}
+
+class Employee {
+  name : String
+}
+
+class JuniorEmployee {
+}
+
+class SeniorEmployee {
+}
+
+Employee <|-- JuniorEmployee
+Employee <|-- SeniorEmployee
+
+Museum "1" *-- "1..*" Location
+Museum "1" -- "1..*" Employee
+Location "1" -- "0..*" Exhibition
+Employee "1" -- "0..*" Exhibition
+Exhibition "1" *-- "1..*" ExhibitionItem
+ExhibitionItem "0..*" -- "1..*" Piece
+Collector "1" -- "0..*" Piece
+ExhibitionItem "1" *-- "0..*" PieceRequest
+Piece "1" -- "0..*" PieceRequest
+Collector "1" -- "0..*" PieceRequest
+SeniorEmployee "1" -- "0..*" JuniorEmployee
+@enduml

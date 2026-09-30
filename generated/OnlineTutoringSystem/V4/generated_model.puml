@@ -1,0 +1,117 @@
+@startuml
+class RegisteredUser {
+  name : String
+  emailAddress : String
+}
+
+class Student {
+}
+
+class Tutor {
+  bankAccount : String
+}
+
+class Subject {
+  name : String
+}
+
+class ExpertiseLevel {
+  name : String
+}
+
+class TutoringOffer {
+  hourlyRate : Decimal
+}
+
+class WeeklyAvailability {
+  dayOfWeek : String
+  startTime : Time
+  endTime : Time
+}
+
+class TuitionRequest {
+  requestedAt : DateTime
+}
+
+class SessionTimeProposal {
+  proposedDateTime : DateTime
+  accepted : Boolean
+}
+
+class Session {
+  scheduledDateTime : DateTime
+  price : Decimal
+  tookPlace : Boolean
+}
+
+class Payment {
+  amount : Decimal
+  paidAt : DateTime
+  method : PaymentMethod
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  WIRE_TRANSFER
+}
+
+class Cancellation {
+  cancelledAt : DateTime
+}
+
+class LateStudentCancellationCharge {
+  rate : StudentCancellationChargeRate
+}
+
+enum StudentCancellationChargeRate {
+  PERCENT_75
+}
+
+class LateTutorCancellationDiscount {
+  rate : TutorCancellationDiscountRate
+}
+
+enum TutorCancellationDiscountRate {
+  PERCENT_25
+}
+
+class TutorOfTheMonthAward {
+  awardMonth : YearMonth
+}
+
+RegisteredUser <|-- Student
+RegisteredUser <|-- Tutor
+
+Tutor "1" -- "0..*" TutoringOffer
+Subject "1" -- "0..*" TutoringOffer
+ExpertiseLevel "1" -- "0..*" TutoringOffer
+
+Tutor "1" *-- "0..*" WeeklyAvailability
+
+Student "1" -- "0..*" TuitionRequest
+TutoringOffer "1" -- "0..*" TuitionRequest
+ExpertiseLevel "1" -- "0..*" TuitionRequest
+TuitionRequest "1" *-- "1..*" SessionTimeProposal
+RegisteredUser "1" -- "0..*" SessionTimeProposal
+TuitionRequest "1" -- "0..1" Session
+
+Student "1" -- "0..*" Session
+TutoringOffer "1" -- "0..*" Session
+Session "0..1" -- "0..1" Session
+
+Session "1" -- "0..1" Payment
+Student "1" -- "0..*" Payment
+
+Session "1" -- "0..1" Cancellation
+RegisteredUser "1" -- "0..*" Cancellation
+
+Cancellation "1" -- "0..1" LateStudentCancellationCharge
+Student "1" -- "0..*" LateStudentCancellationCharge
+
+Cancellation "1" -- "0..1" LateTutorCancellationDiscount
+Student "1" -- "0..*" LateTutorCancellationDiscount
+Session "0..1" -- "0..1" LateTutorCancellationDiscount
+
+Tutor "1" -- "0..*" TutorOfTheMonthAward
+Subject "1" -- "0..*" TutorOfTheMonthAward
+@enduml

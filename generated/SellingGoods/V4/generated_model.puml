@@ -1,0 +1,88 @@
+@startuml
+class Customer {
+  vatNumber : String
+}
+
+class Address {
+  details : String
+}
+
+class HeadOfficeAddress {
+}
+
+class DeliveryAddress {
+}
+
+class Product {
+  currentQuantity : Integer
+}
+
+class Order {
+  fulfillmentStatus : OrderFulfillmentStatus
+  fullyShippedAt : DateTime
+}
+
+class OrderLine {
+  orderedQuantity : Integer
+  shipmentStatus : OrderLineShipmentStatus
+}
+
+class Invoice {
+  issuedAt : DateTime
+}
+
+class Payment {
+  paidAt : DateTime
+}
+
+class Delivery {
+  status : DeliveryStatus
+}
+
+class DeliveryEvent {
+  type : DeliveryEventType
+  occurredAt : DateTime
+}
+
+enum OrderFulfillmentStatus {
+  AWAITING_SHIPMENT
+  PARTIALLY_SHIPPED
+  SHIPPED
+}
+
+enum OrderLineShipmentStatus {
+  AWAITING_SHIPMENT
+  DISPATCHED
+}
+
+enum DeliveryStatus {
+  PACKING
+  DISPATCHED
+  RECEIVED
+  MISSING
+  DAMAGED
+}
+
+enum DeliveryEventType {
+  PACKING
+  DISPATCH
+  RECEIPT
+  REPORTED_MISSING
+  REPORTED_DAMAGED
+}
+
+Address <|-- HeadOfficeAddress
+Address <|-- DeliveryAddress
+
+Customer "1" -- "1" HeadOfficeAddress
+Customer "1" -- "1..*" DeliveryAddress
+Customer "1" -- "0..*" Order
+Order "1" *-- "1..*" OrderLine
+Product "1" -- "0..*" OrderLine
+Order "1" *-- "1" Invoice
+Invoice "1" -- "0..1" Payment
+Order "1" -- "0..*" Delivery
+DeliveryAddress "1" -- "0..*" Delivery
+Delivery "0..1" -- "1..*" OrderLine
+Delivery "1" *-- "1..*" DeliveryEvent
+@enduml

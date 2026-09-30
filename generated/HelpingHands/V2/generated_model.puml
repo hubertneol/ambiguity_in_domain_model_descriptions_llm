@@ -1,0 +1,125 @@
+@startuml
+class H2SLocation {
+    city : String
+}
+
+class Resident {
+    name : String
+    streetAddress : String
+    phoneNumber : String
+    emailAddress : Optional<String>
+}
+
+class ScheduledPickup {
+    requestedDate : Date
+    pickupAddress : String
+    pickupWindowStart : Time
+    pickupWindowEnd : Time
+}
+
+class Item {
+    description : String
+    dimensions : String
+    weight : Decimal
+}
+
+class SecondHandArticle {
+}
+
+class NonPerishableFood {
+}
+
+class Vehicle {
+    availableStorageSpace : Decimal
+}
+
+class VolunteerDriver {
+}
+
+class DriverAvailability {
+    availableDate : Date
+}
+
+class PickupRoute {
+    routeDate : Date
+}
+
+class DistributionCenter {
+    offersClientDeliveryService : Boolean
+}
+
+class FoodBank {
+}
+
+class Employee {
+}
+
+class QualityExamination {
+    examinationDate : Date
+    usable : Boolean
+    correctedDescription : Optional<String>
+}
+
+class RFIDDevice {
+    identifier : String
+}
+
+class Category {
+    name : String
+}
+
+class CategoryAssignment {
+    assignmentDate : Date
+}
+
+class Client {
+    homeAddress : String
+}
+
+class ClientCall {
+    callDate : Date
+}
+
+class Delivery {
+    deliveryDate : Date
+    deliveryAddress : String
+}
+
+Item <|-- SecondHandArticle
+Item <|-- NonPerishableFood
+
+H2SLocation "1" *-- "1" DistributionCenter
+H2SLocation "1" -- "1" FoodBank
+H2SLocation "1" *-- "0..*" Vehicle
+H2SLocation "1" -- "0..*" Employee
+H2SLocation "1" -- "0..*" ScheduledPickup
+
+Resident "1" -- "0..*" ScheduledPickup
+ScheduledPickup "1" *-- "1..*" Item
+PickupRoute "0..1" -- "0..*" ScheduledPickup
+
+Vehicle "1" -- "0..*" PickupRoute
+VolunteerDriver "1" -- "0..*" PickupRoute
+VolunteerDriver "1" *-- "0..*" DriverAvailability
+
+DistributionCenter "0..1" -- "0..*" SecondHandArticle
+FoodBank "0..1" -- "0..*" NonPerishableFood
+
+SecondHandArticle "1" -- "0..1" QualityExamination
+Employee "1" -- "0..*" QualityExamination
+SecondHandArticle "1" -- "0..1" RFIDDevice
+
+SecondHandArticle "1" -- "0..1" CategoryAssignment
+Category "1" -- "0..*" CategoryAssignment
+Employee "1" -- "0..*" CategoryAssignment
+
+Client "0..*" -- "0..*" Category
+Client "1" -- "0..*" ClientCall
+Employee "1" -- "0..*" ClientCall
+ClientCall "0..*" -- "0..*" SecondHandArticle
+
+Client "1" -- "0..*" Delivery
+SecondHandArticle "1" -- "0..1" Delivery
+Employee "1" -- "0..*" Delivery
+PickupRoute "0..1" -- "0..*" Delivery
+@enduml

@@ -1,0 +1,105 @@
+@startuml
+class Employee {
+  name : String
+  socialSecurityNumber : String
+}
+
+class OfficeEmployee {
+  username : String
+  password : String
+}
+
+class Driver {
+}
+
+class Planner {
+}
+
+class AdministrativeStaff {
+  fieldOfActivity : String
+}
+
+class Customer {
+  name : String
+  billingAddress : String
+}
+
+class PartnerCompany {
+  name : String
+  address : String
+}
+
+class OrderRecipient {
+}
+
+class Vehicle {
+  licensePlateNumber : String
+}
+
+class RefrigeratedTruck {
+}
+
+class SmallVan {
+}
+
+class LoadingPlatform {
+}
+
+class BoxTruck {
+}
+
+class MileageReading {
+  calendarDate : Date
+  mileage : Integer
+}
+
+class RepairShop {
+  name : String
+  address : String
+}
+
+enum MaintenanceType {
+  REPAIR
+  INSPECTION
+}
+
+class MaintenanceRecord {
+  type : MaintenanceType
+  duration : Duration
+  cost : Decimal
+}
+
+class Order {
+  requiredTransportTime : DateTime
+  packageSize : String
+  comment : String
+  startTime : DateTime
+  finishTime : DateTime
+  pickupAddress : String
+  deliveryAddress : String
+}
+
+Employee <|-- Driver
+Employee <|-- OfficeEmployee
+OfficeEmployee <|-- Planner
+OfficeEmployee <|-- AdministrativeStaff
+
+OrderRecipient <|-- AdministrativeStaff
+OrderRecipient <|-- PartnerCompany
+
+Vehicle <|-- RefrigeratedTruck
+Vehicle <|-- SmallVan
+Vehicle <|-- LoadingPlatform
+Vehicle <|-- BoxTruck
+
+Vehicle "1" *-- "0..*" MileageReading
+Vehicle "1" -- "0..*" MaintenanceRecord
+RepairShop "1" -- "0..*" MaintenanceRecord
+Employee "1" -- "0..*" MaintenanceRecord
+
+Customer "1" -- "0..*" Order
+Driver "1" -- "0..*" Order
+Planner "1" -- "0..*" Order
+Vehicle "1" -- "0..*" Order
+OrderRecipient "1" -- "0..*" Order
+@enduml

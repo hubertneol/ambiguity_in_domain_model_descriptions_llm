@@ -1,0 +1,136 @@
+@startuml
+class OilCompany {
+}
+
+class GasStation {
+}
+
+class Customer {
+  status : CustomerStatus
+  nonPaymentThreshold : Integer
+}
+
+class RefuelCard {
+  status : CardStatus
+}
+
+class PersonalCreditCard {
+}
+
+class Pump {
+  status : PumpStatus
+}
+
+class Reservoir {
+  currentQuantity : Decimal
+  reorderingLevel : Decimal
+  criticalLevel : Decimal
+}
+
+class GasolineType {
+  name : String
+}
+
+class RefuelTurn {
+  nozzleTakenAt : DateTime
+  nozzleReturnedAt : DateTime
+  quantity : Decimal
+  amount : Decimal
+}
+
+class RefuelTurnPayment {
+  amount : Decimal
+  receivedAt : DateTime
+  method : TurnPaymentMethod
+}
+
+class MonthlyInvoice {
+  invoicedMonth : YearMonth
+  turnoverAmount : Decimal
+  discountAmount : Decimal
+  amountDue : Decimal
+}
+
+class InvoiceDispatch {
+  sentAt : DateTime
+  type : DispatchType
+}
+
+class InvoicePayment {
+  amount : Decimal
+  receivedAt : DateTime
+}
+
+class Refill {
+  startedAt : DateTime
+  completedAt : DateTime
+  quantity : Decimal
+}
+
+class PumpBlock {
+  reason : PumpBlockReason
+  blockedAt : DateTime
+  releasedAt : DateTime
+}
+
+class DailyReport {
+  reportDate : Date
+}
+
+class PumpReportEntry {
+  currentLevel : Decimal
+  quantityToOrder : Decimal
+}
+
+enum CustomerStatus {
+  NORMAL
+  SUSPENDED
+}
+
+enum CardStatus {
+  ACTIVE
+  BLOCKED
+}
+
+enum PumpStatus {
+  AVAILABLE
+  REFUELING
+  BLOCKED
+}
+
+enum TurnPaymentMethod {
+  CASH
+  CREDIT_CARD
+}
+
+enum DispatchType {
+  INITIAL
+  REMINDER
+}
+
+enum PumpBlockReason {
+  CRITICAL_LEVEL
+  REFILL_SETTLING
+}
+
+OilCompany "1" *-- "1..*" GasStation
+GasStation "1" *-- "1..*" Pump
+GasolineType "1" -- "0..*" Pump
+Pump "1" *-- "1" Reservoir
+Pump "1" -- "0..*" RefuelTurn
+Customer "1" -- "0..*" RefuelTurn
+Customer "1" -- "0..1" RefuelCard
+Customer "1" -- "0..*" PersonalCreditCard
+RefuelCard "0..1" -- "0..*" RefuelTurn
+RefuelTurn "1" -- "0..1" RefuelTurnPayment
+PersonalCreditCard "0..1" -- "0..*" RefuelTurnPayment
+Customer "1" -- "0..*" MonthlyInvoice
+MonthlyInvoice "0..1" -- "0..*" RefuelTurn
+MonthlyInvoice "1" *-- "0..*" InvoiceDispatch
+MonthlyInvoice "1" -- "0..1" InvoicePayment
+Reservoir "1" *-- "0..*" Refill
+Pump "1" *-- "0..*" PumpBlock
+OilCompany "1" *-- "0..*" DailyReport
+DailyReport "1" *-- "0..*" PumpReportEntry
+Pump "1" -- "0..*" PumpReportEntry
+@enduml

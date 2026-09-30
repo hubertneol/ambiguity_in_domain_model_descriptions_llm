@@ -1,0 +1,116 @@
+@startuml
+class Kinepolis {
+}
+
+class Cinema {
+    town : String
+}
+
+class Theatre {
+    capacity : Integer
+}
+
+class Seat {
+    seatNumber : String
+}
+
+class Movie {
+}
+
+class MovieCopy {
+}
+
+class WeeklyProgram {
+    publicationDate : Date
+    periodStart : Date
+    periodEnd : Date
+}
+
+class Show {
+    startTime : DateTime
+    reservationDeadline : DateTime
+    status : ShowStatus
+}
+
+enum ShowStatus {
+    PROGRAMMED
+    PUBLISHED
+    CANCELLED
+}
+
+class Customer {
+    homeAddress : String
+}
+
+class Reservation {
+    reservedAt : DateTime
+    cancellationDeadline : DateTime
+    cancelledAt : DateTime
+    status : ReservationStatus
+}
+
+enum ReservationStatus {
+    ACTIVE
+    CANCELLED
+}
+
+class CreditCard {
+}
+
+class Payment {
+    debitAt : DateTime
+    status : PaymentStatus
+}
+
+enum PaymentStatus {
+    SCHEDULED
+    DEBITED
+}
+
+class SeatOffer {
+    expiresAt : DateTime
+    status : OfferStatus
+}
+
+enum OfferStatus {
+    PENDING
+    ACCEPTED
+    DECLINED
+    EXPIRED
+}
+
+class Ticket {
+    issuedAt : DateTime
+}
+
+class EntranceTicket {
+}
+
+class FreeTicket {
+    sentHomeAt : DateTime
+}
+
+Kinepolis "1" *-- "1..*" Cinema
+Cinema "1" *-- "1..*" Theatre
+Theatre "1" *-- "1..*" Seat
+Cinema "1" -- "0..*" MovieCopy
+Movie "1" -- "0..*" MovieCopy
+Cinema "1" *-- "0..*" WeeklyProgram
+WeeklyProgram "1" *-- "1..*" Show
+Theatre "1" -- "0..*" Show
+MovieCopy "1" -- "0..*" Show
+Show "1" -- "0..*" Reservation
+Customer "1" -- "0..*" Reservation
+Seat "1" -- "0..*" Reservation
+Reservation "1" *-- "1" Payment
+CreditCard "1" -- "0..*" Payment
+Reservation "1" -- "0..1" SeatOffer
+Show "1" -- "0..*" SeatOffer
+Seat "1" -- "0..*" SeatOffer
+Ticket <|-- EntranceTicket
+Ticket <|-- FreeTicket
+Show "1" -- "0..*" EntranceTicket
+Seat "1" -- "0..*" EntranceTicket
+Reservation "1" -- "0..1" FreeTicket
+Customer "1" -- "0..*" FreeTicket
+@enduml

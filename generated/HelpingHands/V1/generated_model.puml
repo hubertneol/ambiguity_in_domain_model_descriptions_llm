@@ -1,0 +1,122 @@
+@startuml
+class H2S {
+}
+
+class H2SLocation {
+    city : String
+}
+
+class DistributionCenter {
+    offersClientDeliveryService : Boolean
+}
+
+class FoodBank {
+}
+
+class Resident {
+    name : String
+    streetAddress : String
+    phoneNumber : String
+    email : String [0..1]
+}
+
+class ScheduledPickup {
+    requestedDate : Date
+    pickupWindowStart : Time
+    pickupWindowEnd : Time
+}
+
+class DonatedItem {
+    description : String
+    dimensions : String
+    weight : Decimal
+}
+
+class SecondHandArticle {
+}
+
+class NonPerishableFood {
+}
+
+class PickupVehicle {
+    availableStorageSpace : Decimal
+}
+
+class VolunteerDriver {
+}
+
+class DriverAvailability {
+    availableDate : Date
+}
+
+class PickupRoute {
+    routeDate : Date
+}
+
+class Employee {
+}
+
+class QualityInspection {
+    examinationDate : Date
+    usable : Boolean
+}
+
+class RFIDDevice {
+}
+
+class Category {
+    name : String
+}
+
+class Client {
+    homeAddress : String
+}
+
+class NotificationCall {
+    callDate : Date
+}
+
+class ArticleDelivery {
+    deliveryDate : Date
+}
+
+DonatedItem <|-- SecondHandArticle
+DonatedItem <|-- NonPerishableFood
+
+H2S "1" o-- "1..*" H2SLocation
+H2S "1" *-- "134" Category
+H2SLocation "1" *-- "1" DistributionCenter
+H2SLocation "1" *-- "0..*" PickupVehicle
+H2SLocation "1" -- "0..*" ScheduledPickup
+H2SLocation "1" -- "1" FoodBank
+
+Resident "1" -- "0..*" ScheduledPickup
+ScheduledPickup "1" *-- "1..*" DonatedItem
+
+PickupVehicle "1" -- "0..*" PickupRoute
+VolunteerDriver "1" -- "0..*" PickupRoute
+VolunteerDriver "1" *-- "0..*" DriverAvailability
+PickupRoute "0..1" -- "1..*" ScheduledPickup
+
+DistributionCenter "1" -- "0..*" Employee
+DistributionCenter "1" -- "0..*" SecondHandArticle
+FoodBank "1" -- "0..*" NonPerishableFood
+
+SecondHandArticle "1" *-- "0..1" QualityInspection
+Employee "1" -- "0..*" QualityInspection
+SecondHandArticle "1" *-- "0..1" RFIDDevice
+Category "0..1" -- "0..*" SecondHandArticle
+
+DistributionCenter "1" -- "0..*" Client
+Client "0..*" -- "0..*" Category
+Employee "1" -- "0..*" NotificationCall
+Client "1" -- "0..*" NotificationCall
+NotificationCall "0..*" -- "1..*" SecondHandArticle
+
+NotificationCall "1" -- "0..*" ArticleDelivery
+Employee "1" -- "0..*" ArticleDelivery
+Client "1" -- "0..*" ArticleDelivery
+VolunteerDriver "1" -- "0..*" ArticleDelivery
+PickupRoute "1" -- "0..*" ArticleDelivery
+ArticleDelivery "0..1" -- "1" SecondHandArticle
+@enduml

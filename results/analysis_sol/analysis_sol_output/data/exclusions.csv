@@ -1,0 +1,36 @@
+case_id,version,run,error,reason
+Cruise,V0,1,"ValueError: Unrecognized line 51: '<> diamond'
+Context:
+    49: }
+    50: 
+>>> 51: <> diamond
+    52: 
+    53: Cruise ""0..*""--""0..1"" ProviderCompany",ValueError: Unrecognized line 51: '<> diamond'
+Cruise,V1,1,"ValueError: Unrecognized line 51: '<> diamond'
+Context:
+    49: }
+    50: 
+>>> 51: <> diamond
+    52: 
+    53: Cruise ""0..*""--""0..1"" ProviderCompany",ValueError: Unrecognized line 51: '<> diamond'
+Cruise,V2,1,"ValueError: Unrecognized line 51: '<> diamond'
+Context:
+    49: }
+    50: 
+>>> 51: <> diamond
+    52: 
+    53: Cruise ""0..*""--""0..1"" ProviderCompany",ValueError: Unrecognized line 51: '<> diamond'
+Cruise,V3,1,"ValueError: Unrecognized line 51: '<> diamond'
+Context:
+    49: }
+    50: 
+>>> 51: <> diamond
+    52: 
+    53: Cruise ""0..*""--""0..1"" ProviderCompany",ValueError: Unrecognized line 51: '<> diamond'
+Cruise,V4,1,"ValueError: Unrecognized line 51: '<> diamond'
+Context:
+    49: }
+    50: 
+>>> 51: <> diamond
+    52: 
+    53: Cruise ""0..*""--""0..1"" ProviderCompany",ValueError: Unrecognized line 51: '<> diamond'

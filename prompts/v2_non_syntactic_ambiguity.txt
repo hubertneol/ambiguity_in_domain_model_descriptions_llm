@@ -1,0 +1,35 @@
+Transform the provided natural-language domain description according to the V2 Non-Syntactic Ambiguity condition.
+
+Your task is to introduce exactly one deliberate non-syntactic ambiguity affecting model-relevant information while keeping the text grammatically well formed.
+
+Select exactly one model-relevant statement and rewrite it so that at least two genuinely plausible and discrete interpretations are possible, even though the grammatical structure of the sentence remains valid.
+
+The ambiguity may concern:
+
+- which class or entity an attribute belongs to
+- which entity participates in a relationship
+- which entity a pronoun or referring expression refers to
+- the scope of a relationship or constraint
+- a word or expression that has two plausible domain-specific interpretations in the given context
+
+Requirements:
+
+- Introduce exactly one ambiguous model-relevant statement.
+- The ambiguity must allow at least two genuinely plausible and discrete interpretations.
+- Before producing the transformed text, internally verify that you could state at least two distinct interpretations of the introduced ambiguity.
+- Do not output those interpretations.
+- Do not introduce weak ambiguity where the surrounding context makes one interpretation clearly dominant.
+- Do not deliberately introduce syntactic ambiguity.
+- Do not introduce contradictions or semantic anomalies.
+- Preserve all model-relevant information from the original description except for the intended ambiguity of the selected statement.
+- Preserve every explicit number, numerical bound, cardinality, and multiplicity exactly as stated in the original.
+- Do not replace precise information with vague or less precise expressions such as "a few", "several", "some", "many", "a small number of", or similar wording.
+- Vagueness or underspecification does not count as non-syntactic ambiguity.
+- Do not introduce a second independent ambiguity.
+- Do not add unrelated domain information.
+- Modify as little of the original description as necessary.
+- Keep the text natural and grammatically correct.
+
+Return only the transformed domain description.
+Do not explain the ambiguity.
+Do not add headings, comments, notes, or analysis.

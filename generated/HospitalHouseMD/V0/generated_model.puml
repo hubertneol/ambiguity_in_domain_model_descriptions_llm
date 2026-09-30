@@ -1,0 +1,82 @@
+@startuml
+class HospitalHouseMD {
+}
+
+class Patient {
+}
+
+class Symptom {
+}
+
+class Doctor {
+}
+
+class HeadDoctor {
+}
+
+class Nurse {
+}
+
+class Diagnosis {
+}
+
+class DiagnosisApproval {
+}
+
+class Illness {
+  priorityScore : PriorityScore
+}
+
+class Treatment {
+}
+
+class AppliedTreatment {
+  stage : TreatmentStage
+}
+
+class ConsentForm {
+  signed : Boolean
+  retracted : Boolean
+}
+
+class FollowUpCheck {
+}
+
+enum PriorityScore {
+  HIGH
+  LOW
+}
+
+enum TreatmentStage {
+  STAGE_1
+  STAGE_2
+  STAGE_3
+}
+
+Doctor <|-- HeadDoctor
+
+HospitalHouseMD "1" -- "0..*" Patient
+HospitalHouseMD "1" -- "1..*" Doctor
+HospitalHouseMD "1" -- "1" HeadDoctor
+HospitalHouseMD "1" -- "0..*" Nurse
+HospitalHouseMD "1" -- "0..*" Illness
+
+Patient "0..*" -- "1..*" Doctor
+Patient "0..*" -- "1..*" Symptom
+Patient "1" -- "0..*" Diagnosis
+Patient "1" -- "0..*" ConsentForm
+
+Doctor "1" -- "0..*" Diagnosis
+HeadDoctor "1" -- "0..*" DiagnosisApproval
+Diagnosis "1" -- "0..1" DiagnosisApproval
+
+Illness "1" -- "0..*" Diagnosis
+Illness "0..*" -- "0..*" Treatment
+
+Diagnosis "1" -- "0..*" AppliedTreatment
+Treatment "1" -- "0..*" AppliedTreatment
+
+AppliedTreatment "1" -- "0..*" FollowUpCheck
+Doctor "0..1" -- "0..*" FollowUpCheck
+Nurse "0..1" -- "0..*" FollowUpCheck
+@enduml

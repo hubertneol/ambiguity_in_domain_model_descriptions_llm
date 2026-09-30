@@ -1,0 +1,178 @@
+@startuml
+class Home {
+}
+
+class Department {
+}
+
+class Room {
+}
+
+class Bed {
+}
+
+class Category {
+  type : CategoryType
+  price : Decimal
+}
+
+enum CategoryType {
+  RH
+  RNH
+  SF
+}
+
+class Person {
+}
+
+class Inhabitant {
+}
+
+class Representative {
+}
+
+class Registration {
+  registrationDate : Date
+}
+
+class Question {
+  text : String
+}
+
+class IdentificationQuestion {
+}
+
+class AbilityQuestion {
+}
+
+class RegistrationAnswer {
+  value : String
+}
+
+class AssessmentAnswer {
+  value : String
+}
+
+class Assessment {
+  assessmentDate : Date
+  status : AssessmentStatus
+}
+
+enum AssessmentStatus {
+  ASSESSED
+  VALIDATED
+  INVALIDATED
+}
+
+class WaitingList {
+}
+
+class WaitingListEntry {
+  registrationDate : Date
+  position : Integer
+}
+
+class Proposal {
+  proposalDate : Date
+  responseDeadline : Date
+  responseDate : Date
+  status : ProposalStatus
+}
+
+enum ProposalStatus {
+  PROPOSED
+  ACCEPTED
+  REFUSED
+}
+
+class Stay {
+  startDate : Date
+  endDate : Date
+  status : StayStatus
+  endReason : StayEndReason
+}
+
+enum StayStatus {
+  ACTIVE
+  SUSPENDED
+  ENDED
+}
+
+enum StayEndReason {
+  DEATH
+  MOVED
+}
+
+class Invoice {
+  billingMonth : YearMonth
+  issueDate : Date
+  totalAmount : Decimal
+  outstandingAmount : Decimal
+  status : InvoiceStatus
+}
+
+enum InvoiceStatus {
+  UNPAID
+  PAID
+}
+
+class InvoiceItem {
+  amount : Decimal
+  discountAmount : Decimal
+}
+
+class PaymentEvent {
+  paymentDate : Date
+  amount : Decimal
+}
+
+class CreditNote {
+  creationDate : Date
+  amount : Decimal
+}
+
+class RefundEvent {
+  refundDate : Date
+  amount : Decimal
+}
+
+Person <|-- Inhabitant
+Question <|-- IdentificationQuestion
+Question <|-- AbilityQuestion
+
+Home "1" *-- "1..*" Department
+Department "1" *-- "1..*" Room
+Room "1" *-- "1..*" Bed
+Home "1" -- "3" Category
+Category "1" -- "0..*" Bed
+
+Person "1" -- "1" Registration
+Registration "1" *-- "1..*" RegistrationAnswer
+IdentificationQuestion "1" -- "0..*" RegistrationAnswer
+
+Person "1" -- "0..*" Assessment
+Assessment "1" *-- "1..*" AssessmentAnswer
+AbilityQuestion "1" -- "0..*" AssessmentAnswer
+Category "1" -- "0..*" Assessment
+
+Category "1" -- "1" WaitingList
+WaitingList "1" *-- "0..*" WaitingListEntry
+Person "1" -- "0..1" WaitingListEntry
+WaitingListEntry "1" -- "0..*" Proposal
+Bed "1" -- "0..*" Proposal
+Proposal "0..1" -- "0..1" Assessment
+
+Inhabitant "1" -- "1..*" Stay
+Category "1" -- "0..*" Stay
+Bed "1" -- "0..*" Stay
+Proposal "0..1" -- "0..1" Stay
+Inhabitant "1" -- "0..1" Representative
+
+Inhabitant "1" -- "0..*" Invoice
+Invoice "1" *-- "1..*" InvoiceItem
+Stay "1" -- "0..*" InvoiceItem
+Invoice "1" -- "0..*" PaymentEvent
+Invoice "1" -- "0..*" CreditNote
+PaymentEvent "1" -- "0..1" CreditNote
+CreditNote "1" -- "1" RefundEvent
+@enduml

@@ -1,0 +1,117 @@
+@startuml
+class TileOApplication {
+}
+
+class GameDesigner {
+}
+
+class BoardGame {
+    numberOfPlayers : Integer
+}
+
+class Board {
+}
+
+class Tile {
+    color : TileColor
+}
+
+enum TileColor {
+    WHITE
+    BLACK
+}
+
+class HiddenTileDesignation {
+}
+
+class ActionTileDesignation {
+    inactiveTurnDuration : Integer
+    remainingInactiveTurns : Integer
+    revealed : Boolean
+    active : Boolean
+}
+
+class StartingPosition {
+    playerNumber : Integer
+}
+
+class Connection {
+}
+
+class ConnectionEnd {
+    side : TileSide
+}
+
+enum TileSide {
+    RIGHT
+    LEFT
+    TOP
+    BOTTOM
+}
+
+class ConnectionPiece {
+}
+
+class SpareConnectionPile {
+    initialQuantity : Integer
+}
+
+class ActionDeck {
+    nextCardPosition : Integer
+}
+
+class ActionCard {
+    sequencePosition : Integer
+    actionType : ActionType
+}
+
+enum ActionType {
+    ROLL_DIE_FOR_EXTRA_TURN
+    CONNECT_TWO_ADJACENT_TILES
+    REMOVE_CONNECTION_PIECE
+    MOVE_TO_ARBITRARY_OTHER_TILE
+    LOSE_NEXT_TURN
+}
+
+class GameSession {
+    currentPlayerNumber : Integer
+    ended : Boolean
+}
+
+class Player {
+    playerNumber : Integer
+    winner : Boolean
+}
+
+class PlayingPiece {
+    color : String
+}
+
+class Die {
+    lastRoll : Integer
+}
+
+GameDesigner "1" -- "0..*" BoardGame
+BoardGame "1" *-- "1" Board
+BoardGame "1" *-- "1" ActionDeck
+BoardGame "1" *-- "1" SpareConnectionPile
+Board "1" *-- "1..*" Tile
+Board "1" *-- "1" HiddenTileDesignation
+Board "1" *-- "0..*" ActionTileDesignation
+Board "1" *-- "2..4" StartingPosition
+Board "1" *-- "0..*" Connection
+Tile "1" -- "0..1" HiddenTileDesignation
+Tile "1" -- "0..1" ActionTileDesignation
+Tile "1" -- "0..*" StartingPosition
+Connection "1" *-- "2" ConnectionEnd
+Tile "1" -- "0..4" ConnectionEnd
+ConnectionPiece "1" -- "0..1" Connection
+SpareConnectionPile "0..1" o-- "0..*" ConnectionPiece
+ActionDeck "1" *-- "32" ActionCard
+TileOApplication "1" *-- "0..1" GameSession
+BoardGame "1" -- "0..1" GameSession
+GameSession "1" *-- "2..4" Player
+GameSession "1" *-- "1" Die
+Player "1" *-- "1" PlayingPiece
+Tile "1" -- "0..*" PlayingPiece
+@enduml

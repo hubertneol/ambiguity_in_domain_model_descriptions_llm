@@ -1,0 +1,140 @@
+@startuml
+class TileOApplication {
+}
+
+class Designer {
+}
+
+class BoardGame {
+    name : String
+}
+
+class GameSession {
+    status : GameStatus
+}
+
+class GameResult {
+}
+
+class Board {
+}
+
+class Tile {
+    color : TileColor
+}
+
+class TileSide {
+    side : Side
+}
+
+class HiddenTileDesignation {
+}
+
+class ActionTileDesignation {
+    regularTurnDuration : Integer
+    remainingRegularTurns : Integer
+    revealed : Boolean
+}
+
+class StartingPosition {
+    playerNumber : Integer
+}
+
+class BoardConnection {
+}
+
+class ConnectionPiece {
+}
+
+class SpareConnectionPile {
+    initialCount : Integer
+}
+
+class ActionDeck {
+}
+
+class ActionCard {
+    position : Integer
+    actionType : ActionType
+}
+
+class Player {
+    playerNumber : Integer
+    skipNextTurn : Boolean
+}
+
+class PlayingPiece {
+    color : String
+}
+
+class Turn {
+    sequenceNumber : Integer
+    extraTurn : Boolean
+    skipped : Boolean
+}
+
+class Die {
+}
+
+class DieRoll {
+    value : Integer
+}
+
+enum TileColor {
+    WHITE
+    BLACK
+}
+
+enum Side {
+    RIGHT
+    LEFT
+    TOP
+    BOTTOM
+}
+
+enum ActionType {
+    ROLL_DIE_FOR_EXTRA_TURN
+    CONNECT_TWO_ADJACENT_TILES
+    REMOVE_CONNECTION_PIECE
+    MOVE_TO_ARBITRARY_OTHER_TILE
+    LOSE_NEXT_TURN
+}
+
+enum GameStatus {
+    IN_PROGRESS
+    ENDED
+}
+
+TileOApplication "1" o-- "0..*" BoardGame
+TileOApplication "1" *-- "0..1" GameSession
+Designer "1" -- "0..*" BoardGame
+BoardGame "1" -- "0..1" GameSession
+BoardGame "1" *-- "1" Board
+BoardGame "1" *-- "1" ActionDeck
+BoardGame "1" *-- "1" SpareConnectionPile
+BoardGame "1" *-- "0..*" ConnectionPiece
+BoardGame "1" *-- "2..4" StartingPosition
+Board "1" *-- "1..*" Tile
+Board "1" *-- "0..*" BoardConnection
+Board "1" *-- "1" HiddenTileDesignation
+Board "1" *-- "0..*" ActionTileDesignation
+Tile "1" *-- "4" TileSide
+HiddenTileDesignation "0..1" -- "1" Tile
+ActionTileDesignation "0..1" -- "1" Tile
+StartingPosition "0..*" -- "1" Tile
+TileSide "2" -- "0..1" BoardConnection
+BoardConnection "0..1" -- "1" ConnectionPiece
+SpareConnectionPile "0..1" o-- "0..*" ConnectionPiece
+ActionDeck "1" *-- "32" ActionCard
+GameSession "1" *-- "2..4" Player
+GameSession "1" *-- "0..*" Turn
+GameSession "1" *-- "1" Die
+GameSession "1" *-- "0..1" GameResult
+Player "1" *-- "1" PlayingPiece
+StartingPosition "1" -- "0..1" Player
+PlayingPiece "0..*" -- "1" Tile
+Player "1" -- "0..*" Turn
+Turn "1" *-- "0..1" DieRoll
+Die "1" -- "0..*" DieRoll
+Player "1" -- "0..1" GameResult
+@enduml

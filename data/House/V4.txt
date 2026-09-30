@@ -1,0 +1,5 @@
+For each house, records contain its address and construction material, chosen from wood, brick, and concrete. A house can include a basement, whose name and size are recorded. Basements come in precisely two varieties: earth and concrete. For an earth basement, the humidity level is recorded too.
+
+Semi-detached houses are a specialized form of house. Their additional recorded details are whether they have a garden of their own and their window count. Each has either a pair of carports or a garage. Carport records indicate whether the carport is double and whether its roof is flat. Garage records indicate whether the garage door is automatic.
+
+Several companies service a house. Each company's name and address are kept on record. Whenever one of these companies performs work at a house, a job log captures the hours worked and the price agreed.

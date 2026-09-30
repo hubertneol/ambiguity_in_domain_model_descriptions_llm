@@ -1,0 +1,123 @@
+@startuml
+class SmartHomeAutomationSystem {
+  operational : Boolean
+}
+
+class InfrastructureMap {
+}
+
+class User {
+}
+
+class SmartHome {
+  physicalAddress : String
+}
+
+class Room {
+  name : String
+}
+
+class Device {
+  deviceIdentifier : String
+  active : Boolean
+}
+
+class SensorDevice {
+  sensorType : String
+}
+
+class ActuatorDevice {
+  actuatorType : String
+}
+
+class SensorReading {
+  measuredValue : Any
+  timestamp : DateTime
+}
+
+class ControlCommand {
+  commandName : String
+  timestamp : DateTime
+  status : String
+}
+
+class ActivityLog {
+}
+
+class AutomationRule {
+  active : Boolean
+}
+
+class Precondition {
+}
+
+class BooleanExpression {
+}
+
+class BooleanOperation {
+  operator : BooleanOperator
+}
+
+class AtomicRelationalTerm {
+  relationalOperator : String
+  comparisonValue : Any
+}
+
+enum BooleanOperator {
+  AND
+  OR
+  NOT
+}
+
+class Action {
+}
+
+class ActionStep {
+  sequenceNumber : Integer
+}
+
+class RuleTrigger {
+  timestamp : DateTime
+}
+
+Device <|-- SensorDevice
+Device <|-- ActuatorDevice
+BooleanExpression <|-- BooleanOperation
+BooleanExpression <|-- AtomicRelationalTerm
+
+SmartHomeAutomationSystem "1" *-- "1" InfrastructureMap
+SmartHomeAutomationSystem "1" -- "0..*" User
+SmartHomeAutomationSystem "1" -- "0..*" SmartHome
+InfrastructureMap "1" -- "0..*" Device
+
+User "1" -- "0..*" SmartHome : owns
+SmartHome "1" *-- "1..*" Room
+Room "1" *-- "0..*" Device
+
+SensorDevice "1" *-- "0..*" SensorReading
+ActuatorDevice "1" -- "0..*" ControlCommand
+
+SmartHome "1" *-- "1" ActivityLog
+ActivityLog "1" -- "0..*" SensorReading
+ActivityLog "1" -- "0..*" ControlCommand
+
+SmartHome "1" *-- "0..*" AutomationRule
+User "1" -- "0..*" AutomationRule : createsAndManages
+AutomationRule "1" *-- "1" Precondition
+Precondition "1" *-- "1" BooleanExpression
+BooleanOperation "0..1" *-- "1..*" BooleanExpression
+
+AtomicRelationalTerm "0..*" -- "0..*" Room
+AtomicRelationalTerm "0..*" -- "0..*" SensorDevice
+AtomicRelationalTerm "0..*" -- "0..*" ActuatorDevice
+AtomicRelationalTerm "0..*" -- "0..*" SensorReading
+AtomicRelationalTerm "0..*" -- "0..*" ControlCommand
+
+AutomationRule "1" *-- "1" Action
+Action "1" *-- "1..*" ActionStep
+ActionStep "0..1" -- "1" ControlCommand
+
+AutomationRule "1" *-- "0..*" RuleTrigger
+AutomationRule "0..*" -- "0..*" AutomationRule : dependsOn
+AutomationRule "0..*" -- "0..*" AutomationRule : conflictsWith
+@enduml

@@ -1,0 +1,3 @@
+Students arrange appointments with the teaching assistants for the courses they take in order to ask course-related questions. Because demand is high, a system records every appointment between a teaching assistant and one or more students.
+
+Requesting an appointment for a course is permitted only if the student is registered for it. Likewise, a teaching assistant may help only with courses they teach. Each appointment concerns precisely one course and involves one specific assistant who serves as a TA for that course.

@@ -1,0 +1,21 @@
+You manage a project at a medium-sized software company and are responsible for delivering the system described here successfully. The exam's first five tasks build its specification progressively.
+
+Brief description:
+An infrastructure and software platform captures energy consumption data in private homes.
+
+Customer:
+HomeTec is a small building-engineering company that makes sensors for installation in private homes. Like your company, it is based in Aachen.
+
+System details:
+E-Home-2020 comprises multiple sensors reporting their readings to a connected SensorController. The SensorController additionally records information about the apartment and its inhabitants. Using usernames and passwords, inhabitants can log in to query readings from each installed sensor and set a threshold per sensor. An attached external system, E-Monitor, checks every sensor's thresholds automatically. When a threshold is exceeded, E-Monitor sends an alert through E-Home-2020 if an email address has been specified for the apartment.
+
+Some inhabitants hold administrative privileges for sensor configuration. They can change a sensor's description or assign it to another room.
+
+HomeTec currently makes two sensor types: temperature and power. Power sensors are installed between a power socket and an appliance in plug-and-play fashion. Temperature sensors specify a valid range with minimum and maximum values. Power sensors keep total power consumption as a counter reading.
+
+Every sensor has a unique vendor-id, a description—for example “temperature radiator living room” or “power consumption microwave oven”—and a unit. The possible units are CELSIUS and WATT. A sensor belongs to exactly one room. An apartment has an address and no fewer than two rooms. Each room has a description, such as “living room”.
+
+The system stores each sensor's measured values and makes them available for queries. Every measured value includes a timestamp and its reading as a floating-point number. Direct access to a sensor's most recent value supports quick retrieval.
+
+Project goal:
+Develop a prototype that supplies essential functionality while operating on a specified target platform in a specified environment.

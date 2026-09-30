@@ -1,0 +1,74 @@
+@startuml
+class IdentifiedObject {
+  id : ID
+}
+
+class Game {
+}
+
+class Player {
+}
+
+class CardDeck {
+}
+
+class Card {
+  height : CardHeight
+  suit : Suit
+}
+
+class ScoringTable {
+}
+
+class Round {
+  pointsValue : Integer
+}
+
+class JackRound {
+}
+
+class SoloRound {
+  soloType : SoloType
+}
+
+class MandatorySoloRound {
+}
+
+enum Suit {
+  HEARTS
+  DIAMONDS
+  CLUBS
+  SPADES
+}
+
+enum CardHeightComparisonResult {
+  LOWER
+  EQUAL
+  HIGHER
+}
+
+enum SoloType {
+  TRUMP
+  JACK
+  QUEEN
+}
+
+IdentifiedObject <|-- Game
+IdentifiedObject <|-- Player
+IdentifiedObject <|-- CardDeck
+IdentifiedObject <|-- Card
+IdentifiedObject <|-- ScoringTable
+IdentifiedObject <|-- Round
+
+Round <|-- JackRound
+Round <|-- SoloRound
+SoloRound <|-- MandatorySoloRound
+
+Game "1" *-- "4" Player
+Game "1" *-- "1" CardDeck
+Game "1" *-- "1" ScoringTable
+CardDeck "1" *-- "0..48" Card
+ScoringTable "1" *-- "0..*" Round
+Round "0..*" -- "1..*" Player
+SoloRound "0..*" -- "1" Player
+@enduml

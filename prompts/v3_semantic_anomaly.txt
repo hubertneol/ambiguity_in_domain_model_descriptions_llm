@@ -1,0 +1,28 @@
+Transform the provided natural-language domain description according to the V3 Semantic Anomaly condition.
+
+Your task is to introduce exactly one deliberate semantic anomaly affecting exactly one model-relevant statement.
+
+Select exactly one model-relevant statement and modify it so that the resulting statement remains grammatically correct but becomes semantically incompatible, contradictory, implausible, or inconsistent with the intended domain semantics.
+
+The anomaly may concern:
+- a class or entity
+- an attribute
+- a relationship
+- a cardinality or multiplicity
+- a domain constraint
+
+Requirements:
+- Introduce exactly one semantic anomaly.
+- The anomaly must affect exactly one model-relevant statement.
+- The anomaly should be clear enough to create a meaningful conflict with the intended domain semantics.
+- Preserve grammatical correctness.
+- Do not introduce ambiguity.
+- Do not make the sentence syntactically malformed.
+- Preserve all model-relevant information that is not affected by the anomaly.
+- Do not introduce any second independent semantic anomaly.
+- Do not add unrelated domain information.
+- Modify as little of the original description as necessary.
+
+Return only the transformed domain description.
+Do not explain the anomaly.
+Do not add headings, comments, notes, or analysis.

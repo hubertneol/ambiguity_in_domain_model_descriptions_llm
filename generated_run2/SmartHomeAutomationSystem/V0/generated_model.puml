@@ -1,0 +1,137 @@
+@startuml
+class SmartHomeAutomationSystem {
+  operational : Boolean
+}
+
+class InfrastructureMap {
+}
+
+class User {
+}
+
+class Owner {
+}
+
+class SmartHome {
+  physicalAddress : String
+}
+
+class Room {
+  name : String
+}
+
+class Device {
+  deviceIdentifier : String
+  activationStatus : DeviceActivationStatus
+}
+
+class SensorDevice {
+  sensorType : String
+}
+
+class ActuatorDevice {
+  actuatorType : String
+}
+
+class SensorReading {
+  measuredValue : String
+  timestamp : DateTime
+}
+
+class ControlCommand {
+  commandName : String
+  timestamp : DateTime
+  status : String
+  sequenceNumber : Integer
+}
+
+class ActivityLog {
+}
+
+class AutomationRule {
+  name : String
+  status : RuleStatus
+}
+
+class RulePrecondition {
+}
+
+class BooleanExpression {
+}
+
+class BooleanOperation {
+  operator : BooleanOperator
+}
+
+class RelationalTerm {
+  relationalOperator : String
+  comparisonValue : String
+}
+
+class AutomationAction {
+}
+
+class RuleTrigger {
+  timestamp : DateTime
+}
+
+class RuleRelationship {
+}
+
+class RuleDependency {
+}
+
+class RuleConflict {
+}
+
+enum DeviceActivationStatus {
+  ACTIVATED
+  DEACTIVATED
+}
+
+enum RuleStatus {
+  ACTIVATED
+  DEACTIVATED
+}
+
+enum BooleanOperator {
+  AND
+  OR
+  NOT
+}
+
+User <|-- Owner
+Device <|-- SensorDevice
+Device <|-- ActuatorDevice
+BooleanExpression <|-- BooleanOperation
+BooleanExpression <|-- RelationalTerm
+RuleRelationship <|-- RuleDependency
+RuleRelationship <|-- RuleConflict
+
+SmartHomeAutomationSystem "1" -- "0..*" User
+SmartHomeAutomationSystem "1" *-- "1" InfrastructureMap
+InfrastructureMap "1" -- "0..*" SmartHome
+Owner "1" -- "0..*" SmartHome
+SmartHome "1" *-- "1..*" Room
+Room "1" *-- "0..*" SensorDevice
+Room "1" *-- "0..*" ActuatorDevice
+SensorDevice "1" -- "0..*" SensorReading
+ActuatorDevice "1" -- "0..*" ControlCommand
+SmartHome "1" *-- "1" ActivityLog
+ActivityLog "1" *-- "0..*" SensorReading
+ActivityLog "0..1" -- "0..*" ControlCommand
+SmartHome "1" *-- "0..*" AutomationRule
+Owner "1" -- "0..*" AutomationRule
+AutomationRule "1" *-- "1" RulePrecondition
+AutomationRule "1" *-- "1" AutomationAction
+RulePrecondition "1" *-- "1" BooleanExpression
+BooleanOperation "0..1" *-- "1..*" BooleanExpression
+AutomationAction "0..1" -- "1..*" ControlCommand
+AutomationRule "1" *-- "0..*" RuleTrigger
+AutomationRule "2" -- "0..*" RuleRelationship
+RelationalTerm "0..*" -- "0..*" Room
+RelationalTerm "0..*" -- "0..*" SensorDevice
+RelationalTerm "0..*" -- "0..*" ActuatorDevice
+RelationalTerm "0..*" -- "0..*" SensorReading
+RelationalTerm "0..*" -- "0..*" ControlCommand
+@enduml

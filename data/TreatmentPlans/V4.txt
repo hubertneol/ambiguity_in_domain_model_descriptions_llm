@@ -1,0 +1,7 @@
+Doctors in hospitals prescribe examinations for their patients. Examination types include cardiologic tests, echography, radiology, scanners, and others. Each individual examination belongs to exactly one type. Hospitals are not all authorized to perform every possible examination type; some, for example, lack permission to perform NMR scans. A hospital may apply for authorization for particular types.
+
+To improve and monitor treatment quality, the hospital defines a treatment plan for each problem type. The plan specifies recommended examination types. When a patient presents a problem, a doctor affiliated with the hospital they visit makes the diagnosis. Using an existing plan for the identified problem, the doctor defines the patient's actual treatment.
+
+Actual treatment need not follow the standard plan exactly. It may combine recommended examinations with medical actions chosen freely. Examinations need not all take place in one hospital either: a doctor may refer a patient elsewhere if the doctor's own hospital lacks authorization for a desired examination.
+
+Recording all these details is intended both to ensure examinations respect permissions and to monitor the extent to which actual treatments differ from the recommended plans.

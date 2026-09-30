@@ -1,0 +1,155 @@
+@startuml
+class InsuranceCompany {
+}
+
+class AssessmentPerformer {
+}
+
+class Broker {
+}
+
+class HeadOffice {
+}
+
+class Customer {
+}
+
+class CustomerFile {
+}
+
+class CustomerProfile {
+}
+
+class PolicyRequest {
+}
+
+class ProfileAssessment {
+  trustworthy : Boolean
+}
+
+class InsuranceProduct {
+  price : Decimal
+}
+
+class Offer {
+  deliveryMethod : OfferDeliveryMethod
+  accepted : Boolean
+}
+
+class Contract {
+  invoicingFrequency : InvoicingFrequency
+  customerSigned : Boolean
+  companySigned : Boolean
+}
+
+class Coverage {
+}
+
+class Invoice {
+  amount : Decimal
+}
+
+class InsuredEvent {
+}
+
+class CompensationClaim {
+}
+
+class ClaimCase {
+  approvalStatus : ClaimApprovalStatus
+}
+
+class Estimator {
+  expertise : String
+}
+
+class EstimatorReport {
+  minimumRetentionAfterPayment : Duration
+}
+
+class SupportingDocument {
+}
+
+class CompensationDecision {
+  compensationAmount : Decimal
+}
+
+class ReimbursableCost {
+  amount : Decimal
+  reimbursementLevel : ReimbursementLevel
+}
+
+class CompensationPayment {
+  paymentDate : Date
+}
+
+class CustomerAccount {
+}
+
+enum OfferDeliveryMethod {
+  IN_PERSON
+  EMAIL
+}
+
+enum InvoicingFrequency {
+  MONTHLY
+  YEARLY
+}
+
+enum ClaimApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ReimbursementLevel {
+  FULL
+  PARTIAL
+}
+
+AssessmentPerformer <|-- Broker
+AssessmentPerformer <|-- HeadOffice
+
+InsuranceCompany "1" -- "0..*" InsuranceProduct
+InsuranceCompany "1" -- "0..*" Broker
+InsuranceCompany "1" *-- "1" HeadOffice
+InsuranceCompany "1" -- "0..*" Estimator
+InsuranceCompany "1" -- "0..*" Contract
+InsuranceCompany "1" -- "0..*" CompensationClaim
+
+Customer "1" *-- "1" CustomerFile
+Broker "1" -- "0..*" CustomerFile
+Customer "1" *-- "1" CustomerProfile
+Customer "1" -- "0..*" PolicyRequest
+PolicyRequest "0..*" -- "1..*" InsuranceProduct
+PolicyRequest "1" -- "1" ProfileAssessment
+CustomerProfile "1" -- "0..*" ProfileAssessment
+AssessmentPerformer "1" -- "0..*" ProfileAssessment
+
+ProfileAssessment "1" -- "0..*" Offer
+Customer "1" -- "0..*" Offer
+InsuranceProduct "1" -- "0..*" Offer
+Offer "1" -- "0..1" Contract
+
+Customer "1" -- "0..*" Contract
+Broker "1" -- "0..*" Contract
+InsuranceProduct "1" -- "0..*" Contract
+Contract "1" *-- "1" Coverage
+Contract "1" *-- "0..*" Invoice
+
+Coverage "1" -- "0..*" InsuredEvent
+InsuredEvent "1" -- "0..1" CompensationClaim
+Customer "1" -- "0..*" CompensationClaim
+CompensationClaim "1" *-- "1..*" ClaimCase
+
+ClaimCase "1" *-- "1..*" EstimatorReport
+Estimator "1" -- "0..*" EstimatorReport
+ClaimCase "1" *-- "0..*" SupportingDocument
+ClaimCase "1" -- "0..1" CompensationDecision
+CompensationDecision "1" *-- "1..*" ReimbursableCost
+ReimbursableCost "0..*" -- "1..*" SupportingDocument
+CompensationDecision "1" -- "0..1" CompensationPayment
+
+Customer "1" *-- "1" CustomerAccount
+CustomerAccount "1" -- "0..*" CompensationPayment
+@enduml

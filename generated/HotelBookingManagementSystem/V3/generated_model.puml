@@ -1,0 +1,153 @@
+@startuml
+class Traveller {
+  name : String
+  reliabilityRating : Decimal
+}
+
+class BillingInformation {
+  companyName : String
+  address : String
+}
+
+class TravelPreference {
+  name : String
+}
+
+class City {
+  name : String
+}
+
+class AccommodationSearch {
+  arrivalDate : Date
+  departureDate : Date
+  numberOfRooms : Integer
+  minimumHotelRating : Integer
+  maximumCostPerNight : Decimal
+}
+
+class RoomType {
+  name : String
+}
+
+class Hotel {
+  name : String
+  address : String
+  cityArea : String
+  rating : Integer
+}
+
+class HotelChain {
+  name : String
+}
+
+class RoomAvailability {
+  startDate : Date
+  endDate : Date
+  fullyBooked : Boolean
+}
+
+class Offer {
+  pricePerNight : Decimal
+  startDate : Date
+  endDate : Date
+}
+
+class SpecialOffer {
+  submittedAt : DateTime
+  validUntil : DateTime
+}
+
+class Booking {
+  bookingIdentifier : String
+  arrivalDate : Date
+  departureDate : Date
+  numberOfRooms : Integer
+  pricePerNight : Decimal
+}
+
+class PreliminaryBooking {
+  createdAt : DateTime
+  specialOfferDeadline : DateTime
+  cityArea : String
+  hotelRating : Integer
+}
+
+class FinalizedBooking {
+  finalizedAt : DateTime
+  confirmationDueAt : DateTime
+  cancellationDeadline : Optional<DateTime>
+  paymentOption : PaymentOption
+  status : FinalizedBookingStatus
+}
+
+class CreditCardInformation {
+  cardholderName : String
+  cardNumber : String
+  expiryDate : Date
+}
+
+class BookingConfirmation {
+  sentAt : DateTime
+}
+
+class BookingCancellation {
+  cancelledAt : DateTime
+  initiatedBy : CancellationInitiator
+  chargeAmount : Optional<Decimal>
+  reimbursementAmount : Optional<Decimal>
+  compensationAmount : Optional<Decimal>
+}
+
+enum PaymentOption {
+  PRE_PAID
+  PAY_AT_HOTEL
+}
+
+enum FinalizedBookingStatus {
+  AWAITING_CONFIRMATION
+  CONFIRMED
+  CANCELLED
+}
+
+enum CancellationInitiator {
+  TRAVELLER
+  HOTEL
+  HBMS
+}
+
+Offer <|-- SpecialOffer
+Booking <|-- PreliminaryBooking
+Booking <|-- FinalizedBooking
+
+Traveller "1" *-- "1" BillingInformation
+Traveller "0..*" -- "0..*" TravelPreference
+Traveller "1" -- "0..*" AccommodationSearch
+Traveller "1" -- "0..*" Booking
+
+City "1" -- "0..*" Hotel
+City "1" -- "0..*" AccommodationSearch
+HotelChain "0..1" -- "0..*" Hotel
+
+Hotel "1" *-- "0..*" RoomAvailability
+RoomAvailability "0..*" -- "1" RoomType
+
+Hotel "1" -- "0..*" Offer
+Offer "0..*" -- "1" RoomType
+Offer "0..*" -- "0..*" TravelPreference
+
+AccommodationSearch "0..*" -- "1" RoomType
+AccommodationSearch "0..*" -- "0..*" TravelPreference
+AccommodationSearch "0..*" -- "0..*" Offer
+
+Booking "0..*" -- "1" Offer
+PreliminaryBooking "0..*" -- "0..*" TravelPreference
+PreliminaryBooking "1" -- "0..*" SpecialOffer
+PreliminaryBooking "0..1" -- "0..1" FinalizedBooking
+
+FinalizedBooking "1" *-- "1" CreditCardInformation
+FinalizedBooking "1" *-- "0..1" BookingConfirmation
+FinalizedBooking "1" *-- "0..1" BookingCancellation
+
+Hotel "1" -- "0..*" BookingConfirmation
+Traveller "1" -- "0..*" BookingConfirmation
+@enduml

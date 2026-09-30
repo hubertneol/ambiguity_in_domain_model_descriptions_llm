@@ -1,0 +1,119 @@
+@startuml
+class Person {
+  address : String
+  phoneNumber : String
+}
+
+class Doctor {
+  practitionerNumber : Integer
+  fullName : String
+  signature : Image
+}
+
+class Patient {
+  healthNumber : String
+  firstName : String
+  lastName : String
+  dateOfBirth : Date
+}
+
+class Requisition {
+  validFrom : Date
+}
+
+class RepetitionPattern {
+  numberOfRepetitions : Integer
+  interval : RepetitionInterval
+}
+
+enum RepetitionInterval {
+  WEEKLY
+  MONTHLY
+  HALF_YEARLY
+  YEARLY
+}
+
+class TestGroup {
+  name : String
+  fixedDurationForMultipleTests : Boolean
+}
+
+class Test {
+  name : String
+  duration : Duration
+  accessMode : TestAccessMode
+}
+
+enum TestAccessMode {
+  APPOINTMENT_REQUIRED
+  WALK_IN_ONLY
+  SAMPLE_DROP_OFF_ONLY
+}
+
+class RequisitionTest {
+}
+
+class TestResult {
+  outcome : ResultOutcome
+  report : String
+}
+
+enum ResultOutcome {
+  NEGATIVE
+  POSITIVE
+}
+
+class LabNetwork {
+}
+
+class Lab {
+  name : String
+  registrationNumber : String
+  address : String
+  changeCancellationFee : Decimal
+}
+
+class BusinessHours {
+  dayOfWeek : DayOfWeek
+  startTime : Time
+  endTime : Time
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+class Appointment {
+  confirmationNumber : String
+  date : Date
+  startTime : Time
+  endTime : Time
+}
+
+Person <|-- Doctor
+Person <|-- Patient
+
+Doctor "1" -- "0..*" Requisition
+Patient "1" -- "0..*" Requisition
+TestGroup "1" -- "0..*" Requisition
+Requisition "1" *-- "1..*" RequisitionTest
+Test "1" -- "0..*" RequisitionTest
+RequisitionTest "1" *-- "0..*" TestResult
+Requisition "1" *-- "0..1" RepetitionPattern
+
+TestGroup "1" -- "1..*" Test
+LabNetwork "1" *-- "1..*" Lab
+LabNetwork "1" o-- "1..*" Test
+Lab "1..*" -- "1..*" Test
+Lab "1" *-- "7" BusinessHours
+
+Requisition "1" -- "0..*" Appointment
+Patient "1" -- "0..*" Appointment
+Lab "1" -- "0..*" Appointment
+@enduml

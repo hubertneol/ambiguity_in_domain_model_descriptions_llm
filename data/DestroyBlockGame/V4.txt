@@ -1,0 +1,17 @@
+DestroyBlock lets a game admin design a game and subsequently lets players play it, competing for a place in that game's hall of fame.
+
+GAME DESIGN: Every user has a unique username. All users are players, and some are admins as well. A user's password is identical for the player and admin roles. On logging in, the user selects play mode or admin mode. Game creation is restricted to admins.
+
+A game has its own hall of fame and a name that is unique. To design it, the admin defines a collection of blocks. The admin assigns each block a color and a points value from 1 through 1000.
+
+The admin defines several levels for a game. Numbering begins at Level 1, and a game may have no more than 99 levels. For every level, the admin sets the initial block layout. Blocks occupy individual grid cells: the upper-left cell is 1/1, the cell immediately to its right is 2/1, and the cell immediately below it is 1/2, with the same pattern continuing. A level may instead be designated random by the admin. In that case, its blocks at the top are selected randomly from the admin-defined block set.
+
+The admin also determines the starting block count, which is identical across all levels. The ball begins at its minimum speed and accelerates with each successive level. At the same time, the paddle gradually shortens from its maximum to its minimum length. The game's minimum ball speed, speed increase factor, and maximum and minimum paddle lengths are all set by the admin.
+
+GAME PLAY: Publication by the game admin makes a game available to players. When a game or level begins, DestroyBlock arranges the blocks at the top of the play area according to the design. The ball starts at the center and falls straight toward the bottom. The player's paddle begins in the middle of the bottom edge. The player slides it left and right along that edge, attempting to rebound the ball toward the blocks. The ball travels with a particular speed and direction, rebounding from the upper wall and both side walls. On striking a block, it rebounds, removes that block, and awards the block's points to the player.
+
+Hitting the final block advances the player to the following level. A ball that reaches the bottom wall is out of bounds and costs the player one life. The initial allowance is three lives. The game finishes when all three are lost or the final level is completed, and the hall of fame displays the total score.
+
+The game is saved whenever a level ends or the player pauses. A player can resume a paused game. Moving into the next level requires confirmation from the player rather than happening automatically.
+
+A user can administer one game and play another, but cannot occupy both roles in the same game. Each game has just one admin. Its hall of fame is where players compete for the highest score. A player can play multiple different games and replay a game many times. Only one game can be played at a time; simultaneous games are not allowed.

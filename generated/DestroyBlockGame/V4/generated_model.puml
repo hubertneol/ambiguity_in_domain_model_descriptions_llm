@@ -1,0 +1,89 @@
+@startuml
+class User {
+  username : String
+  password : String
+}
+
+class Admin {
+}
+
+class Game {
+  name : String
+  published : Boolean
+  startingBlockCount : Integer
+  minimumBallSpeed : Real
+  speedIncreaseFactor : Real
+  maximumPaddleLength : Real
+  minimumPaddleLength : Real
+}
+
+class Block {
+  color : String
+  points : Integer
+}
+
+class Level {
+  number : Integer
+  isRandom : Boolean
+}
+
+class BlockPlacement {
+  xCoordinate : Integer
+  yCoordinate : Integer
+}
+
+class GameSession {
+  totalScore : Integer
+  livesRemaining : Integer
+  status : SessionStatus
+}
+
+class Ball {
+  speed : Real
+  direction : String
+  xCoordinate : Real
+  yCoordinate : Real
+}
+
+class Paddle {
+  length : Real
+  xCoordinate : Real
+}
+
+class BlockInstance {
+  xCoordinate : Integer
+  yCoordinate : Integer
+}
+
+class HallOfFame {
+}
+
+class HallOfFameEntry {
+  score : Integer
+}
+
+enum SessionStatus {
+  IN_PROGRESS
+  PAUSED
+  AWAITING_NEXT_LEVEL_CONFIRMATION
+  FINISHED
+}
+
+User <|-- Admin
+Admin "1" -- "0..*" Game
+Game "1" *-- "1" HallOfFame
+Game "1" *-- "1..99" Level
+Game "1" *-- "1..*" Block
+Level "1" *-- "0..*" BlockPlacement
+Block "1" -- "0..*" BlockPlacement
+User "1" -- "0..*" GameSession
+Game "1" -- "0..*" GameSession
+GameSession "0..*" -- "1" Level
+GameSession "1" *-- "1" Ball
+GameSession "1" *-- "1" Paddle
+GameSession "1" *-- "0..*" BlockInstance
+Block "1" -- "0..*" BlockInstance
+HallOfFame "1" *-- "0..*" HallOfFameEntry
+User "1" -- "0..*" HallOfFameEntry
+GameSession "1" -- "0..1" HallOfFameEntry
+@enduml

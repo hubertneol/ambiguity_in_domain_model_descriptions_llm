@@ -1,0 +1,160 @@
+@startuml
+class OilCompany {
+}
+
+class GasStation {
+}
+
+class Customer {
+  status : CustomerStatus
+  blockingThresholdMonths : Integer
+}
+
+enum CustomerStatus {
+  NORMAL
+  SUSPENDED
+}
+
+class RefuelCard {
+  status : RefuelCardStatus
+}
+
+enum RefuelCardStatus {
+  ACTIVE
+  BLOCKED
+}
+
+class PersonalCreditCard {
+}
+
+class Invoice {
+  billingMonth : YearMonth
+  turnoverAmount : Decimal
+  discountAmount : Decimal
+  totalAmount : Decimal
+}
+
+class InvoiceDispatch {
+  sentAt : DateTime
+  type : InvoiceDispatchType
+}
+
+enum InvoiceDispatchType {
+  ORIGINAL
+  REMINDER
+}
+
+class InvoicePayment {
+  amount : Decimal
+  receivedAt : DateTime
+}
+
+class RefuelingTransaction {
+  startedAt : DateTime
+  endedAt : DateTime
+  volume : Decimal
+}
+
+class RefuelingPayment {
+  amount : Decimal
+  paidAt : DateTime
+}
+
+class CashPayment {
+}
+
+class CreditCardPayment {
+}
+
+class RefuelCardPayment {
+}
+
+class Car {
+}
+
+class Pump {
+  status : PumpStatus
+}
+
+enum PumpStatus {
+  AVAILABLE
+  IN_USE
+  BLOCKED
+}
+
+class GasolineType {
+  name : String
+}
+
+class Reservoir {
+  currentLevel : Decimal
+  reorderLevel : Decimal
+  criticalLevel : Decimal
+}
+
+class ReservoirRefill {
+  occurredAt : DateTime
+  amount : Decimal
+  levelBeforeRefill : Decimal
+}
+
+class PumpBlock {
+  blockedAt : DateTime
+  releasedAt : DateTime
+  reason : PumpBlockReason
+  initiatedAutomatically : Boolean
+}
+
+enum PumpBlockReason {
+  CRITICAL_FUEL_LEVEL
+  DIRT_SETTLING
+}
+
+class ResponsiblePerson {
+}
+
+class DailySystemReport {
+  reportDate : Date
+}
+
+class PumpReportEntry {
+  currentGasolineLevel : Decimal
+  requiredOrderQuantity : Decimal
+  needsRefilling : Boolean
+}
+
+RefuelingPayment <|-- CashPayment
+RefuelingPayment <|-- CreditCardPayment
+RefuelingPayment <|-- RefuelCardPayment
+
+OilCompany "1" o-- "0..*" GasStation
+OilCompany "1" -- "0..*" DailySystemReport
+GasStation "1" *-- "1..*" Pump
+GasStation "1" -- "1" ResponsiblePerson
+
+Customer "1" -- "0..1" RefuelCard
+Customer "1" -- "0..*" PersonalCreditCard
+Customer "1" -- "0..*" Invoice
+Customer "1" -- "0..*" RefuelingTransaction
+
+RefuelCard "1" -- "0..*" RefuelCardPayment
+RefuelCard "1" -- "0..*" Invoice
+PersonalCreditCard "1" -- "0..*" CreditCardPayment
+
+Invoice "1" *-- "0..*" InvoiceDispatch
+Invoice "1" -- "0..*" InvoicePayment
+Invoice "0..1" -- "0..*" RefuelingTransaction
+
+Pump "1" -- "0..*" RefuelingTransaction
+Car "1" -- "0..*" RefuelingTransaction
+RefuelingTransaction "1" *-- "1" RefuelingPayment
+
+GasolineType "1" -- "0..*" Pump
+Pump "1" *-- "1" Reservoir
+Reservoir "1" *-- "0..*" ReservoirRefill
+Pump "1" *-- "0..*" PumpBlock
+ResponsiblePerson "0..1" -- "0..*" PumpBlock
+
+DailySystemReport "1" *-- "1..*" PumpReportEntry
+Pump "1" -- "0..*" PumpReportEntry
+@enduml

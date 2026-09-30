@@ -1,0 +1,150 @@
+@startuml
+class RegisteredUser {
+  name : String
+  emailAddress : String
+}
+
+class Student {
+}
+
+class Tutor {
+  bankAccount : String
+}
+
+class Subject {
+  name : String
+}
+
+class TutoringLevel {
+  name : String
+}
+
+class TutoringOffer {
+  hourlyPrice : Money
+}
+
+class WeeklyAvailability {
+  dayOfWeek : Weekday
+  startTime : Time
+  endTime : Time
+}
+
+class TutoringRequest {
+  requestedDateTime : DateTime
+  status : RequestStatus
+}
+
+class CounterOffer {
+  proposedDateTime : DateTime
+}
+
+class TutoringSession {
+  scheduledDateTime : DateTime
+  price : Money
+  status : SessionStatus
+}
+
+class Payment {
+  amount : Money
+  paidAt : DateTime
+  method : PaymentMethod
+}
+
+class Cancellation {
+  cancelledAt : DateTime
+}
+
+class StudentCancellation {
+}
+
+class TutorCancellation {
+}
+
+class StudentCancellationLessThan24Hours {
+  feeRate : StudentCancellationFeeRate
+}
+
+class TutorCancellationWithin24Hours {
+}
+
+class NextSessionDiscount {
+  rate : TutorDiscountRate
+}
+
+class TutorOfTheMonthAward {
+  awardedMonth : YearMonth
+}
+
+enum Weekday {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum RequestStatus {
+  REQUESTED
+  COUNTER_OFFERED
+  AGREED
+}
+
+enum SessionStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  WIRE_TRANSFER
+}
+
+enum StudentCancellationFeeRate {
+  SEVENTY_FIVE_PERCENT
+}
+
+enum TutorDiscountRate {
+  TWENTY_FIVE_PERCENT
+}
+
+RegisteredUser <|-- Student
+RegisteredUser <|-- Tutor
+Cancellation <|-- StudentCancellation
+Cancellation <|-- TutorCancellation
+StudentCancellation <|-- StudentCancellationLessThan24Hours
+TutorCancellation <|-- TutorCancellationWithin24Hours
+
+Tutor "1" -- "0..*" TutoringOffer
+Subject "1" -- "0..*" TutoringOffer
+TutoringLevel "1" -- "0..*" TutoringOffer
+Tutor "1" *-- "0..*" WeeklyAvailability
+
+Student "1" -- "0..*" TutoringRequest
+TutoringOffer "1" -- "0..*" TutoringRequest
+TutoringLevel "1" -- "0..*" TutoringRequest
+TutoringRequest "1" *-- "0..*" CounterOffer
+Tutor "1" -- "0..*" CounterOffer
+
+TutoringRequest "1" -- "0..1" TutoringSession
+Student "1" -- "0..*" TutoringSession
+Tutor "1" -- "0..*" TutoringSession
+TutoringOffer "1" -- "0..*" TutoringSession
+TutoringSession "0..1" -- "0..*" TutoringSession
+
+TutoringSession "1" -- "0..1" Payment
+Student "1" -- "0..*" Payment
+
+TutoringSession "1" *-- "0..1" Cancellation
+Student "1" -- "0..*" StudentCancellation
+Tutor "1" -- "0..*" TutorCancellation
+
+TutorCancellationWithin24Hours "1" *-- "1" NextSessionDiscount
+Student "1" -- "0..*" NextSessionDiscount
+NextSessionDiscount "0..*" -- "0..1" TutoringSession
+
+Tutor "1" -- "0..*" TutorOfTheMonthAward
+Subject "1" -- "0..*" TutorOfTheMonthAward
+@enduml

@@ -1,0 +1,125 @@
+@startuml
+class HelpingHandsLocation {
+  city : String
+}
+
+class DistributionCenter {
+  deliveryServiceOffered : Boolean
+}
+
+class FoodBank {
+  name : String
+}
+
+class Resident {
+  name : String
+  streetAddress : String
+  phoneNumber : String
+}
+
+class EmailAddress {
+  value : String
+}
+
+class ScheduledPickup {
+  requestedDate : Date
+}
+
+class Item {
+  description : String
+  dimensions : String
+  weight : Decimal
+}
+
+class SecondHandArticle {
+}
+
+class NonPerishableFood {
+}
+
+class Vehicle {
+  availableStorageSpace : Decimal
+}
+
+class VolunteerDriver {
+  name : String
+}
+
+class DriverAvailability {
+  availableDate : Date
+}
+
+class PickupRoute {
+  routeDate : Date
+}
+
+class H2SEmployee {
+  name : String
+}
+
+class ArticleExamination {
+  examinationDate : Date
+  usable : Boolean
+}
+
+class RFIDDevice {
+  identifier : String
+}
+
+class Category {
+  name : String
+}
+
+class Client {
+  name : String
+  homeAddress : String
+}
+
+class NotificationCall {
+  callDate : Date
+}
+
+class Delivery {
+  deliveryDate : Date
+}
+
+Item <|-- SecondHandArticle
+Item <|-- NonPerishableFood
+
+HelpingHandsLocation "1" *-- "1" DistributionCenter
+HelpingHandsLocation "1" *-- "0..*" Vehicle
+HelpingHandsLocation "1" *-- "0..*" H2SEmployee
+HelpingHandsLocation "1" -- "0..*" VolunteerDriver
+HelpingHandsLocation "1" -- "0..*" ScheduledPickup
+
+Resident "1" *-- "0..1" EmailAddress
+Resident "1" -- "0..*" ScheduledPickup
+ScheduledPickup "1" -- "1..*" Item
+
+Vehicle "1" -- "0..*" PickupRoute
+VolunteerDriver "1" -- "0..*" PickupRoute
+VolunteerDriver "1" *-- "0..*" DriverAvailability
+PickupRoute "0..1" -- "0..*" ScheduledPickup
+
+DistributionCenter "0..1" -- "0..*" SecondHandArticle
+FoodBank "0..1" -- "0..*" NonPerishableFood
+
+H2SEmployee "1" -- "0..*" ArticleExamination
+SecondHandArticle "1" -- "0..1" ArticleExamination
+SecondHandArticle "1" -- "0..1" RFIDDevice
+
+DistributionCenter "0..*" o-- "134" Category
+Category "0..1" -- "0..*" SecondHandArticle
+
+DistributionCenter "1" -- "0..*" Client
+Client "0..*" -- "0..*" Category
+
+H2SEmployee "1" -- "0..*" NotificationCall
+Client "1" -- "0..*" NotificationCall
+NotificationCall "0..*" -- "1..*" SecondHandArticle
+
+H2SEmployee "1" -- "0..*" Delivery
+Client "1" -- "0..*" Delivery
+VolunteerDriver "0..1" -- "0..*" Delivery
+Delivery "0..1" -- "1" SecondHandArticle
+@enduml

@@ -1,0 +1,100 @@
+@startuml
+class Designer {
+}
+
+class Game {
+  inProgress : Boolean
+}
+
+class Board {
+}
+
+class Tile {
+  color : TileColor
+}
+
+class ActionTile {
+  revealedToPlayers : Boolean
+  normalTurnDuration : Integer
+  normalTurnsRemaining : Integer
+}
+
+class Player {
+  playerNumber : Integer
+  missNextTurn : Boolean
+}
+
+class PlayingPiece {
+}
+
+class PieceColor {
+  name : String
+}
+
+class Die {
+  currentValue : Integer
+}
+
+class ActionDeck {
+}
+
+class ActionCard {
+  action : ActionType
+}
+
+class ConnectionStock {
+}
+
+class Connection {
+}
+
+class ConnectionEnd {
+  side : Side
+}
+
+enum TileColor {
+  WHITE
+  BLACK
+}
+
+enum Side {
+  LEFT
+  RIGHT
+  UPPER
+  LOWER
+}
+
+enum ActionType {
+  ROLL_AGAIN
+  JOIN_ADJACENT_TILES
+  REMOVE_CONNECTION
+  MOVE_TO_ANY_OTHER_TILE
+  MISS_NEXT_TURN
+}
+
+Tile <|-- ActionTile
+
+Designer "1" -- "0..*" Game
+Game "1" *-- "1" Board
+Game "1" *-- "2..4" Player
+Game "1" *-- "1" Die
+Game "1" *-- "1" ActionDeck
+Game "1" *-- "1" ConnectionStock
+Game "0..1" -- "0..1" Player
+Game "0..1" -- "0..1" Player
+
+Board "1" *-- "1..*" Tile
+Board "0..1" -- "1" Tile
+Board "0..1" -- "0..*" Connection
+
+Player "1" *-- "1" PlayingPiece
+Player "0..4" -- "1" Tile
+Player "0..4" -- "1" Tile
+PlayingPiece "0..1" -- "1" PieceColor
+
+ActionDeck "1" *-- "32" ActionCard
+
+ConnectionStock "1" *-- "32" Connection
+Connection "1" *-- "2" ConnectionEnd
+Tile "0..1" -- "0..4" ConnectionEnd
+@enduml

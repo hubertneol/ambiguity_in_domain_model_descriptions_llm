@@ -1,0 +1,73 @@
+@startuml
+class Aircraft {
+  name : String
+  type : String
+  yearOfManufacture : Integer
+  nextInspectionDate : Date
+}
+
+class PassengerAircraft {
+  numberOfSeats : Integer
+}
+
+class Flight {
+  flightNumber : String
+  date : Date
+}
+
+class Passenger {
+  name : String
+  passportNumber : String
+}
+
+class Ticket {
+  ticketNumber : String
+  price : Decimal
+  upgradeDesired : Boolean
+}
+
+class SeatCategory {
+  designation : String
+  offersEntertainmentProgram : Boolean
+  numberOfSeats : Integer
+}
+
+class Airline {
+  name : String
+}
+
+class FlightAttendant {
+  name : String
+  employmentDate : Date
+  isChiefStewardOrStewardess : Boolean
+}
+
+class Pilot {
+  name : String
+  employmentDate : Date
+  license : String
+}
+
+class Airport {
+  name : String
+  address : String
+  numberOfRunways : Integer
+}
+
+Aircraft <|-- PassengerAircraft
+
+Aircraft "1" -- "1..*" Flight
+Passenger "1" -- "0..*" Ticket
+Flight "1" -- "1..*" Ticket
+PassengerAircraft "1" *-- "0..*" SeatCategory
+SeatCategory "1" -- "0..*" Ticket
+Airline "0..1" -- "0..*" Aircraft
+Airline "1" -- "1..*" FlightAttendant
+Airline "1" -- "1..*" Pilot
+FlightAttendant "1..*" -- "0..*" Flight : worksOn
+Pilot "1" -- "0..*" Flight : captain
+Pilot "1..2" -- "0..*" Flight : coPilot
+Airport "0..1" -- "0..*" Aircraft : homeAirport
+Airport "1" -- "0..*" Flight : departureAirport
+Airport "1" -- "0..*" Flight : destinationAirport
+@enduml

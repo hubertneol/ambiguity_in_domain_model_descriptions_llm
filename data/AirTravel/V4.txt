@@ -1,0 +1,11 @@
+For every aircraft, records contain its name, type, manufacturing year, and next inspection date. Several flights are carried out by an aircraft; each flight is recorded by its number and date.
+
+A flight carries several passengers, with each passenger's name and passport number kept on record. Passengers may take several flights. For every flight, the personalized ticket is recorded by number and price, together with an indication of whether an upgrade is wanted.
+
+Passenger aircraft form a special kind of aircraft devoted entirely to carrying passengers. Their seat counts are recorded as well. Such an aircraft may offer several seat categories. A category's designation, availability of an entertainment program, and number of seats are recorded. A ticket specifies a particular seat category.
+
+An aircraft may belong to an airline, and the airline's name is recorded. Airlines employ several pilots and flight attendants. For a flight attendant, the recorded details are name, employment date, and chief steward or stewardess status. For a pilot, they are name, employment date, and license.
+
+A flight is staffed by several flight attendants. Its aircraft is flown by one pilot serving as captain, assisted by one or two other pilots serving as co-pilots.
+
+Airport records contain a name, address, and runway count. An aircraft may have an airport as its home base. Every flight has both an airport of departure and an airport of destination.

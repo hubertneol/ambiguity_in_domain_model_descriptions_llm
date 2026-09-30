@@ -1,0 +1,7 @@
+The fitness company Conan intends to create a database for members and trainers. Among its purposes is recording attendance by members at sessions and supervision of sessions by trainers.
+
+Conan runs fitness centers in various cities. Each center has its own unique name, such as Fitplaza or my6pack, an address, and at least one room. Treat an address as an atomic value. A room has a maximum capacity and a number that is unique within its center, for example 1, 2, or 3.
+
+People may sign up at different centers for either group sessions or individual sessions. A group session needs exactly one trainer, whereas an individual session takes place without one. A person's given name, surname, and birth date must be recorded; their combination may be assumed unique. A trainer additionally has a recorded diploma. The same person may train one session and participate in another, whether the latter is individual or group. Information must also cover people who have never attended a session, such as prospects, and trainers who have not yet supervised a group session, such as interns.
+
+Record the date and start time for every session. A group session additionally records a type, such as aerobics or bodystyling. Sessions may begin simultaneously on the same date if they occupy different rooms in one center or occur at different centers. For any particular room of a particular center, no more than one session, individual or group, may begin at a particular hour on a particular date.

@@ -1,0 +1,26 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.idea/
+.vscode/
+
+# OS / temporary files
+.DS_Store
+*.tmp
+*.swp
+*~
+~$*
+
+# NOTE: data/, generated/ and results/ are intentionally NOT ignored.
+# The descriptions, generated models and evaluation results are the
+# experimental record and must stay under version control.

@@ -1,0 +1,79 @@
+@startuml
+class Person {
+  firstName : String
+  lastName : String
+  emailAddress : String
+}
+
+class Organizer {
+  postalAddress : String
+  phoneNumber : String
+}
+
+class Attendee {
+}
+
+class Account {
+  username : String
+  password : String
+}
+
+class Event {
+  occasion : String
+  startDateTime : DateTime
+  endDateTime : DateTime
+}
+
+class EventKind {
+  name : String
+}
+
+class Location {
+  name : String
+  address : String
+}
+
+class Invitation {
+  status : InvitationStatus
+}
+
+class TaskDefinition {
+  name : String
+}
+
+class EventTask {
+  status : TaskStatus
+  designatedForAttendees : Boolean
+}
+
+enum InvitationStatus {
+  NOT_REPLIED
+  WILL_ATTEND
+  MAYBE_ATTEND
+  CANNOT_ATTEND
+}
+
+enum TaskStatus {
+  NEEDS_TO_BE_DONE
+  DONE
+  NOT_APPLICABLE
+}
+
+Person <|-- Organizer
+Person <|-- Attendee
+
+Organizer "1" -- "1" Account
+Attendee "0..1" -- "0..1" Account
+
+Organizer "1..*" -- "0..*" Event
+EventKind "1" -- "0..*" Event
+Location "1" -- "0..*" Event
+
+Event "1" *-- "0..*" Invitation
+Attendee "1" -- "0..*" Invitation
+
+EventKind "1" -- "0..*" TaskDefinition
+Event "1" *-- "0..*" EventTask
+TaskDefinition "1" -- "0..*" EventTask
+Attendee "0..*" -- "0..*" EventTask
+@enduml

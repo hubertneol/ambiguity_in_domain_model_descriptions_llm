@@ -1,0 +1,7 @@
+file,source,md5
+primary,results.csv,1a5bf21ff38e10979a9d7d361af03d74
+replication,results_run2.csv,b6fefc76327e32865218f88c2871ff8d
+records,records_225_sol.jsonl,c9065dac7deb55b82b3aacbc3130fc43
+log,generation_log_sol.csv,244e6c0ce5474265e2aaa86fa28f76e0
+pairs,noise_floor_pairs.csv,dd70f8ef04af63533f0b88f2c864b0b2
+summary,noise_floor_summary.csv,4ac680ed07d426428a8859838f96a7a0

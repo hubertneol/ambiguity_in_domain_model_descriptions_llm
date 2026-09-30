@@ -1,0 +1,13 @@
+LabTracker serves two purposes: helping doctors handle requisitions for patients' tests and examinations, and helping patients arrange lab appointments for them. In this description, “test” and “examination” mean the same thing.
+
+A doctor preparing a requisition provides a numeric practitioner number and a signature for verification, plus a full name, address, and telephone number. The digital signature is an image of the doctor's actual signature. The doctor also specifies when the requisition becomes valid. Patient details on it must include an alphanumeric health number, given name, surname, date of birth, address, and phone number. A doctor is not permitted to prescribe a test for themselves, although prescribing for another doctor is permitted.
+
+One requisition may combine several tests provided they all belong to one test group. Blood tests can be combined with other blood tests, for example, and ultrasound examinations with other ultrasound examinations, but blood and ultrasound cannot share a requisition. The lab network defines each test's duration for appointment scheduling, and that duration is identical across labs. With some test types, carrying out several takes no longer than carrying out one. Drawing blood for several tests on the same sample, for example, takes the same time as drawing it for a single test.
+
+A requisition may specify repeated testing, with the doctor giving a repetition count and an interval. Permitted intervals are weekly, monthly, half-yearly, and yearly. Every test on the requisition uses the same repetition pattern.
+
+Both patient and doctor may inspect each test's positive or negative result and the accompanying report.
+
+Some tests require an appointment, while others permit walk-ins only. X-rays, for example, require appointments. Blood tests are exclusively walk-in, so appointments cannot be made for them. Other tests merely require a sample to be delivered, such as urine or stool.
+
+When booking for a requisition, the patient chooses a lab by considering its address and business hours. A requisition for repeated tests permits the patient to book only one appointment at a time. Appointment confirmation includes a confirmation number, date, starting and ending times, lab name, and lab registration number. Appointments may be changed or cancelled at any time, but doing so within 24 hours incurs a change or cancellation fee. Each lab sets its own fee and opening hours. Every lab opens on every day of the year and offers every test. Its weekly opening-hour pattern stays constant. On any day, it operates continuously between that day's opening and closing times, without breaks.

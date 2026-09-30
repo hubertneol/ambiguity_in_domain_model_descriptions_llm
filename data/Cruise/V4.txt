@@ -1,0 +1,11 @@
+A particular provider organizes each cruise. Providers are described by a name and location. Cruises have a number and a name for identification, together with start and end dates. Many employees are needed for a cruise, and each employee has a name and social security number.
+
+Several guests join a cruise. Each guest's name is known, and their VIP status is recorded. A guest may take part in multiple cruises.
+
+For ships, the known details are name, deck count, length, and passenger count. The same ship may serve different cruises.
+
+Bookings for cruises are made through travel agencies. A booking records its unique booking number and booking date, while an agency records its name and address.
+
+Every cruise travels toward a particular destination area. Each such area has a name, and its sea's name is also recorded. Guests on a cruise can enjoy several shows, each described by a title and duration.
+
+Each cruise has several guests, and guests may participate in several cruises. Several tickets are issued for a cruise, with every ticket belonging to precisely one cruise. There is no overall limit to a guest's tickets, but the guest may hold only one for any particular cruise.

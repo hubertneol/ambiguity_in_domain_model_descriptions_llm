@@ -1,0 +1,38 @@
+@startuml
+class AirlineCompany {
+}
+
+class Contract {
+  deliveryConditions : String
+  legalAspects : String
+}
+
+class Acquisition {
+  negotiatedPrice : Decimal
+  deliveryDate : Date
+  chosenOptionsAndCustomizations : String
+}
+
+class AircraftModel {
+}
+
+class Aircraft {
+}
+
+class Employee {
+}
+
+class SalespersonAssignment {
+  startDate : Date
+  endDate : Date
+}
+
+AirlineCompany "1" -- "0..*" Contract
+Contract "1" *-- "1..*" Acquisition
+Acquisition "0..*" -- "1" AircraftModel
+Acquisition "1" -- "0..1" Aircraft
+Contract "1" *-- "1..*" SalespersonAssignment
+Employee "1" -- "0..*" SalespersonAssignment
+AirlineCompany "0..1" -- "0..*" AirlineCompany
+AirlineCompany "0..1" -- "0..*" Aircraft
+@enduml

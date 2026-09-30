@@ -1,0 +1,115 @@
+@startuml
+class SmartHomeAutomationSystem {
+  operational : Boolean
+}
+
+class InfrastructureMap {
+}
+
+class User {
+}
+
+class Owner {
+}
+
+class SmartHome {
+  physicalAddress : String
+}
+
+class Room {
+  name : String
+}
+
+class Device {
+  deviceIdentifier : String
+  deviceType : String
+  active : Boolean
+}
+
+class SensorDevice {
+}
+
+class ActuatorDevice {
+}
+
+class SensorReading {
+  measuredValue : String
+  timestamp : Timestamp
+}
+
+class ControlCommand {
+  commandName : String
+  timestamp : Timestamp
+  status : String
+  sequencePosition : Integer
+}
+
+class ActivityLog {
+}
+
+class AutomationRule {
+  active : Boolean
+}
+
+class RuleAction {
+}
+
+class BooleanExpression {
+}
+
+class CompoundBooleanExpression {
+  operator : BooleanOperator
+}
+
+class RelationalTerm {
+  relationalOperator : String
+  comparisonValue : String
+}
+
+class RuleTrigger {
+  timestamp : Timestamp
+}
+
+class RuleDependency {
+}
+
+class RuleConflict {
+}
+
+enum BooleanOperator {
+  AND
+  OR
+  NOT
+}
+
+User <|-- Owner
+Device <|-- SensorDevice
+Device <|-- ActuatorDevice
+BooleanExpression <|-- CompoundBooleanExpression
+BooleanExpression <|-- RelationalTerm
+
+SmartHomeAutomationSystem "1" *-- "1" InfrastructureMap
+SmartHomeAutomationSystem "1" -- "0..*" User
+InfrastructureMap "1" o-- "0..*" SmartHome
+Owner "1" -- "0..*" SmartHome
+SmartHome "1" *-- "1..*" Room
+Room "1" *-- "0..*" Device
+SensorDevice "1" -- "0..*" SensorReading
+ActuatorDevice "1" -- "0..*" ControlCommand
+SmartHome "1" *-- "1" ActivityLog
+ActivityLog "1" *-- "0..*" SensorReading
+ActivityLog "1" *-- "0..*" ControlCommand
+SmartHome "1" *-- "0..*" AutomationRule
+AutomationRule "1" *-- "1" RuleAction
+RuleAction "0..1" -- "1..*" ControlCommand
+AutomationRule "0..1" *-- "1" BooleanExpression
+CompoundBooleanExpression "0..1" *-- "1..*" BooleanExpression
+AutomationRule "1" *-- "0..*" RuleTrigger
+AutomationRule "2" -- "0..*" RuleDependency
+AutomationRule "2" -- "0..*" RuleConflict
+RelationalTerm "0..*" -- "0..*" Room
+RelationalTerm "0..*" -- "0..*" SensorDevice
+RelationalTerm "0..*" -- "0..*" ActuatorDevice
+RelationalTerm "0..*" -- "0..*" SensorReading
+RelationalTerm "0..*" -- "0..*" ControlCommand
+@enduml

@@ -1,0 +1,136 @@
+case,version,target_type,target_element,hit,alternative_plausible_interpretation,confidence,notes
+AirTravel,V1,association,"Airplane ""0..*""-""0..1"" Airport",1,,medium,"Aircraft has 0..1 HomeAirportAssignment, each linked to one Airport; this reifies the reference optional home-airport association with matching endpoint bounds."
+AirTravel,V2,association,"FlightExecution ""0..*""-""0..2"" Pilot : Co-pilot",0,no,high,"The coPilot association permits 1..2 pilots per dated Flight, whereas the reference FlightExecution permits 0..2. No alternative aircraft-level attachment is modeled."
+AirTravel,V3,association,"Airport ""0..1""--""0..*"" Flight : Destination",0,,high,Only a departure-airport association is present; the targeted destination-airport association is absent.
+AlphaInsurance,V1,class,Broker,1,,high,Broker is explicitly represented as a class.
+AlphaInsurance,V2,association,"(ClaimCase,Estimator) .. Report",0,no,high,"EstimatorReport is linked to Estimator and ClaimCase, but each ClaimCase requires 1..* reports rather than the reference optional 0..* estimator/report links. Reports remain estimator reports."
+AlphaInsurance,V3,other,uncertain,NA,,low,The annotation names no localized element (target_element=uncertain); the reference has no contract-signature constraint to evaluate.
+BankAccount,V1,attribute,Customer.firstName,1,,high,Customer.firstName is present with type String.
+BankAccount,V2,attribute,CheckingAccount.overdraftLimit,0,yes,high,"overdraftLimit:double is on Account, so it also applies to SavingsAccount; the reference restricts it to CheckingAccount. This follows the broader antecedent of 'They'."
+BankAccount,V3,multiplicity,"Customer ""1"" --> ""1..5"" Account",0,,high,Customer-Account uses the reversed range 5..1 rather than the reference 1..5 accounts per customer.
+Boeing,V1,association,"Contract ""0..*"" -- ""1"" Employee",0,,high,"Contract has 1..* SalespersonAssignments, each linked to an Employee; no constraint enforces the reference exactly one managing Employee per Contract."
+Boeing,V2,attribute,Acquisition.NegotiatedPice,1,no,high,"Acquisition.negotiatedPrice is a numeric attribute on Acquisition, matching reference Acquisition.NegotiatedPice despite the spelling and numeric-type differences."
+Boeing,V3,other,uncertain,NA,,low,"The target is annotated as uncertain, and the reference does not encode the ordering of construction and sales agreement."
+BuildingManagement,V1,attribute,Image.fileName,1,,high,Image.fileName is present with type String.
+BuildingManagement,V2,association,"Building ""1"" --> ""*"" Comment",1,no,high,"Building is associated with 0..* Comments, each for one Building, matching the reference. Comments are not attached to entries."
+BuildingManagement,V3,attribute,User.username,1,,high,User.userName:String matches reference User.username:String. The reference does not encode a uniqueness or registration-validation constraint on this attribute.
+BusTransportationManagementSystem,V1,attribute,Driver.Name,1,,high,Driver.name:String matches reference Driver.Name.
+BusTransportationManagementSystem,V2,association,"Route ""1"" -- ""0..*"" RouteAssignment; RouteAssignment ""1"" -- ""0..*"" DriverSchedule",0,yes,medium,"BusRoute-BusRouteAssignment is retained, but shifts are dated Driver-Bus assignments without a RouteAssignment link, supporting a driver/bus schedule reading of 'each of them'."
+BusTransportationManagementSystem,V3,other,"Driver.OnSickLeave; Driver ""1"" -- ""0..*"" DriverSchedule",1,,high,Driver.onSickLeave:Boolean and Driver 1 to 0..* DriverShiftAssignment are present. The reference does not encode a sick-leave scheduling prohibition.
+CardGameApp,V1,attribute,Game.ID; Player.ID; Deck.ID; Card.ID; Scoreboard.ID; Round.ID; RoundType.ID,0,,high,"IDs exist on Game, Player, Deck, Card, ScoringTable and Round, but the reference RoundType and its ID are absent; the composite target is not fully represented."
+CardGameApp,V2,association,"Deck --> ""0..48"" Card",1,no,high,"Deck is linked to 0..48 Cards, preserving the targeted ownership and upper bound."
+CardGameApp,V3,multiplicity,uncertain,NA,,low,The target is annotated as uncertain. The reference has no explicit SoloRound-to-solo-player multiplicity to compare with the generated zero-player link.
+CelO,V1,attribute,Person.EmailAddress,1,,high,Person.emailAddress:String is present.
+CelO,V2,association,"Event ""*"" - ""*"" CheckListTask",1,no,medium,"ChecklistItem links one Event and one Task, with 0..* items at each endpoint, reifying the reference many-to-many Event-CheckListTask association."
+CelO,V3,other,uncertain,NA,,low,The target is annotated as uncertain; the reference does not explicitly constrain whether an organizer attends each organized event.
+ClothingCompany,V1,association,"(Manufacturer,Country) .. Product",1,,medium,"Product is linked to one Manufacturer and one manufacturing Country, with 0..* Products per endpoint, preserving the reference association-class participants through ordinary associations."
+ClothingCompany,V2,association,"Representative ""1""--""*"" Order : placedBy",0,yes,medium,"The Representative-Order link is absent; only Customer-Order remains, supporting the reading that customers themselves place orders."
+ClothingCompany,V3,multiplicity,"Product ""1""--""*"" Order : contains",0,,high,Order has no Product association; the reference requires exactly one Product per Order.
+Cruise,V1,attribute,TravelAgency.Address,1,,high,TravelAgency.address:String is present.
+Cruise,V2,attribute,Ship.PassengerCount,1,no,high,Ship.numberOfPassengers:Integer corresponds to reference Ship.PassengerCount.
+Cruise,V3,multiplicity,"diamond --""0..1"" Cruise",0,,high,"The generated Cruise-Ticket link specifies zero cruises per ticket, differing from the reference Cruise end bound 0..1 on the ternary association."
+DestroyBlockGame,V1,attribute,Game.name,1,,high,Game.name:String matches the reference name attribute; no explicit uniqueness constraint is encoded in the reference.
+DestroyBlockGame,V2,class,PlayedGame,1,no,high,"GamePlay represents a played game, with score, lives, status and links to Game and Player, corresponding to the targeted PlayedGame class."
+DestroyBlockGame,V3,association,"Admin ""1"" -- ""*"" Game : admin",1,,high,Admin 1 to 0..* Game retains the reference Admin-Game association and multiplicities despite the modified sentence.
+EUScienceConnect,V1,attribute,Journal.ImpactFactor,1,,high,"Journal.impactFactor is numeric, matching reference Journal.ImpactFactor."
+EUScienceConnect,V2,association,"Person ""*""--""*"" PeerReviewedPaper : reviews",1,no,medium,"Review links one Person and one PeerReviewedPaper, with 0..* reviews per endpoint, preserving the targeted many-to-many reviewing relationship."
+EUScienceConnect,V3,association,"Journal ""1""--""*"" PeerReviewedPaper",0,,high,Journal is associated with TechnicalReport; the reference Journal-PeerReviewedPaper association is absent.
+Ebike,V1,association,EBike --> Battery : battery,1,,high,An EBike-Battery association is present. The reference target specifies no explicit endpoint multiplicities.
+Ebike,V2,other,AdvancedController.nextInspection() : Date,0,uncertain,medium,"AdvancedController has a Date attribute nextMaintenanceInspectionDate, but no nextInspection() operation. The model does not identify whether the date concerns the bike or controller."
+Ebike,V3,attribute,Battery.storedEnergy,0,,high,Battery.storedEnergy is typed Date instead of the reference float.
+Facepage,V1,attribute,Page.Visits,1,,high,Page.numberOfVisits:Integer matches reference Page.Visits:Int.
+Facepage,V2,association,"PersonalAccount ""1""--""*"" PersonalPage : administrator",0,uncertain,medium,Only Account 1 to 0..* Page is modeled; PersonalPage and its specific PersonalAccount administrator association are absent. The model does not distinguish management from ownership.
+Facepage,V3,attribute,User.UserID,0,,high,"User.id is String rather than the reference integer UserID. The reference has no explicit uniqueness constraint, so the shared-ID anomaly itself is not observable."
+FilmSet,V1,attribute,Director.AssistentName,1,,high,Director.assistantName:String corresponds to reference Director.AssistentName.
+FilmSet,V2,attribute,Director.AssistentName,0,yes,high,"assistantName is on Actor rather than Director, matching the alternative reading of 'their' as referring to each actor."
+FilmSet,V3,multiplicity,"Film ""1""--""1"" Screenplay",0,,high,Screenplay is associated with zero Films rather than the reference one-to-one Film-Screenplay relationship.
+FitnessCompanyConan,V1,attribute,Center.name,1,,high,FitnessCenter.name:String represents reference Center.name.
+FitnessCompanyConan,V2,attribute,Room.MaxCapacity,1,no,high,"maximumCapacity:Integer remains on Room, matching Room.MaxCapacity."
+FitnessCompanyConan,V3,attribute,Room.MaxCapacity,1,,high,Room.maximumCapacity:Integer matches the reference attribute; no minus-one value or negative-capacity constraint is encoded.
+GameArea,V1,multiplicity,"GameArea ""1"" --> ""1"" Enemy : finalBoss",0,,high,"The boss association has 0..1 at both ends, whereas the reference requires exactly one GameArea and one Enemy."
+GameArea,V2,association,"GameArea ""1"" o-- ""1..2"" GameCharacter",1,no,high,"GameArea aggregates 1..2 GamePieces, with one area per piece, matching reference GameCharacter and its aggregation bounds."
+GameArea,V3,attribute,Enemy.numberOfLives,1,,high,Opponent.lives:int corresponds to Enemy.numberOfLives:int. Neither the reference nor generated attribute encodes a sign restriction.
+GasStation_KUL,V1,association,uncertain,NA,,low,"The annotation names an uncertain association, and the reference contains no Reservoir class or explicit pump-reservoir association."
+GasStation_KUL,V2,attribute,Pump.Blocked,1,no,medium,"Pump.status uses PumpStatus with an explicit BLOCKED value, preserving the pump blocked state represented by reference Pump.Blocked:Boolean."
+GasStation_KUL,V3,other,uncertain,NA,,low,"The target is uncertain, and the reference encodes no invoice-sending/payment temporal ordering constraint."
+GasStation_TUW,V1,attribute,Fuel.Name,1,,high,Fuel.name:String matches reference Fuel.Name.
+GasStation_TUW,V2,attribute,FuelPump.SelfService,0,yes,high,"selfService:Boolean is attached to GasStation rather than FuelPump, supporting a station-level reading of 'it'."
+GasStation_TUW,V3,attribute,DailyPrice.Price,1,,high,"DailyPrice.pricePerLiter remains numeric (Decimal), matching reference Price:Double rather than the anomalous calendar-date wording."
+HelpingHands,V1,association,uncertain,NA,,low,The target association is annotated as uncertain; the reference contains no H2S fleet-ownership association to identify as the localized target.
+HelpingHands,V2,attribute,SecondHandArticle.Category,0,no,medium,SecondHandArticle has no ItemCategory attribute; category is modeled through an optional 0..1 CategoryAssignment to a Category class. The assignment still targets the article.
+HelpingHands,V3,other,uncertain,NA,,low,"The target is annotated as uncertain, and the reference does not encode an 08:00-14:00 pickup-time constraint."
+HomeForTheElderly,V1,attribute,Category.Price,1,,high,StayCategory.price:Decimal corresponds to reference Category.Price:Double.
+HomeForTheElderly,V2,attribute,uncertain,NA,yes,low,"The annotation leaves the target uncertain, so no specific attribute is scored. AssessmentStatus includes INVALIDATED while ProposalStatus does not, supporting invalidation of the re-assessment."
+HomeForTheElderly,V3,attribute,Invoice.Status,1,,medium,"Invoice.status is represented with PAID and UNPAID enum values. The reference String Status does not encode the zero-balance-to-paid rule, so only the status property can be evaluated."
+HospitalHouseMD,V1,association,"Illness ""1"" -- ""0..*"" Treatment",0,,high,Illness-Treatment is many-to-many; the reference requires exactly one Illness per Treatment.
+HospitalHouseMD,V2,association,"Doctor ""1"" -- ""0..*"" Diagnosis",1,no,high,Doctor 1 to 0..* Diagnosis exactly retains the targeted association. The reference association does not separately encode downgrade authorization.
+HospitalHouseMD,V3,attribute,Diagnosis.Stage,0,,high,stage is attached to AppliedTreatment; Diagnosis has no Stage attribute as required by the reference.
+HotelBookingManagementSystem,V1,association,"Booking ""*"" -- ""1"" Traveller",1,,high,Traveller 1 to 0..* Booking matches the reference Booking-Traveller association.
+HotelBookingManagementSystem,V2,association,"Hotel ""1"" *-- ""*"" RoomAvailability",1,no,high,"Hotel composes 0..* RoomAvailability objects, with one Hotel per availability, matching the reference."
+HotelBookingManagementSystem,V3,other,uncertain,NA,,low,"The target is annotated as uncertain, and the reference does not encode the one-night late-cancellation charge as a localized constraint."
+House,V1,attribute,EarthBasement.Humidity,1,,high,EarthBasement.humidityLevel:Real matches the numeric reference Humidity attribute.
+House,V2,attribute,JobLog.Price; JobLog.Hours,0,no,high,"Both values remain on JobLog, but numberOfHours is Decimal rather than the reference Int Hours. agreedPrice is a compatible numeric representation of Price."
+House,V3,class,JobLog,1,,high,"Job records hours and agreed price and links House to Company, providing the targeted JobLog domain concept under a different name."
+Kinepolis,V1,association,"Cinema ""1..1"" -- ""0..*"" Theatre",0,,high,Cinema has 1..* Theatres rather than the reference 0..*; the required minimum differs.
+Kinepolis,V2,association,"Seat ""1..1"" -- ""0..*"" Ticket",1,no,high,"Seat 1 to 0..* EntranceTicket preserves the reference Seat-Ticket association for entrance tickets, distinct from online reservations."
+Kinepolis,V3,association,uncertain,NA,,low,"The target association is annotated as uncertain. The generated EntranceTicket.customerName is observable, but no specified reference association can be scored."
+LabTracker,V1,attribute,Test.Duration,0,,medium,"Test.duration is present at test level, but is typed Duration rather than the reference String. No definition establishes Duration as an alias for String."
+LabTracker,V2,attribute,TestResult.Report,1,no,high,TestResult.report:String matches the reference Report attribute and remains attached to the result.
+LabTracker,V3,other,uncertain,NA,,low,The target is annotated as uncertain; the reference has no explicit self-prescription prohibition to evaluate.
+Louvre,V1,association,"Employee ""0..*"" -- ""0..1"" Employee : hasCoach >",0,,high,"SeniorEmployee 1 to 0..* JuniorEmployee makes the coach mandatory for juniors, whereas the reference Employee self-association permits 0..1 coach."
+Louvre,V2,association,"Employee ""1"" -- ""0..*"" Exhibition : Coordinator",1,no,high,"Employee 1 to 0..* Exhibition retains one employee per exhibition; Employee is also associated with Museum, preserving the intended coordinator context."
+Louvre,V3,other,uncertain,NA,,low,"The target is annotated as uncertain, and the reference has no planning-start/opening-date ordering constraint."
+Menso,V1,attribute,uncertain,NA,,low,"The target attribute is annotated as uncertain, and neither Bus nor BusLine declares a line-number attribute in the reference."
+Menso,V2,attribute,PriceCategory.Price,0,uncertain,medium,"LineCategory has no price; price:Decimal is stored on Trip. The model does not encode how that price depends on category, so a distinct interpretation of 'its price' cannot be established."
+Menso,V3,other,uncertain,NA,,low,"The target is annotated as uncertain, and the reference MensoTicket has no validity-period or issue-date constraint."
+Musicmatic,V1,attribute,Artist.Name,1,,high,Artist.name:String matches reference Artist.Name.
+Musicmatic,V2,association,"Single ""*""-""*"" RegularUser",1,no,medium,"SinglePurchase links one RegularUser and one Single, with 0..* purchases per endpoint, preserving the reference many-to-many purchase association restricted to singles."
+Musicmatic,V3,association,"Hit ""*""--""*"" Album",0,,high,"AlbumTrack links Album to Hit, but each Album requires 2..* tracks rather than the reference 0..* Hits. The targeted lower bound is not preserved."
+OnlineTutoringSystem,V1,association,"User ""1"" *-- ""0..2"" TutoringRole : roles",0,,high,Student and Tutor inherit from User; TutoringRole and the User composition with 0..2 roles are absent. No explicit overlapping-role constraint establishes the reference role structure.
+OnlineTutoringSystem,V2,class,Subject,1,no,high,Subject is explicitly modeled and remains linked to tutoring offers and tutor-of-the-month awards.
+OnlineTutoringSystem,V3,other,uncertain,NA,,low,"The target is annotated as uncertain, and the reference does not encode the 75-percent late-cancellation charge as a localized constraint."
+PizzaDeliveryWithEntertainment,V1,attribute,User.UserID,0,,high,"AppUser.userId is present but typed String, whereas reference User.UserID is Int."
+PizzaDeliveryWithEntertainment,V2,association,"Entertainer ""1""--""*"" EntertainmentOrder",1,no,high,Entertainer 1 to 0..* EntertainmentOrder matches the reference; the provider is still specifically an Entertainer.
+PizzaDeliveryWithEntertainment,V3,attribute,Entertainer.PriceThirtyMin,1,,high,Entertainer.pricePer30Minutes:Decimal retains the reference numeric price per 30 minutes; no negative interval is encoded.
+ProjectManagement,V1,multiplicity,"WorkPackage ""0..*"" - ""0..1"" ResearchGroup",0,,high,"WorkPackage has 1..* WorkPackageLeadership records, each for one ResearchGroup; the reference permits only 0..1 leading group per WorkPackage."
+ProjectManagement,V2,association,"ResearchGroup ""1"" - ""0..*"" Researcher",1,no,high,ResearchGroup 1 to 0..* Researcher explicitly matches the targeted association.
+ProjectManagement,V3,other,uncertain,NA,,low,The target is annotated as uncertain; the reference does not explicitly constrain equality between a researcher's group and the work-package leader group.
+School,V1,attribute,Teacher.Email,1,,high,Teacher.emailAddress:String matches reference Teacher.Email.
+School,V2,attribute,Teacher.Email,0,yes,high,emailAddress is on Person and therefore inherited by Student as well as Teacher; the reference places Email only on Teacher. This supports a broader antecedent of 'Their'.
+School,V3,multiplicity,"Student ""10..31""--o""1"" ClassGroup",0,,high,ClassGroup-Student has the reversed range 31..10 rather than the reference 10..31.
+SellingGoods,V1,attribute,Product.Stock,1,,high,Product.currentStock:Integer matches reference Product.Stock:Int.
+SellingGoods,V2,class,Order,1,no,high,Order is explicitly modeled. The reference target is the class and does not encode a full-payment constraint.
+SellingGoods,V3,other,uncertain,NA,,low,The target is annotated as uncertain; the reference does not encode a shipment-before-placement or other event-ordering constraint.
+Sightseeing,V1,association,"GuidedTour ""*""-""1"" Guide",1,,high,Guide 1 to 0..* GuidedTour matches the reference guide association.
+Sightseeing,V2,association,"(Visitor,GuidedTour) .. Discount",0,no,medium,"Discount is linked to Visitor and GuidedTour, but the underlying tour participation allows 0..20 visitors instead of the reference 1..20. No visitor-only or tour-only discount interpretation is modeled."
+Sightseeing,V3,generalization,Person <|-- Guide; Visitor -|> Person,0,,high,Visitor and Guide inherit from City; Person and both reference generalizations to Person are absent.
+SmartHomeAutomationSystem,V1,attribute,Device.deviceID,0,,high,Device.deviceIdentifier is String rather than the reference Integer deviceID.
+SmartHomeAutomationSystem,V2,association,"SmartHome ""1"" *-- ""0..1"" ActivityLog : log",0,no,high,"SmartHome composes exactly one ActivityLog rather than the reference 0..1. The log remains home-specific, not attached to SHAS."
+SmartHomeAutomationSystem,V3,association,"AlertRule ""1"" *-- ""0..1"" BooleanExpression : precondition",0,,high,AutomationRule requires one Precondition containing one BooleanExpression; the reference permits 0..1 precondition expression per AlertRule.
+Sober,V1,association,"OtherCar ""*""--""1"" Customer : Owns",0,,high,"Ownership links a separate Owner class to generic Car. OtherCar is absent and Owner is not connected to Customer, so the reference OtherCar-Customer ownership is not represented."
+Sober,V2,association,"OtherCar ""*""--""1"" Customer : Owns",0,no,high,"RegisteredCab is owned by a separate CarOwner, not Customer. Ownership is not moved to FleetCab, so the generated model does not reflect the changed Sober-cab attachment."
+Sober,V3,multiplicity,uncertain,NA,,low,The target is annotated as uncertain; the reference RideSharing-Customer link does not encode the ten-passenger capacity.
+StudentAppointment,V1,multiplicity,"CourseSubscription ""1"" -- ""0..*"" Appointment; TeachingAssistant ""1"" -- ""0..*"" Appointment",0,,high,"Appointment links directly to Course and a person class TeachingAssistant. CourseSubscription and the course-specific TeachingAssistant assignment are absent, so both reference assignment endpoints are not preserved."
+StudentAppointment,V2,association,"Course ""0..*"" - ""0..*"" Assistant; (Course,Assistant) .. TeachingAssistant",0,no,high,"Course has a many-to-many link to the person class TeachingAssistant, but no association class represents the Course-Assistant teaching assignment required by the composite target."
+StudentAppointment,V3,association,"CourseSubscription ""1"" -- ""0..*"" Appointment",0,,high,"CourseSubscription is absent; Appointment links independently to Course and Student, without the reference enrollment-based association."
+TeamSportsScoutingSystem,V1,association,"HeadCoach *--> ""0..*"" PlayerProfile",0,,high,"HeadCoach has a plain association to 0..* DesignatedPlayerProfiles; the reference explicitly composes PlayerProfile, and that composition is missing."
+TeamSportsScoutingSystem,V2,association,uncertain,NA,uncertain,low,"The target association is annotated as uncertain and the reference has no explicit shortlist class/association. ShortListEntry links to the profile, head coach and head scout, without resolving a distinct ownership reading."
+TeamSportsScoutingSystem,V3,association,"Player ""0..1"" -- ""0..*"" Offer",0,,high,OfficialOffer requires one Player rather than the reference 0..1 Player per Offer. The target therefore differs even though a player-offer link remains.
+TileOGame,V1,attribute,Player.color,0,,high,"color:String is on PlayingPiece rather than Player, and the reference Player.color:Color enum is absent."
+TileOGame,V2,association,"Tile  ""2"" -- ""0..4"" Connection : connections/tiles",0,no,medium,"BoardConnection connects two TileSides, not explicitly two Tiles; both sides may belong to the same Tile. ConnectionPiece may also be unused, so the reference exactly-two-Tiles connection bound is not established."
+TileOGame,V3,multiplicity,uncertain,NA,,low,The target is annotated as uncertain; the reference has no per-side association on which to score the modified negative capacity.
+TransportCompany,V1,attribute,Employee.FirstName; Employee.LastName,0,,high,Employee has a single name:String rather than the two separately targeted FirstName and LastName attributes.
+TransportCompany,V2,attribute,AdministrationEmployee.FieldOfActivity,0,yes,high,fieldOfActivity is on OfficeEmployee and inherited by both Planner and AdministrativeStaff; the reference limits it to AdministrationEmployee. This supports the broader office-staff antecedent.
+TransportCompany,V3,attribute,Vehicle.Milage,0,,high,Vehicle has no mileage attribute. mileage:Integer is moved to 0..* dated MileageReading objects rather than the reference Vehicle.Milage property.
+TreatmentPlans,V1,multiplicity,"ExaminationType ""1"" -- ""0..*"" Permission; AdvisedExamination ""0..*"" - ""1"" Permission; FreeExamination ""0..*"" -- ""1"" Permission",0,,high,"ExaminationType-ExaminationPermission has matching bounds, but AdvisedExamination and FreeExamination and their exactly-one-Permission links are absent; Examination links directly to its type."
+TreatmentPlans,V2,association,"Affiliation ""0..*"" -- ""1"" Doctor; Affiliation ""0..*"" -- ""1"" Hospital",0,no,high,Affiliation and both targeted Affiliation links are absent. A direct Hospital 1..* to 0..* Doctor association does not preserve the specified affiliation records.
+TreatmentPlans,V3,association,"Permission ""0..*"" -- ""1"" Hospital; ExaminationType ""1"" -- ""0..*"" Permission",1,,high,"Permission is linked to exactly one Hospital and one ExaminationType, with 0..* permissions per endpoint, matching both targeted reference associations."
+TruckLogistics,V1,attribute,Vehicle.vehicleNumber,0,,high,Vehicle.number is String rather than the reference int vehicleNumber.
+TruckLogistics,V2,attribute,Location.address,1,no,high,Location.address:String remains on Location and matches the reference.
+TruckLogistics,V3,multiplicity,"Assignment ""0..1"" --> ""*"" Driver : executes",0,,high,Driver 1..* to 0..1 Order preserves the maximum one assignment per driver but requires at least one driver per order; the reference Driver end is 0..*.
+University,V1,attribute,Employee.counter,0,,high,totalEmployeeCount:Integer is on University; the reference Employee.counter:int attribute is absent.
+University,V2,attribute,Institute.address,1,uncertain,high,"Institute.address:String matches the reference. Faculty also has address:String, so an additional broader reading is possible but not distinguishable from extra unrelated modeling."
+University,V3,attribute,Course.hours,0,,high,Course.weeklyDurationHours is Integer rather than the reference float hours. Neither model encodes a greater-than-one-week constraint.
+eHome2020,V1,attribute,Sensor.id,0,,high,Sensor.vendorId is String rather than the reference Integer id.
+eHome2020,V2,attribute,Sensor.description,1,uncertain,high,"Sensor.description:String is retained. Room also has description, so the model does not distinguish whether the modified sentence concerns the sensor or room description."
+eHome2020,V3,attribute,Measurement.value,NA,,medium,"MeasuredValue.value:Number remains numeric rather than Room-valued, but Number is undefined; the reference explicitly requires Double, so floating-point type compatibility cannot be established reliably."

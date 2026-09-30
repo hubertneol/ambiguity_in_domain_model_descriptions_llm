@@ -1,0 +1,5 @@
+Produce an EBike class diagram using the requirements below.
+
+An EBike comprises a steel frame, a controller, and a drive system. Each frame holds two wheels, and a motor makes up the drive system. An EBike may have a battery attached, and that battery is removable. The battery's stored energy is expressed in Watt-hours (Wh).
+
+On, Off, and Charging are the controller's three possible states. Besides commanding the drive system, the controller controls the battery whenever a battery is attached. The company intends to offer two controller versions, basic and advanced. The advanced version must be capable of estimating the next Date on which the bike needs a maintenance inspection.

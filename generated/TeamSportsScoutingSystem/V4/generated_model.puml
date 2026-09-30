@@ -1,0 +1,99 @@
+@startuml
+class ClubEmployee {
+}
+
+class Scout {
+}
+
+class HeadScout {
+}
+
+class HeadCoach {
+}
+
+class Director {
+}
+
+class TargetProfile {
+}
+
+class PlayingPosition {
+  code : String
+}
+
+class DesiredPlayerAttribute {
+  name : String
+  value : String
+}
+
+class Player {
+}
+
+class LongList {
+}
+
+class LongListEntry {
+}
+
+class ShortList {
+}
+
+class ShortListEntry {
+}
+
+class ScoutingAssignment {
+}
+
+class ScoutingReport {
+  strengths : String
+  weaknesses : String
+  recommendation : Recommendation
+}
+
+enum Recommendation {
+  KEY_PLAYER
+  FIRST_TEAM_PLAYER
+  RESERVE_TEAM_PLAYER
+  PROSPECTIVE_PLAYER
+  NOT_A_GOOD_SIGNING
+}
+
+class SigningRecommendation {
+}
+
+class OfficialOffer {
+}
+
+ClubEmployee <|-- Scout
+Scout <|-- HeadScout
+ClubEmployee <|-- HeadCoach
+ClubEmployee <|-- Director
+
+HeadCoach "1" -- "0..*" TargetProfile
+TargetProfile "0..*" -- "1..*" PlayingPosition
+TargetProfile "1" *-- "0..*" DesiredPlayerAttribute
+
+TargetProfile "1" *-- "1" LongList
+LongList "1" *-- "0..*" LongListEntry
+LongListEntry "0..*" -- "1" Player
+Scout "1" -- "0..*" LongListEntry
+
+TargetProfile "1" *-- "0..1" ShortList
+ShortList "1" *-- "0..*" ShortListEntry
+ShortListEntry "0..*" -- "1" Player
+HeadCoach "1" -- "0..*" ShortListEntry
+HeadScout "1" -- "0..*" ShortListEntry
+
+HeadScout "1" -- "0..*" ScoutingAssignment
+Scout "1" -- "0..*" ScoutingAssignment
+TargetProfile "1" -- "0..*" ScoutingAssignment
+Player "1" -- "0..*" ScoutingAssignment
+ScoutingAssignment "1" *-- "0..1" ScoutingReport
+
+HeadScout "1" -- "0..*" SigningRecommendation
+TargetProfile "1" -- "0..*" SigningRecommendation
+Player "1" -- "0..*" SigningRecommendation
+SigningRecommendation "1" -- "1" OfficialOffer
+Director "1" -- "0..*" OfficialOffer
+Player "1" -- "0..*" OfficialOffer
+@enduml

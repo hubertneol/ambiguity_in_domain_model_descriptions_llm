@@ -1,0 +1,9 @@
+The European Union has recently provided funding for a research database spanning national borders. Science Connect will establish this database to hold information about scientific articles by researchers employed at EU institutions.
+
+The database records scientific staff, represented as persons, and research institutions. A unique person ID identifies each person, while a unique institution code identifies each institution. A person's recorded details also include a telephone number, keywords describing their main research subjects, and their employing institution. Someone may simultaneously author one article and review a different peer-reviewed article.
+
+Every scientific article is uniquely identified by its DOI, a document object identifier. Its title and authors are also recorded, along with each author's position when there is more than one author. Science Connect recognizes two article types: peer-reviewed papers and technical reports. For a peer-reviewed paper, the database records the citation count and the people who reviewed it. Each technical report is published by one research institution only; an institution can publish many technical reports.
+
+Scientific publishers, such as IEE and Elsevier, are tracked too. A publisher's name identifies it. Publishers may produce multiple journals, and research institutions may subscribe to those journals. The publisher names its journals, for example Decision Support Systems. Different publishers may use an identical journal name: both IEE and Elsevier could, for instance, publish a journal titled Management Science. The database also records each journal's impact factor, a measure of its scientific impact.
+
+Journals publish peer-reviewed papers exclusively; they do not publish technical reports.

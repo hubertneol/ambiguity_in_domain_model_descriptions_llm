@@ -1,0 +1,51 @@
+@startuml
+class User {
+  id : String
+  name : String
+  email : String
+  dateOfBirth : Date
+}
+
+class Account {
+  accountNumber : Integer
+}
+
+class BusinessAccount {
+  companyName : String
+  monthlyFee : Decimal
+}
+
+class PersonalAccount {
+}
+
+class Page {
+  pageName : String
+  numberOfVisits : Integer
+}
+
+class AdvertisementPage {
+  bounceRate : Decimal
+  clickThroughRate : Decimal
+  conversionRate : Decimal
+}
+
+class FriendRequest {
+}
+
+class PagePrivilege {
+}
+
+Account <|-- BusinessAccount
+Account <|-- PersonalAccount
+Page <|-- AdvertisementPage
+
+User "1" -- "1" Account
+Account "1" *-- "0..*" Page
+BusinessAccount "1" -- "0..*" AdvertisementPage
+
+PersonalAccount "1" -- "0..*" FriendRequest
+PersonalAccount "1" -- "0..*" FriendRequest
+
+PersonalAccount "1" -- "0..*" PagePrivilege
+Page "1" -- "0..*" PagePrivilege
+@enduml

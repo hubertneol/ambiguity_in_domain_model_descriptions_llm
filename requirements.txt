@@ -1,0 +1,26 @@
+# Runtime dependencies for the domain-model evaluation experiment.
+#
+# Metrik-4 is provided by `domain_model_metrics`, which is NOT on PyPI. It is
+# installed as an editable package from a local source checkout of
+# "domainModel-Metrics-Comparison":
+#
+#     pip install -e /path/to/VasiliySeibert-domainModel-Metrics-Comparison-<rev>
+#
+# That package pulls in its own dependencies (nltk, networkx, numpy, scipy,
+# python-Levenshtein, rapidfuzz, pydantic, ...), so they are not repeated here.
+#
+# Metrik-4 additionally requires these NLTK corpora, which are data downloads
+# rather than pip packages:
+#
+#     python -m nltk.downloader wordnet omw-1.4 stopwords \
+#         averaged_perceptron_tagger averaged_perceptron_tagger_eng punkt punkt_tab
+
+# Excel export in scripts/export_results.py. CSV export uses the standard
+# library, so this is only needed for results.xlsx.
+openpyxl
+
+# UML generation in scripts/generate_models.py. Needed only for the generation
+# stage — the rest of the pipeline (validation, Metrik-4 evaluation, export)
+# runs without it, and `generate_models.py --dry-run` works without it too.
+# Requires the OPENAI_API_KEY environment variable at run time.
+openai

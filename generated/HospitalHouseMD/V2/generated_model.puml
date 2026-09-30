@@ -1,0 +1,78 @@
+@startuml
+class Hospital {
+}
+
+class Patient {
+}
+
+class Symptom {
+}
+
+class MedicalProfessional {
+}
+
+class Doctor {
+}
+
+class HeadDoctor {
+}
+
+class Nurse {
+}
+
+class Diagnosis {
+}
+
+class Illness {
+  priorityScore : PriorityScore
+}
+
+class Treatment {
+}
+
+class AppliedTreatment {
+  stage : TreatmentStage
+}
+
+class ConsentForm {
+  active : Boolean
+}
+
+class FollowUp {
+}
+
+enum PriorityScore {
+  HIGH
+  LOW
+}
+
+enum TreatmentStage {
+  STAGE_1
+  STAGE_2
+  STAGE_3
+}
+
+MedicalProfessional <|-- Doctor
+MedicalProfessional <|-- Nurse
+Doctor <|-- HeadDoctor
+
+Hospital "1" *-- "1..*" MedicalProfessional
+Hospital "1" -- "1" HeadDoctor
+Hospital "1" -- "0..*" Patient
+Hospital "1" -- "0..*" Illness
+
+Doctor "1..*" -- "0..*" Patient
+Patient "0..*" -- "1..*" Symptom
+Patient "1" *-- "0..*" ConsentForm
+Patient "1" -- "0..*" Diagnosis
+
+Doctor "1" -- "0..*" Diagnosis
+HeadDoctor "0..1" -- "0..*" Diagnosis
+Illness "1" -- "0..*" Diagnosis
+Illness "1..*" -- "0..*" Treatment
+
+Diagnosis "1" *-- "0..*" AppliedTreatment
+Treatment "1" -- "0..*" AppliedTreatment
+AppliedTreatment "1" *-- "0..*" FollowUp
+MedicalProfessional "1" -- "0..*" FollowUp
+@enduml

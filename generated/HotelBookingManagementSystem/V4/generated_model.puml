@@ -1,0 +1,157 @@
+@startuml
+class Traveller {
+  name : String
+  reliabilityRating : Decimal
+}
+
+class BillingDetails {
+  companyName : String
+  address : String
+}
+
+class TravelPreferences {
+  includedBreakfast : Boolean
+  freeWifi : Boolean
+  receptionOpen24x7 : Boolean
+}
+
+class SearchRequest {
+  city : String
+  arrivalDate : Date
+  departureDate : Date
+  minimumStarRating : Integer
+  maximumNightlyCost : Decimal
+}
+
+class RoomRequirement {
+  quantity : Integer
+}
+
+class RoomType {
+  name : String
+}
+
+class Hotel {
+  name : String
+  address : String
+  city : String
+  cityArea : String
+  starRating : Integer
+}
+
+class HotelChain {
+}
+
+class RoomTypeAvailability {
+  availableFrom : Date
+  availableTo : Date
+  status : AvailabilityStatus
+}
+
+enum AvailabilityStatus {
+  AVAILABLE
+  SOLD_OUT
+}
+
+class HotelOffer {
+  nightlyPrice : Decimal
+  arrivalDate : Date
+  departureDate : Date
+}
+
+class SpecialOffer {
+  submittedAt : DateTime
+}
+
+class OfferedRoom {
+  quantity : Integer
+}
+
+class Booking {
+}
+
+class PreliminaryBooking {
+  uniqueBookingIdentifier : String
+  createdAt : DateTime
+  competitionDeadline : DateTime
+}
+
+class FinalizedBooking {
+  finalizedAt : DateTime
+  confirmationDueAt : DateTime
+  cancellationDeadline : DateTime
+  paymentMethod : PaymentMethod
+  status : FinalizedBookingStatus
+}
+
+enum PaymentMethod {
+  PREPAID
+  PAY_AT_HOTEL
+}
+
+enum FinalizedBookingStatus {
+  AWAITING_CONFIRMATION
+  CONFIRMED
+  CANCELLED
+}
+
+class CreditCardDetails {
+}
+
+class CompetitionInvitation {
+  sentAt : DateTime
+  offerDeadline : DateTime
+}
+
+class Confirmation {
+  sentAt : DateTime
+}
+
+class Cancellation {
+  cancelledAt : DateTime
+  initiator : CancellationInitiator
+  chargeAmount : Decimal
+  refundAmount : Decimal
+  compensationAmount : Decimal
+}
+
+enum CancellationInitiator {
+  TRAVELLER
+  HOTEL
+  HBMS
+}
+
+Traveller "1" *-- "1" BillingDetails
+Traveller "1" *-- "0..1" TravelPreferences
+Traveller "1" -- "0..*" SearchRequest
+Traveller "1" -- "0..*" Booking
+Traveller "1" -- "0..*" Confirmation
+
+SearchRequest "0..*" -- "0..1" TravelPreferences
+SearchRequest "1" *-- "1..*" RoomRequirement
+RoomRequirement "0..*" -- "1" RoomType
+SearchRequest "1" -- "0..*" HotelOffer
+
+HotelChain "0..1" -- "0..*" Hotel
+Hotel "1" *-- "0..*" RoomTypeAvailability
+RoomTypeAvailability "0..*" -- "1" RoomType
+Hotel "1" -- "0..*" HotelOffer
+
+HotelOffer "1" *-- "1..*" OfferedRoom
+OfferedRoom "0..*" -- "1" RoomType
+HotelOffer <|-- SpecialOffer
+
+Booking <|-- PreliminaryBooking
+Booking <|-- FinalizedBooking
+Booking "0..*" -- "1" HotelOffer
+PreliminaryBooking "0..1" -- "0..1" FinalizedBooking
+
+PreliminaryBooking "1" *-- "0..*" CompetitionInvitation
+Hotel "1" -- "0..*" CompetitionInvitation
+CompetitionInvitation "1" -- "0..1" SpecialOffer
+
+FinalizedBooking "1" *-- "1" CreditCardDetails
+FinalizedBooking "1" *-- "0..1" Confirmation
+Hotel "1" -- "0..*" Confirmation
+FinalizedBooking "1" *-- "0..1" Cancellation
+@enduml

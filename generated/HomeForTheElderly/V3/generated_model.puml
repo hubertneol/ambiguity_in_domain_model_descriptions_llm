@@ -1,0 +1,165 @@
+@startuml
+class ElderlyHome {
+}
+
+class Department {
+}
+
+class Room {
+}
+
+class Bed {
+}
+
+class StayCategory {
+  type : StayType
+  price : Decimal
+}
+
+enum StayType {
+  RH
+  RNH
+  SF
+}
+
+class Person {
+}
+
+class Inhabitant {
+}
+
+class Representative {
+}
+
+class Registration {
+  registrationDate : Date
+}
+
+class Question {
+  text : String
+}
+
+class IdentificationQuestion {
+}
+
+class AbilityQuestion {
+}
+
+class RegistrationResponse {
+  answer : String
+}
+
+class Assessment {
+  assessmentDate : Date
+  type : AssessmentType
+}
+
+enum AssessmentType {
+  INITIAL
+  REASSESSMENT
+}
+
+class AssessmentResponse {
+  answer : String
+}
+
+class WaitingList {
+}
+
+class WaitingListEntry {
+  position : Integer
+}
+
+class Proposal {
+  proposalDate : Date
+  responseDeadline : Date
+  intakeDate : Date
+  status : ProposalStatus
+}
+
+enum ProposalStatus {
+  PENDING
+  ACCEPTED
+  REFUSED
+  INVALIDATED
+}
+
+class Stay {
+  startDate : Date
+  endDate : Date
+  status : StayStatus
+  endReason : StayEndReason
+}
+
+enum StayStatus {
+  ACTIVE
+  SUSPENDED
+  ENDED
+}
+
+enum StayEndReason {
+  DEATH
+  MOVED_ELSEWHERE
+}
+
+class Invoice {
+  invoiceDate : Date
+  outstandingAmount : Decimal
+  status : InvoiceStatus
+}
+
+enum InvoiceStatus {
+  PAID
+  UNPAID
+}
+
+class InvoiceItem {
+  amount : Decimal
+}
+
+class Discount {
+  value : Decimal
+}
+
+class CreditNote {
+  amount : Decimal
+}
+
+Person <|-- Inhabitant
+Question <|-- IdentificationQuestion
+Question <|-- AbilityQuestion
+
+ElderlyHome "1" *-- "1..*" Department
+Department "1" *-- "1..*" Room
+Room "1" *-- "1..*" Bed
+ElderlyHome "1" -- "1..*" StayCategory
+StayCategory "1" -- "0..*" Bed
+
+Person "1" -- "1" Registration
+Registration "1" *-- "1..*" RegistrationResponse
+IdentificationQuestion "1" -- "0..*" RegistrationResponse
+
+Person "1" -- "0..*" Assessment
+Assessment "1" *-- "1..*" AssessmentResponse
+AbilityQuestion "1" -- "0..*" AssessmentResponse
+StayCategory "1" -- "0..*" Assessment
+
+StayCategory "1" -- "1" WaitingList
+WaitingList "1" *-- "0..*" WaitingListEntry
+Person "1" -- "0..1" WaitingListEntry
+WaitingListEntry "1" -- "0..*" Proposal
+Bed "1" -- "0..*" Proposal
+Proposal "0..1" -- "0..1" Assessment
+
+Inhabitant "1" -- "0..*" Stay
+Bed "1" -- "0..*" Stay
+StayCategory "1" -- "0..*" Stay
+Proposal "0..1" -- "0..1" Stay
+Inhabitant "0..*" -- "0..1" Representative
+
+Inhabitant "1" -- "0..*" Invoice
+Invoice "1" *-- "1..*" InvoiceItem
+Stay "1" -- "0..*" InvoiceItem
+InvoiceItem "1" *-- "0..*" Discount
+Invoice "1" -- "0..*" CreditNote
+@enduml

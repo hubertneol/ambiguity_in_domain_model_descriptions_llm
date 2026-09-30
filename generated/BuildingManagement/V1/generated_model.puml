@@ -1,0 +1,117 @@
+@startuml
+enum EnergyClass {
+  A
+  B
+  C
+  D
+}
+
+class WebPortal {
+  versionNumber : String
+  urlAddress : String
+}
+
+class Visitor {
+}
+
+class User {
+  userName : String
+  emailAddress : String
+  password : String
+  isActivated : Boolean
+}
+
+class Administrator {
+  idCardNumber : String
+}
+
+class Building {
+  uniqueId : String
+  name : String
+  energyClass : EnergyClass
+  address : String
+  yearOfConstruction : Integer
+}
+
+class AdditionalEntry {
+  name : String
+  isPublic : Boolean
+}
+
+class TextualEntry {
+  value : String
+}
+
+class NumericEntry {
+  value : Float
+  unit : String
+}
+
+class Image {
+  fileName : String
+}
+
+class Comment {
+}
+
+class RegisterUser {
+}
+
+class ConfirmEmailAddress {
+}
+
+class SetUpUserAccount {
+}
+
+class ActivateUser {
+}
+
+class LogIn {
+}
+
+class SearchBuildings {
+}
+
+class CreateBuilding {
+}
+
+class ManageBuildingEntries {
+}
+
+class CommentOnBuilding {
+}
+
+class DeleteComment {
+}
+
+Visitor <|-- User
+User <|-- Administrator
+AdditionalEntry <|-- TextualEntry
+AdditionalEntry <|-- NumericEntry
+
+WebPortal "1" o-- "0..*" Building
+WebPortal "1" o-- "0..*" User
+User "1" -- "0..*" Building
+Building "1" *-- "0..*" AdditionalEntry
+Building "1" *-- "1..*" Image
+Building "1" -- "1" Image
+Building "1" *-- "0..*" Comment
+User "1" -- "0..*" Comment
+
+Visitor "1" -- "0..*" RegisterUser
+Visitor "1" -- "0..*" ConfirmEmailAddress
+Administrator "1" -- "0..*" SetUpUserAccount
+WebPortal "1" -- "0..*" ActivateUser
+User "1" -- "0..*" LogIn
+Visitor "1" -- "0..*" SearchBuildings
+User "1" -- "0..*" CreateBuilding
+User "1" -- "0..*" ManageBuildingEntries
+User "1" -- "0..*" CommentOnBuilding
+Administrator "1" -- "0..*" DeleteComment
+
+RegisterUser "1" *-- "1" ConfirmEmailAddress
+RegisterUser "1" *-- "1" SetUpUserAccount
+RegisterUser "1" *-- "1" ActivateUser
+CreateBuilding "1" -- "0..*" ManageBuildingEntries
+CommentOnBuilding "1" -- "0..1" DeleteComment
+@enduml

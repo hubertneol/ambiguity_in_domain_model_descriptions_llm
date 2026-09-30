@@ -1,0 +1,65 @@
+@startuml
+class EHome2020 {
+}
+
+class SensorController {
+}
+
+class EMonitor {
+}
+
+class Apartment {
+  address : String
+  emailAddress : String
+}
+
+class Inhabitant {
+  username : String
+  password : String
+  administrativePrivileges : Boolean
+}
+
+class Room {
+  description : String
+}
+
+class Sensor {
+  vendorId : String
+  description : String
+  unit : Unit
+  threshold : Float
+  mostRecentValue : MeasuredValue
+}
+
+class TemperatureSensor {
+  minimumValue : Float
+  maximumValue : Float
+}
+
+class PowerSensor {
+  totalPowerConsumption : Float
+}
+
+class MeasuredValue {
+  timestamp : DateTime
+  reading : Float
+}
+
+enum Unit {
+  CELSIUS
+  WATT
+}
+
+Sensor <|-- TemperatureSensor
+Sensor <|-- PowerSensor
+
+EHome2020 "1" *-- "1" SensorController
+EHome2020 "1" -- "1" EMonitor
+SensorController "1" -- "1" Apartment
+SensorController "1" -- "2..*" Sensor
+Apartment "1" *-- "2..*" Room
+Apartment "1" -- "0..*" Inhabitant
+Room "1" -- "0..*" Sensor
+Sensor "1" *-- "0..*" MeasuredValue
+EMonitor "1" -- "0..*" Sensor
+@enduml

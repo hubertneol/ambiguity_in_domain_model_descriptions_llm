@@ -1,0 +1,124 @@
+@startuml
+class DeLijn {
+}
+
+class Bus {
+}
+
+class Line {
+  lineNumber : String
+  name : String
+}
+
+class Destination {
+  name : String
+}
+
+class Trajectory {
+  status : TrajectoryStatus
+  operationStartDate : Date
+  cancellationDate : Date
+}
+
+class RouteSection {
+}
+
+class BusTrajectoryAssignment {
+  assignedFrom : Date
+  assignedUntil : Date
+}
+
+class TownAuthority {
+  name : String
+}
+
+class ApprovalRequest {
+  requestDate : Date
+  decisionDate : Date
+  outcome : ApprovalOutcome
+}
+
+class Suspension {
+  startDate : Date
+  endDate : Date
+  reason : String
+}
+
+class LineCategory {
+  name : String
+  tripPrice : Money
+}
+
+class Subscriber {
+  homeAddress : String
+  workAddress : String
+  workingHours : String
+}
+
+class MENSOTicket {
+  validFrom : Date
+  validUntil : Date
+}
+
+class TicketMachine {
+}
+
+class Trip {
+  date : Date
+  time : Time
+  price : Money
+}
+
+class Invoice {
+  billingMonth : YearMonth
+  issueDate : Date
+  totalBeforeDiscount : Money
+  discountPercentage : Percentage
+  amountDue : Money
+}
+
+class Payment {
+  paymentDate : Date
+  amount : Money
+}
+
+enum TrajectoryStatus {
+  PENDING_APPROVAL
+  REVISION_REQUIRED
+  REJECTED
+  APPROVED
+  OPERATIONAL
+  SUSPENDED
+  CANCELLED
+}
+
+enum ApprovalOutcome {
+  PENDING
+  REJECTED_WITHOUT_APPEAL
+  REVISION_REQUIRED
+  APPROVED
+}
+
+DeLijn "1" *-- "1..*" Bus
+DeLijn "1" o-- "1..*" Line
+DeLijn "1" o-- "1..*" Trajectory
+DeLijn "1" -- "0..*" Subscriber
+LineCategory "1" -- "0..*" Line
+Line "0..1" o-- "2..*" Trajectory
+Line "1..*" -- "1..*" Destination
+Trajectory "0..*" -- "1" Destination
+Trajectory "1..*" -- "1..*" RouteSection
+Bus "1" -- "0..*" BusTrajectoryAssignment
+Trajectory "1" -- "0..*" BusTrajectoryAssignment
+Trajectory "1" -- "0..*" ApprovalRequest
+TownAuthority "1" -- "0..*" ApprovalRequest
+Trajectory "1" *-- "0..*" Suspension
+Bus "1" *-- "1" TicketMachine
+Subscriber "1" -- "0..*" MENSOTicket
+MENSOTicket "1" -- "0..*" Trip
+TicketMachine "1" -- "0..*" Trip
+Line "1" -- "0..*" Trip
+Subscriber "1" -- "0..*" Invoice
+Invoice "0..1" -- "0..*" Trip
+Invoice "1" -- "0..1" Payment
+@enduml

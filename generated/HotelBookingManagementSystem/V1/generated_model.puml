@@ -1,0 +1,145 @@
+@startuml
+class Traveller {
+  name : String
+  reliabilityRating : Decimal
+}
+
+class BillingInformation {
+  companyName : String
+  address : String
+}
+
+class CreditCardInformation {
+}
+
+class TravelPreference {
+  name : String
+}
+
+class AccommodationSearch {
+  arrivalDate : Date
+  departureDate : Date
+  numberOfRooms : Integer
+  minimumHotelRating : Integer
+  maximumCostPerNight : Decimal
+}
+
+class City {
+  name : String
+}
+
+class Hotel {
+  name : String
+  address : String
+  cityArea : String
+  rating : Integer
+}
+
+class HotelChain {
+  name : String
+}
+
+class RoomType {
+  name : String
+}
+
+class RoomAvailability {
+  startDate : Date
+  endDate : Date
+  fullyBooked : Boolean
+}
+
+class AccommodationOffer {
+  arrivalDate : Date
+  departureDate : Date
+  numberOfRooms : Integer
+  costPerNight : Decimal
+}
+
+class SpecialOffer {
+  submittedAt : DateTime
+}
+
+class Booking {
+  bookingIdentifier : String
+  arrivalDate : Date
+  departureDate : Date
+  numberOfRooms : Integer
+  pricePerNight : Decimal
+}
+
+class PreliminaryBooking {
+  specialOfferDeadline : DateTime
+}
+
+class FinalizedBooking {
+  paymentType : PaymentType
+  status : FinalizedBookingStatus
+  confirmationDeadline : DateTime
+}
+
+class CancellationTerms {
+  cancellationDeadline : DateTime
+}
+
+class HotelConfirmation {
+  sentAt : DateTime
+}
+
+class Reimbursement {
+}
+
+class FinancialCompensation {
+}
+
+class OneNightCancellationCharge {
+}
+
+enum PaymentType {
+  PRE_PAID
+  PAID_AT_HOTEL
+}
+
+enum FinalizedBookingStatus {
+  UNCONFIRMED
+  CONFIRMED
+  CANCELLED
+}
+
+AccommodationOffer <|-- SpecialOffer
+Booking <|-- PreliminaryBooking
+Booking <|-- FinalizedBooking
+
+Traveller "1" *-- "1" BillingInformation
+Traveller "0..*" -- "0..*" TravelPreference
+Traveller "1" -- "0..*" AccommodationSearch
+Traveller "1" -- "0..*" Booking
+
+City "1" -- "0..*" Hotel
+City "1" -- "0..*" AccommodationSearch
+HotelChain "0..1" -- "0..*" Hotel
+
+Hotel "1" -- "0..*" RoomAvailability
+RoomType "1" -- "0..*" RoomAvailability
+RoomType "1" -- "0..*" AccommodationSearch
+RoomType "1" -- "0..*" AccommodationOffer
+
+AccommodationSearch "0..*" -- "0..*" TravelPreference
+AccommodationSearch "0..*" -- "0..*" AccommodationOffer
+
+Hotel "1" -- "0..*" AccommodationOffer
+AccommodationOffer "0..*" -- "0..*" TravelPreference
+AccommodationOffer "1" -- "0..*" Booking
+
+PreliminaryBooking "1" -- "0..*" SpecialOffer
+PreliminaryBooking "0..1" -- "0..1" FinalizedBooking
+
+FinalizedBooking "1" -- "1" CreditCardInformation
+FinalizedBooking "1" *-- "0..1" CancellationTerms
+FinalizedBooking "1" *-- "0..1" HotelConfirmation
+Hotel "1" -- "0..*" HotelConfirmation
+
+FinalizedBooking "1" -- "0..1" Reimbursement
+FinalizedBooking "1" -- "0..1" FinancialCompensation
+FinalizedBooking "1" -- "0..1" OneNightCancellationCharge
+@enduml

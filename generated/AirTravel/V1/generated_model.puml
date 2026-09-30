@@ -1,0 +1,100 @@
+@startuml
+class Aircraft {
+  name : String
+  type : String
+  yearOfManufacture : Integer
+  nextInspectionDate : Date
+}
+
+class PassengerAircraft {
+  numberOfSeats : Integer
+}
+
+class Flight {
+  flightNumber : String
+  date : Date
+}
+
+class Passenger {
+  name : String
+  passportNumber : String
+}
+
+class Ticket {
+  ticketNumber : String
+  price : Decimal
+  upgradeDesired : Boolean
+}
+
+class SeatCategory {
+  designation : String
+  entertainmentProgram : Boolean
+  numberOfSeats : Integer
+}
+
+class Airline {
+  name : String
+}
+
+class FlightAttendant {
+  name : String
+  dateOfEmployment : Date
+  isChiefStewardOrStewardess : Boolean
+}
+
+class Pilot {
+  name : String
+  dateOfEmployment : Date
+  license : String
+}
+
+class Airport {
+  name : String
+  address : String
+  numberOfRunways : Integer
+}
+
+class CaptainAssignment {
+}
+
+class CoPilotAssignment {
+}
+
+class FlightDeparture {
+}
+
+class FlightDestination {
+}
+
+class HomeAirportAssignment {
+}
+
+Aircraft <|-- PassengerAircraft
+
+Aircraft "1" -- "1..*" Flight
+Flight "1" -- "1..*" Ticket
+Passenger "1" -- "0..*" Ticket
+PassengerAircraft "1" -- "0..*" SeatCategory
+SeatCategory "1" -- "0..*" Ticket
+
+Airline "0..1" -- "0..*" Aircraft
+Airline "1" -- "1..*" FlightAttendant
+Airline "1" -- "1..*" Pilot
+
+Flight "0..*" -- "1..*" FlightAttendant
+
+Flight "1" -- "1" CaptainAssignment
+Pilot "1" -- "0..*" CaptainAssignment
+
+Flight "1" -- "1..2" CoPilotAssignment
+Pilot "1" -- "0..*" CoPilotAssignment
+
+Flight "1" -- "1" FlightDeparture
+Airport "1" -- "0..*" FlightDeparture
+
+Flight "1" -- "1" FlightDestination
+Airport "1" -- "0..*" FlightDestination
+
+Aircraft "1" -- "0..1" HomeAirportAssignment
+Airport "1" -- "0..*" HomeAirportAssignment
+@enduml

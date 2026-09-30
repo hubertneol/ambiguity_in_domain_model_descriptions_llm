@@ -1,0 +1,53 @@
+@startuml
+class EBike {
+}
+
+class Frame {
+  material : FrameMaterial
+}
+
+enum FrameMaterial {
+  STEEL
+}
+
+class Wheel {
+}
+
+class DriveSystem {
+}
+
+class Motor {
+}
+
+class Controller {
+  state : ControllerState
+}
+
+enum ControllerState {
+  ON
+  OFF
+  CHARGING
+}
+
+class BasicController {
+}
+
+class AdvancedController {
+  estimatedNextInspectionDate : Date
+}
+
+class Battery {
+  storedEnergy : Wh
+}
+
+EBike "1" *-- "1" Frame
+EBike "1" *-- "1" DriveSystem
+EBike "1" *-- "1" Controller
+Frame "1" -- "2" Wheel
+DriveSystem "1" *-- "1" Motor
+EBike "1" o-- "0..1" Battery
+Controller "1" -- "0..1" Battery
+Controller "1" -- "1" DriveSystem
+Controller <|-- BasicController
+Controller <|-- AdvancedController
+@enduml

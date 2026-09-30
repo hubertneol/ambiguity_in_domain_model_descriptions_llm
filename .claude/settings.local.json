@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/bin/python scripts/generate_models.py --dry-run)",
+      "Bash(env -u OPENAI_API_KEY .venv/bin/python scripts/generate_models.py --case AirTravel --version V0 --limit 1)",
+      "Bash(.venv/bin/python scripts/generate_models.py --validate-only)"
+    ]
+  }
+}

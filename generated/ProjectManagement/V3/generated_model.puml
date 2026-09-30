@@ -1,0 +1,49 @@
+@startuml
+class University {
+}
+
+class Department {
+}
+
+class ResearchGroup {
+}
+
+class Researcher {
+}
+
+class Project {
+}
+
+class WorkPackage {
+}
+
+class ResearchGroupMembership {
+  startDate : Date
+  endDate : Date
+}
+
+class WPLeadershipAssignment {
+  startDate : Date
+  endDate : Date
+}
+
+class TeamMemberAssignment {
+  startDate : Date
+  endDate : Date
+}
+
+University "1" -- "1..*" ResearchGroup
+Department "1" -- "0..*" ResearchGroup
+ResearchGroup "1" -- "0..*" Researcher
+Project "1" *-- "1..*" WorkPackage
+ResearchGroup "1" -- "0..*" WorkPackage
+
+Researcher "1" -- "1..*" ResearchGroupMembership
+ResearchGroup "1" -- "0..*" ResearchGroupMembership
+
+WorkPackage "1" -- "1..*" WPLeadershipAssignment
+ResearchGroup "1" -- "0..*" WPLeadershipAssignment
+
+ResearchGroupMembership "1" -- "0..*" TeamMemberAssignment
+WPLeadershipAssignment "1" -- "0..*" TeamMemberAssignment
+@enduml

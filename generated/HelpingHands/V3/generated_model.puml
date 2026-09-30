@@ -1,0 +1,137 @@
+@startuml
+class HelpingHandsStore {
+}
+
+class H2SLocation {
+  cityName : String
+}
+
+class DistributionCenter {
+}
+
+class FoodBank {
+}
+
+class Resident {
+  name : String
+  streetAddress : String
+  phoneNumber : String
+  emailAddress : String
+}
+
+class ScheduledPickup {
+  requestedDate : Date
+}
+
+class CollectedItem {
+  description : String
+  dimensions : String
+  weight : Decimal
+}
+
+class SecondHandArticle {
+}
+
+class NonPerishableFood {
+}
+
+class PickupVehicle {
+  availableStorageSpace : Decimal
+}
+
+class VolunteerDriver {
+}
+
+class DriverAvailability {
+  availableDate : Date
+}
+
+class PickupRoute {
+  routeDate : Date
+}
+
+class H2SEmployee {
+}
+
+class ArticleInspection {
+  inspectionDate : Date
+  usable : Boolean
+}
+
+class RFIDDevice {
+  identifier : String
+}
+
+class CategoryCatalog {
+}
+
+class Category {
+  name : String
+}
+
+class CategoryAssignment {
+  assignedDate : Date
+}
+
+class ArticleDeliveryService {
+}
+
+class Client {
+  homeAddress : String
+}
+
+class ClientCall {
+  callDateTime : DateTime
+}
+
+class ArticleDelivery {
+  deliveryDate : Date
+}
+
+CollectedItem <|-- SecondHandArticle
+CollectedItem <|-- NonPerishableFood
+
+HelpingHandsStore "1" *-- "1..*" H2SLocation
+HelpingHandsStore "1" *-- "1" CategoryCatalog
+CategoryCatalog "1" *-- "134" Category
+
+H2SLocation "1" *-- "1" DistributionCenter
+H2SLocation "1" *-- "0..*" PickupVehicle
+H2SLocation "1" -- "0..*" VolunteerDriver
+H2SLocation "1" -- "0..*" H2SEmployee
+H2SLocation "1" -- "0..*" ScheduledPickup
+
+Resident "1" -- "0..*" ScheduledPickup
+ScheduledPickup "1" -- "1..*" CollectedItem
+
+VolunteerDriver "1" *-- "0..*" DriverAvailability
+PickupVehicle "1" -- "0..*" PickupRoute
+VolunteerDriver "1" -- "0..*" PickupRoute
+PickupRoute "0..1" -- "0..*" ScheduledPickup
+
+DistributionCenter "0..1" -- "0..*" SecondHandArticle
+FoodBank "0..1" -- "0..*" NonPerishableFood
+
+SecondHandArticle "1" -- "0..1" ArticleInspection
+H2SEmployee "1" -- "0..*" ArticleInspection
+SecondHandArticle "0..1" -- "0..1" RFIDDevice
+
+SecondHandArticle "1" -- "0..1" CategoryAssignment
+Category "1" -- "0..*" CategoryAssignment
+H2SEmployee "1" -- "0..*" CategoryAssignment
+
+DistributionCenter "1" *-- "0..1" ArticleDeliveryService
+ArticleDeliveryService "1" -- "0..*" Client
+Client "0..*" -- "0..*" Category
+
+ArticleDeliveryService "1" *-- "0..*" ClientCall
+H2SEmployee "1" -- "0..*" ClientCall
+Client "1" -- "0..*" ClientCall
+ClientCall "0..*" -- "0..*" SecondHandArticle
+
+ArticleDeliveryService "1" *-- "0..*" ArticleDelivery
+Client "1" -- "0..*" ArticleDelivery
+H2SEmployee "1" -- "0..*" ArticleDelivery
+VolunteerDriver "1" -- "0..*" ArticleDelivery
+SecondHandArticle "1" -- "0..1" ArticleDelivery
+@enduml

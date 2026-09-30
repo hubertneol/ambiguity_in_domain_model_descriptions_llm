@@ -1,0 +1,9 @@
+Inspired by Spotify's success, a group of economics students intends to create Musicmatic, a music-streaming website. Because database details are unfamiliar to them, they have asked you to draw a UML class diagram.
+
+The site will offer many songs. Each song needs a recorded title, year, duration, and genre. Artist records will include a name, birth date, and a website URL providing further information, such as a Wikipedia page. Assume that artist names uniquely identify artists and that every song belongs to precisely one artist. Different songs may share a title; only the combination of song and artist may be taken as unique.
+
+Musicmatic must also record its users. The students have chosen two user types: regular users, who can purchase music, and business users, who supply content by uploading music. Each user has a unique ID, name, and address on record, with business users additionally recording a VAT number.
+
+For flexibility, business users are allowed to upload individual songs only. A song is classified as either a single or a hit. Regular users can buy singles directly. Alternatively, people may build an album from multiple hits, excluding singles. The database stores each hit's position in the album as its track number. Albums created by regular users can become recommendations to other regular users with similar purchasing habits.
+
+A person may act as a regular user on one occasion, such as when downloading a single or album, and as a business user on another, such as when uploading music they made themselves.

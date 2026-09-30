@@ -1,0 +1,92 @@
+@startuml
+enum TreatmentStage {
+  STAGE_1
+  STAGE_2
+  STAGE_3
+}
+
+enum PriorityScore {
+  HIGH
+  LOW
+}
+
+class Patient {
+}
+
+class Doctor {
+}
+
+class HeadDoctor {
+}
+
+class Nurse {
+}
+
+class Illness {
+  priorityScore : PriorityScore
+}
+
+class Diagnosis {
+}
+
+class DiagnosisApproval {
+}
+
+class Treatment {
+}
+
+class AppliedTreatment {
+  stage : TreatmentStage
+}
+
+class ConsentForm {
+  signed : Boolean
+  withdrawn : Boolean
+}
+
+class FollowUp {
+}
+
+class DoctorCheck {
+}
+
+class NurseCheck {
+}
+
+class TreatmentStageDowngrade {
+  fromStage : TreatmentStage
+  toStage : TreatmentStage
+}
+
+class PriorityStageUpgrade {
+}
+
+Doctor <|-- HeadDoctor
+FollowUp <|-- DoctorCheck
+FollowUp <|-- NurseCheck
+
+Patient "0..*" -- "1..*" Doctor
+Patient "1" -- "0..*" Diagnosis
+Doctor "1" -- "0..*" Diagnosis
+Illness "1" -- "0..*" Diagnosis
+
+Diagnosis "1" -- "0..1" DiagnosisApproval
+HeadDoctor "1" -- "0..*" DiagnosisApproval
+
+Illness "0..*" -- "0..*" Treatment
+Diagnosis "1" -- "0..*" AppliedTreatment
+Treatment "1" -- "0..*" AppliedTreatment
+Patient "1" -- "0..*" AppliedTreatment
+
+Patient "1" -- "0..*" ConsentForm
+
+AppliedTreatment "1" -- "0..*" FollowUp
+Doctor "1" -- "0..*" DoctorCheck
+Nurse "1" -- "0..*" NurseCheck
+
+AppliedTreatment "1" -- "0..*" TreatmentStageDowngrade
+Doctor "1" -- "0..*" TreatmentStageDowngrade
+
+Illness "1" -- "0..*" PriorityStageUpgrade
+AppliedTreatment "1" -- "0..*" PriorityStageUpgrade
+@enduml

@@ -1,0 +1,9 @@
+Kinepolis is the owner of several cinemas located in different towns. A cinema contains several theatres where multiple shows can be scheduled each day. Every cinema needs its own copy of a movie and may need more than one if that movie is screened in several theatres simultaneously. A copy may be screened only in theatres on the premises where it is located. Copies can, however, be transferred to another cinema when the schedule requires it.
+
+Every Sunday, the program for the following week is made public; it covers Wednesday through Tuesday. Online reservations for a show become available once that show has been published on the website.
+
+Reservations are accepted until one hour before a show starts, and payment must be by credit card. Customers may cancel their seat reservations until 24 hours before the start of the show. Credit cards are therefore charged only after the cancellation period has ended.
+
+Kinepolis can cancel a published show provided there are no seat reservations for it. If reservations exist, they must be cancelled first. Whenever possible, a new seat is offered for a show of the same movie in a different theatre. The customer may accept or refuse this offer, which expires 24 hours before the show begins. If the offer is refused or expires, or if no new seat reservation can be offered, the customer receives a free ticket sent to their home.
+
+People who have not reserved a seat may buy a ticket at the entrance. These tickets are assigned seat numbers too. Unlike online seat reservations, tickets bought at the entrance are anonymous and cannot be cancelled or refunded. A display at the ticketing desk shows the number of seats still available for a show, based on the number of seats in the theatre.

@@ -1,0 +1,68 @@
+@startuml
+class Game {
+  id : ID
+}
+
+class Player {
+  id : ID
+}
+
+class Deck {
+  id : ID
+}
+
+class Card {
+  id : ID
+  suit : Suit
+}
+
+class ScoringTable {
+  id : ID
+}
+
+class Round {
+  id : ID
+  pointValue : Integer
+}
+
+class JackRound {
+}
+
+class SoloRound {
+  soloType : SoloType
+}
+
+class MandatorySoloRound {
+}
+
+enum Suit {
+  DIAMONDS
+  HEARTS
+  SPADES
+  CLUBS
+}
+
+enum SoloType {
+  TRUMP
+  JACK
+  QUEEN
+}
+
+enum ComparisonResult {
+  LOWER
+  EQUAL
+  HIGHER
+}
+
+Game "1" *-- "4" Player
+Game "1" *-- "1" Deck
+Game "1" *-- "1" ScoringTable
+Deck "1" *-- "0..48" Card
+ScoringTable "1" *-- "0..*" Round
+Player "1..4" -- "0..*" Round
+Player "1" -- "0..*" SoloRound
+
+Round <|-- JackRound
+Round <|-- SoloRound
+SoloRound <|-- MandatorySoloRound
+@enduml

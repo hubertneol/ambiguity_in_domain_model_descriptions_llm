@@ -1,0 +1,152 @@
+@startuml
+enum Weekday {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+}
+
+class H2S {
+}
+
+class Location {
+  city : String
+}
+
+class CategoryCatalog {
+}
+
+class ArticleCategory {
+  name : String
+}
+
+class Resident {
+  name : String
+  telephoneNumber : String
+}
+
+class EmailAddress {
+  value : String
+}
+
+class StreetAddress {
+  value : String
+}
+
+class ScheduledCollection {
+  requestedWeekday : Weekday
+  earliestCollectionTime : Time
+  latestCollectionTime : Time
+}
+
+class CollectedItem {
+  residentDescription : String
+  size : String
+  weight : Decimal
+}
+
+class SecondHandArticle {
+  receivedDate : Date
+}
+
+class NonPerishableFood {
+}
+
+class PickupVehicle {
+  storageSpace : Decimal
+}
+
+class VolunteerDriver {
+}
+
+class VolunteerAvailability {
+  weekday : Weekday
+}
+
+class Route {
+  routeDate : Date
+}
+
+class DistributionCenter {
+}
+
+class FoodBank {
+}
+
+class Employee {
+}
+
+class ArticleInspection {
+  inspectionDate : Date
+  usable : Boolean
+  verifiedDescription : String
+}
+
+class RFIDTag {
+  identifier : String
+}
+
+class Client {
+  telephoneNumber : String
+}
+
+class ArticleNeed {
+  stillRequired : Boolean
+}
+
+class NotificationCall {
+  callDate : Date
+  callTime : Time
+}
+
+class Delivery {
+  scheduledDate : Date
+}
+
+CollectedItem <|-- SecondHandArticle
+CollectedItem <|-- NonPerishableFood
+
+H2S "1" *-- "1..*" Location
+H2S "1" *-- "1" CategoryCatalog
+CategoryCatalog "1" *-- "134" ArticleCategory
+
+Location "1" *-- "1" DistributionCenter
+Location "1" -- "1" FoodBank
+Location "1" *-- "1..*" PickupVehicle
+Location "1" -- "0..*" VolunteerDriver
+Location "1" -- "0..*" ScheduledCollection
+
+Resident "1" *-- "0..1" EmailAddress
+Resident "1" -- "0..*" ScheduledCollection
+StreetAddress "1" -- "0..*" ScheduledCollection
+ScheduledCollection "1" -- "1..*" CollectedItem
+
+VolunteerDriver "1" *-- "0..*" VolunteerAvailability
+PickupVehicle "1" -- "0..*" Route
+VolunteerDriver "1" -- "0..*" Route
+Route "0..1" -- "0..*" ScheduledCollection
+
+DistributionCenter "1" -- "0..*" SecondHandArticle
+FoodBank "1" -- "0..*" NonPerishableFood
+DistributionCenter "1" -- "0..*" Employee
+
+SecondHandArticle "1" *-- "0..1" ArticleInspection
+Employee "1" -- "0..*" ArticleInspection
+SecondHandArticle "1" *-- "0..1" RFIDTag
+ArticleCategory "0..1" -- "0..*" SecondHandArticle
+
+DistributionCenter "1" -- "0..*" Client
+StreetAddress "1" -- "0..*" Client
+Client "1" *-- "0..*" ArticleNeed
+ArticleCategory "1" -- "0..*" ArticleNeed
+
+Employee "1" -- "0..*" NotificationCall
+Client "1" -- "0..*" NotificationCall
+NotificationCall "0..*" -- "1..*" SecondHandArticle
+
+Employee "1" -- "0..*" Delivery
+Client "1" -- "0..*" Delivery
+SecondHandArticle "1" -- "0..1" Delivery
+Route "1" -- "0..*" Delivery
+@enduml

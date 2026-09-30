@@ -1,0 +1,7 @@
+The city uses the Bus Transportation Management System (BTMS) to make everyday administration of its public buses easier.
+
+For each driver, BTMS records a name and generates a unique ID automatically. City staff determine the unique number identifying a route; the unique licence plate identifies a bus. Route numbers cannot exceed 9999, and licence plate numbers have a maximum length of 10 characters. Staff allocate buses to routes as much as one year ahead. A route can have several buses on a given day, whereas a bus can cover no more than one route that day. Its route can change from day to day.
+
+Staff likewise publish driver schedules up to one year in advance. Every route has morning, afternoon, and night shifts. Staff assign a driver to a shift on a specified bus for a specified day. BTMS imposes no limit on a driver's daily shift count, providing considerable flexibility. A driver can even receive two simultaneous shifts.
+
+In this BTMS version, driver and bus information can be added or deleted but cannot be updated. The system does, however, allow staff to mark a driver as on sick leave or a bus as being in the repair shop. A sick driver cannot be scheduled, and a bus under repair cannot be allocated to a route. For any chosen day, an overview lists the assigned buses' licence plates, the entered shifts, and the assigned drivers' IDs and names under each route number. It highlights drivers who are currently sick and buses that are in the repair shop.

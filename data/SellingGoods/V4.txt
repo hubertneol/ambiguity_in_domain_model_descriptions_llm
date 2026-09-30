@@ -1,0 +1,27 @@
+This exercise develops the ability to construct and reconsider a solution iteratively as requirements evolve. Begin with a class diagram for STEP 1, adding attributes, event types, non-default FSMs, and constraints where needed. At every subsequent step, revise the model by adding, removing, or modifying elements as appropriate.
+
+STEP 1
+Your newly founded business supplies goods to local supermarkets. You need a straightforward information system that records stock, customers, and their orders.
+
+Registering a customer involves entering an address and VAT number.
+
+Stock management requires records of the products offered and the current quantity of each in stock. A customer's order contains at least one order line, and every line specifies the ordered quantity of a particular product.
+
+To limit the administrative burden of payments and deliveries, the business requires full payment for an order before dispatch. Orders are also dispatched complete, simplifying shipping. Accounting needs require recording when each order is paid and when it is shipped.
+
+At the close of every working day, you update product stock levels manually in the system using that day's orders.
+
+STEP 2
+Growth brings more exclusive products that are not always in stock. You now want to dispatch orders by individual line, sending available goods immediately and the remaining goods later to keep customers satisfied.
+
+The system must therefore track orders that have been shipped in part. It needs to distinguish dispatched order lines from those still awaiting shipment. An order is marked once every line has been shipped, indicating that it can be taken off the watchlist.
+
+STEP 3
+Increasing product popularity leads you to supply larger supermarkets. Some use multiple warehouses serving different locations. You now want to record both each customer's head-office address and the addresses receiving deliveries.
+
+You also want to issue invoices for customers' orders as the business becomes more professional. Customers may now pay an invoice when ordering or after delivery. Full payment of the order remains required.
+
+STEP 4
+With further growth, tracking shipments one order line at a time becomes inconvenient. You would rather track each set of lines dispatched together.
+
+Customers have also begun reporting missing or damaged deliveries, raising concerns about the delivery service. You want more delivery information to decide whether to change providers or begin making deliveries yourself. Record the status of every delivery, remembering that partial deliveries may contain one or several order lines. Follow each shipment through packing, dispatch, and receipt by the customer.

@@ -1,0 +1,39 @@
+You are given a natural-language description of a domain.
+
+Your task is to create a UML class diagram that represents the domain described in the text.
+
+Identify the model-relevant information contained in the description and represent it as a UML class diagram, including where applicable:
+
+- classes
+- attributes
+- attribute types
+- associations between classes
+- association multiplicities/cardinalities
+- generalizations/inheritance relationships
+
+Base the model exclusively on the information contained in the provided description.
+
+Do not use external information or make assumptions about the domain beyond what can be derived from the description.
+
+Return the resulting UML class diagram as valid PlantUML.
+
+Use the following format:
+
+@startuml
+...
+@enduml
+
+Use only the following PlantUML notation:
+
+- Declare each class as: class Name { ... }
+- Declare attributes inside the class body as: name : Type
+- Declare every relationship on its own line, outside any class body.
+- Express inheritance as: Parent <|-- Child
+- Express association as: A "1" -- "0..*" B
+- Express composition as: A "1" *-- "0..*" B
+- Express aggregation as: A "1" o-- "0..*" B
+- Express enumerations as: enum Name { VALUE1, VALUE2 }
+
+Do not use the keyword extends. Do not use actor, package, namespace, note, skinparam, or stereotypes such as <<enum>>.
+
+Return only the PlantUML model. Do not include explanations, comments, Markdown code fences, or additional text.

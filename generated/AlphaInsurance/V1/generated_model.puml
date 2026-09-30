@@ -1,0 +1,139 @@
+@startuml
+class InsuranceCompany {
+    name : String
+}
+
+class Customer {
+}
+
+class CustomerFile {
+}
+
+class Broker {
+}
+
+class HeadOffice {
+}
+
+class ProfileAssessor {
+}
+
+class ProfileAssessment {
+    trustworthy : Boolean
+}
+
+class PolicyRequest {
+}
+
+class InsuranceProduct {
+    name : String
+    policyType : String
+    price : Decimal
+}
+
+class Offer {
+    deliveryMethod : OfferDeliveryMethod
+}
+
+enum OfferDeliveryMethod {
+    IN_PERSON
+    EMAIL
+}
+
+class InsuranceContract {
+    signedDate : Date
+    billingFrequency : BillingFrequency
+}
+
+enum BillingFrequency {
+    MONTHLY
+    YEARLY
+}
+
+class Invoice {
+    amount : Decimal
+    invoiceDate : Date
+}
+
+class Claim {
+    submittedDate : Date
+}
+
+class ClaimCase {
+    approved : Boolean
+}
+
+class Estimator {
+    areaOfExpertise : String
+}
+
+class EstimatorReport {
+    issueDate : Date
+    storedUntil : Date
+}
+
+class SuppliedDocument {
+}
+
+class CompensationDecision {
+    registeredDate : Date
+    totalCompensation : Decimal
+}
+
+class EligibleCost {
+    description : String
+    refundAmount : Decimal
+}
+
+class CompensationPayment {
+    amount : Decimal
+    paymentDate : Date
+}
+
+class CustomerAccount {
+    accountNumber : String
+}
+
+ProfileAssessor <|-- Broker
+ProfileAssessor <|-- HeadOffice
+
+InsuranceCompany "1" -- "0..*" Customer
+InsuranceCompany "1" -- "0..*" Broker
+InsuranceCompany "1" *-- "1" HeadOffice
+InsuranceCompany "1" -- "0..*" InsuranceProduct
+InsuranceCompany "1" -- "0..*" InsuranceContract
+
+Broker "1" -- "0..*" Customer
+Customer "1" *-- "1" CustomerFile
+CustomerFile "1" *-- "0..*" PolicyRequest
+InsuranceProduct "1" -- "0..*" PolicyRequest
+
+CustomerFile "1" -- "0..*" ProfileAssessment
+ProfileAssessor "1" -- "0..*" ProfileAssessment
+
+Customer "1" -- "0..*" Offer
+Broker "1" -- "0..*" Offer
+InsuranceProduct "1" -- "0..*" Offer
+ProfileAssessment "1" -- "0..*" Offer
+
+Offer "1" -- "0..1" InsuranceContract
+Customer "1" -- "0..*" InsuranceContract
+Broker "1" -- "0..*" InsuranceContract
+InsuranceProduct "1" -- "0..*" InsuranceContract
+InsuranceContract "1" *-- "0..*" Invoice
+
+Customer "1" -- "0..*" Claim
+InsuranceContract "1" -- "0..*" Claim
+Claim "1" *-- "1..*" ClaimCase
+ClaimCase "1" *-- "0..*" SuppliedDocument
+ClaimCase "1" *-- "0..*" EstimatorReport
+Estimator "1" -- "0..*" EstimatorReport
+
+ClaimCase "1" *-- "0..1" CompensationDecision
+CompensationDecision "1" *-- "0..*" EligibleCost
+SuppliedDocument "0..*" -- "0..*" EligibleCost
+CompensationDecision "1" -- "0..1" CompensationPayment
+
+Customer "1" *-- "0..*" CustomerAccount
+CustomerAccount "1" -- "0..*" CompensationPayment
+@enduml

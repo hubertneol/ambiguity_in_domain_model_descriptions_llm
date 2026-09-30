@@ -1,0 +1,7 @@
+You are designing an app for German clubs to play a card game and are now examining the system's data structure. The customer has supplied this specification.
+
+Four players, a card deck, and a scoring table make up a game. A deck may contain no more than 48 cards. Each card provides a method that compares card height and yields one of three results: lower, equal, or higher. The available suits are hearts, diamonds, clubs, and spades.
+
+The scoring table can hold any number of rounds. Every round records the players who won and the points value. Jack rounds and solo rounds are not mutually exclusive: the same round may be both. A mandatory solo round is a particular form of solo round. Every solo round has one solo type—trump, jack, or queen—and precisely one player acting as the solo player.
+
+All objects carry a unique ID attribute so that they can be located.

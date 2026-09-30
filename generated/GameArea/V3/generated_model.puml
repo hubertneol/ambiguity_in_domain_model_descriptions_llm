@@ -1,0 +1,32 @@
+@startuml
+class GameArea {
+  name : String
+}
+
+class GameElement {
+  x : long
+  y : long
+}
+
+class Shape {
+}
+
+class Object {
+}
+
+class Opponent {
+  lives : int
+}
+
+class GamePiece {
+}
+
+GameElement <|-- Shape
+GameElement <|-- Object
+GameElement <|-- Opponent
+
+GameArea "1 area" *-- "1..* gameElements" GameElement : consistsOf
+GameArea "1 area" *-- "1..2 gamePieces" GamePiece : consistsOf
+GameArea "0..1 gameArea" -- "1 boss" Opponent : knowsAsBoss
+Shape "0..* connectedShapes" -- "0..* connectedShapes" Shape : isConnectedTo
+@enduml

@@ -1,0 +1,68 @@
+@startuml
+enum BuildingMaterial {
+  WOOD
+  BRICK
+  CONCRETE
+}
+
+class House {
+  address : String
+  buildingMaterial : BuildingMaterial
+}
+
+class Basement {
+  size : Number
+  name : String
+}
+
+class EarthBasement {
+  humidityLevel : Number
+}
+
+class ConcreteBasement {
+}
+
+class SemiDetachedHouse {
+  hasOwnGarden : Boolean
+  numberOfWindows : Integer
+}
+
+class ParkingArrangement {
+}
+
+class TwoCarportArrangement {
+}
+
+class Carport {
+  isDoubleCarport : Boolean
+  hasFlatRoof : Boolean
+}
+
+class Garage {
+  hasAutomaticGarageDoor : Boolean
+}
+
+class Company {
+  name : String
+  address : String
+}
+
+class JobLog {
+  numberOfHours : Number
+  agreedPrice : Number
+}
+
+House <|-- SemiDetachedHouse
+Basement <|-- EarthBasement
+Basement <|-- ConcreteBasement
+ParkingArrangement <|-- TwoCarportArrangement
+ParkingArrangement <|-- Garage
+
+House "1" *-- "0..1" Basement
+SemiDetachedHouse "1" *-- "1" ParkingArrangement
+TwoCarportArrangement "1" *-- "2" Carport
+
+House "0..*" -- "2..*" Company
+House "1" -- "0..*" JobLog
+Company "1" -- "0..*" JobLog
+@enduml

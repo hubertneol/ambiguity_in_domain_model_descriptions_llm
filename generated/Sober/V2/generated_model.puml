@@ -1,0 +1,60 @@
+@startuml
+class Cab {
+}
+
+class FleetCab {
+}
+
+class RegisteredCab {
+}
+
+class CarOwner {
+}
+
+class Customer {
+  customerNumber : String
+  name : String
+}
+
+class TaxiService {
+  pickupTime : DateTime
+  dropOffTime : DateTime
+  pickupLocation : String
+  dropOffLocation : String
+  rideDuration : Duration
+  distance : Decimal
+}
+
+class RideHailingService {
+  passengerCount : Integer
+  fee : Decimal
+  requestType : RequestType
+}
+
+class RideSharingService {
+  passengerCount : Integer
+  negotiatedFee : Decimal
+}
+
+class Accident {
+  accidentDate : Date
+  location : String
+  damageAmount : Decimal
+}
+
+enum RequestType {
+  SOBER_APP
+  HAND_WAVING
+}
+
+Cab <|-- FleetCab
+Cab <|-- RegisteredCab
+TaxiService <|-- RideHailingService
+TaxiService <|-- RideSharingService
+
+CarOwner "1" -- "0..*" RegisteredCab
+Cab "1" -- "0..*" TaxiService
+Cab "1" -- "0..*" Accident
+Customer "1" -- "0..*" RideHailingService
+Customer "1..10" -- "0..*" RideSharingService
+@enduml

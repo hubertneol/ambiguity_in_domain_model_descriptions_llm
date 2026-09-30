@@ -1,0 +1,7 @@
+Boeing's customers for aircraft are airline companies. The high construction cost means production takes place only in response to demand: Boeing reaches a sales agreement with the customer before building the aircraft. Demonstration aircraft are an exception, but this case excludes them.
+
+Contracts with airlines govern these sales. One contract can cover multiple aircraft acquisitions. Terms shared by all the acquisitions, including delivery conditions and legal provisions, appear in the overall contract. Details particular to an individual acquisition include the selected aircraft model, its agreed price, the options and customizations chosen, and the delivery date.
+
+A Boeing salesperson manages each contract, and an employee may serve in that role for multiple contracts. Because contracts run for a long time, the salesperson allocated to a contract can change. Nevertheless, Boeing makes sure that a salesperson is always available to the client.
+
+Airlines sometimes have ties to other airlines; a main airline, for instance, often has a low-cost subsidiary airline. Boeing records these parent–subsidiary links as far as possible so it can trace whether aircraft it has sold are transferred to airlines partnered with the initial purchaser.

@@ -1,0 +1,63 @@
+@startuml
+class University {
+  totalNumberOfEmployees : Integer
+}
+
+class Faculty {
+  name : String
+}
+
+class Institute {
+  name : String
+  address : String
+}
+
+class Employee {
+  socialSecurityNumber : String
+  name : String
+  emailAddress : String
+}
+
+class ResearchStaff {
+}
+
+class AdministrativeStaff {
+}
+
+class ResearchAssistant {
+  fieldOfResearch : String
+}
+
+class Lecturer {
+}
+
+class Project {
+  name : String
+  startDate : Date
+  endDate : Date
+}
+
+class ProjectInvolvement {
+  hours : Number
+}
+
+class Course {
+  id : Integer
+  name : String
+  weeklyDurationInHours : Number
+}
+
+Employee <|-- ResearchStaff
+Employee <|-- AdministrativeStaff
+ResearchStaff <|-- ResearchAssistant
+ResearchAssistant <|-- Lecturer
+
+University "1" *-- "1..*" Faculty
+Faculty "1" *-- "1..*" Institute
+University "1" -- "1..*" Employee
+Faculty "0..*" -- "1" Employee : headedBy
+ResearchAssistant "0..*" -- "1..*" Institute : assignedTo
+ResearchAssistant "1" -- "0..*" ProjectInvolvement
+Project "1" -- "0..*" ProjectInvolvement
+Lecturer "0..*" -- "1..*" Course : teaches
+@enduml

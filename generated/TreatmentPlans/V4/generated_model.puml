@@ -1,0 +1,75 @@
+@startuml
+class Doctor {
+}
+
+class Hospital {
+}
+
+class Patient {
+}
+
+class Examination {
+}
+
+class ExaminationType {
+}
+
+class Authorization {
+}
+
+class AuthorizationApplication {
+}
+
+class ProblemType {
+}
+
+class Diagnosis {
+}
+
+class TreatmentPlan {
+}
+
+class ActualTreatment {
+}
+
+class MedicalAction {
+}
+
+class Referral {
+}
+
+Hospital "1" -- "0..*" Doctor
+
+Hospital "1" -- "0..*" Authorization
+ExaminationType "1" -- "0..*" Authorization
+
+Hospital "1" -- "0..*" AuthorizationApplication
+ExaminationType "1" -- "0..*" AuthorizationApplication
+
+Hospital "1" -- "0..*" TreatmentPlan
+ProblemType "1" -- "0..*" TreatmentPlan
+TreatmentPlan "0..*" -- "0..*" ExaminationType
+
+Patient "1" -- "0..*" Diagnosis
+Doctor "1" -- "0..*" Diagnosis
+Hospital "1" -- "0..*" Diagnosis
+ProblemType "1" -- "0..*" Diagnosis
+
+Diagnosis "1" -- "1" ActualTreatment
+Doctor "1" -- "0..*" ActualTreatment
+Patient "1" -- "0..*" ActualTreatment
+TreatmentPlan "1" -- "0..*" ActualTreatment
+
+ActualTreatment "1" -- "0..*" Examination
+ActualTreatment "1" -- "0..*" MedicalAction
+
+ExaminationType "1" -- "0..*" Examination
+Doctor "1" -- "0..*" Examination
+Patient "1" -- "0..*" Examination
+Hospital "1" -- "0..*" Examination
+
+Doctor "1" -- "0..*" Referral
+Patient "1" -- "0..*" Referral
+Hospital "1" -- "0..*" Referral
+Examination "1" -- "0..*" Referral
+@enduml

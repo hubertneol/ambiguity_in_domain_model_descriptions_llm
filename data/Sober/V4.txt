@@ -1,0 +1,10 @@
+Entirely powered by technology
+Sober is a new taxi company that uses self-driving cars to provide cab services. Alongside its own autonomous fleet, it allows people to register their cars as Sober cabs and offer taxi rides when they are not using them. Sober also wants records of the owners of these privately registered cars.
+
+There are two service types: ride-hailing and ride-sharing. With ride-hailing, a customer requests pickup and transport to a destination for a fee based on journey time and distance. This service is immediate and on demand. A single tap in the Sober App lets the customer request a cab from any location, see an estimated wait, and receive an arrival notification. Passing Sober cabs can also be hailed with a hand wave; a deep-learning image-recognition system interprets that gesture as a request.
+
+For each ride-hailing use, Sober records pickup and drop-off times and locations, ride duration, distance, passenger count, fee, request method—app or hand wave—and the number and name of the lead customer, who pays. A ride-hailing trip carries at most six passengers.
+
+Ride-sharing, also known as carpooling, needs more advance planning. It aims to cut costs, congestion, and carbon emissions. Planning enables Sober and customers to negotiate a flexible fare, with more customers in a cab lowering each customer's fee. As an environmental incentive, Sober promises to plant a tree for every customer who books 20 ride-sharing uses. Ride-sharing records contain pickup and drop-off times and locations, journey duration, distance, the number and names of all customers, and the fare negotiated beforehand. No ride-sharing trip carries more than ten passengers.
+
+Self-driving technology is new, so accidents cannot be excluded completely. Sober therefore also wants to record accident dates, locations, and damage amounts for each car.

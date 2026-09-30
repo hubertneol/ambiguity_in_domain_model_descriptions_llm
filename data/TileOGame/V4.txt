@@ -1,0 +1,9 @@
+Tile-O lets a designer create a board game for players to play. Games cannot be paused or saved, and only one may be in progress at once. Players aim to discover a hidden board tile. Between two and four players take turns rolling a die and moving their pieces across connected tiles. Every playing piece has a distinct color.
+
+The designer first specifies the complete game, including its board layout. Tiles are placed on the board and joined with connection pieces. Each tile may connect to other tiles on its left, right, upper, and lower sides, with no more than one neighboring tile connected on each side. The designer also marks the hidden tile, every player's starting position, and the action-tile locations.
+
+The designer builds a 32-card action deck from five predefined actions: roll again for an additional turn; join two adjacent tiles using a piece from the stock of 32 spare connections; remove a connection from the board and return it to that stock; move one's playing piece to any tile other than its present tile; or miss one's next turn.
+
+Play begins with Player 1, then passes to Player 2 and, when present, Players 3 and 4. The current player rolls and moves their piece along connected tiles. Landing on a tile changes it from white to black, marking that it has been visited during the game. Landing on the hidden tile ends the game with that player as winner.
+
+A player arriving on an action tile draws the first card of the action deck and carries out its instruction. The action tile also becomes a normal tile for a designer-specified number of turns. Whether a tile is an action tile remains unknown to players until someone lands on it.

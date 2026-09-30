@@ -1,0 +1,9 @@
+Facepage is a newly established social networking site whose managers believe current trends will make it a major success soon.
+
+Joining begins with a form in which prospective users enter their personal details: ID, name, email, and birth date. Every user has an ID that is unique. An account is then created and receives a unique account number generated automatically by the database. The user chooses between a personal account and a business account. Business accounts are intended to help companies run marketing campaigns. Opening one requires the user to provide the company name, and its users pay a monthly fee. A personal account lets its user stay in contact with other Facepage users. Sending and receiving friend requests is permitted only for personal accounts.
+
+Facepage's Terms of Use forbid having multiple accounts for any purpose. Someone who already holds either kind of account cannot be allowed to create another account of either kind, whatever the reason.
+
+An account can create multiple pages, each of which must be administered by precisely one account. Personal accounts may receive privileges on pages owned by other personal accounts, for instance permission to write on friends' walls or alter some information. Each page's name and visit count are logged. Names must differ among the pages belonging to the same account.
+
+A business profile's user can create advertisement pages, a special page category. These pages record features including bounce rate, click-through rate, and conversion rate. Bounce rate denotes the percentage of page visitors who leave straight away. Click-through rate denotes the percentage who click a particular banner on the page. Conversion rate denotes the percentage who complete the desired action, such as making a purchase or a transaction.

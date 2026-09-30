@@ -1,0 +1,5 @@
+A gas station chain plans to manage its stations electronically. Use the following requirements to represent the situation in a UML class diagram.
+
+Every station records an address and a unique ID. It contains fuel pumps, up to a maximum of twelve. A number identifies each pump, and a flag records whether the pump is self-service. The fuels available from each pump are known. Fuel names provide unique identification, and each fuel's octane rating is recorded.
+
+Every station keeps an archive of all its daily fuel prices. The combination of date, applicable fuel, and station identifies a daily price, which also records the price for a liter. Fuel purchases have unique IDs. For a purchase, records show the pump used, the fuel bought, and the daily price applied. The volume dispensed in liters is recorded as well.

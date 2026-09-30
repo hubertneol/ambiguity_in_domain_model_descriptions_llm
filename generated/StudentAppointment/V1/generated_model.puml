@@ -1,0 +1,19 @@
+@startuml
+class Student {
+}
+
+class TeachingAssistant {
+}
+
+class Course {
+}
+
+class Appointment {
+}
+
+Student "0..*" -- "0..*" Course
+TeachingAssistant "0..*" -- "0..*" Course
+Course "1" -- "0..*" Appointment
+TeachingAssistant "1" -- "0..*" Appointment
+Student "1..*" -- "0..*" Appointment
+@enduml

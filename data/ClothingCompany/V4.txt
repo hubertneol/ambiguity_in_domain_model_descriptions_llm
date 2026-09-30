@@ -1,0 +1,7 @@
+Your company has been engaged to build an application for a clothing business to handle customers, products, orders, and related matters. As the application's designer, you receive this description from the customer:
+
+“Our assortment covers clothing of every kind, from footwear to headwear. Every product has a distinct name, a description, and a net price. We know the manufacturer of each product and the country where it was made. An item's gross price depends on the local VAT rate in each country, so for every country we need its VAT rate, the currency it uses, and the currency's conversion rate to the euro. Product availability also varies by country: we do not sell all products in all countries, and we need to be able to query this.
+
+Representatives distribute our products. We must record each representative's given name, surname, social security number, phone number, and email address. A representative covers precisely one country. For customers, we record their name, address, phone number, email address, and the countries where they resell our goods.
+
+Representatives place customers' orders. Each order must be uniquely identifiable and concern one product only. Its details must include the quantity ordered, the date of ordering, and the requested delivery date.”

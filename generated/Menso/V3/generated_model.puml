@@ -1,0 +1,93 @@
+@startuml
+class BusCompany {
+  name : String
+}
+
+class Bus {
+}
+
+class Line {
+  lineNumber : String
+}
+
+class LineCategory {
+  name : String
+  tripPrice : Decimal
+}
+
+class Trajectory {
+  destination : String
+  operationalStartDate : Date
+  cancellationDate : Date
+}
+
+class Suspension {
+  startDate : Date
+  endDate : Date
+}
+
+class TownAuthority {
+  name : String
+}
+
+class ApprovalRequest {
+  attemptNumber : Integer
+  requestDate : Date
+  decisionDate : Date
+  decision : ApprovalDecision
+  requestedChanges : String
+}
+
+enum ApprovalDecision {
+  APPROVED
+  REFUSED_WITHOUT_APPEAL
+  CHANGE_REQUESTED
+}
+
+class Customer {
+  homeAddress : String
+  officeAddress : String
+  workingHours : String
+}
+
+class MENSOCard {
+  issueDate : Date
+}
+
+class Trip {
+  date : Date
+  time : Time
+  price : Decimal
+}
+
+class Invoice {
+  billingMonth : YearMonth
+  issueDate : Date
+  totalAmount : Decimal
+  discountPercentage : Decimal
+}
+
+class Payment {
+  paymentDate : Date
+  amount : Decimal
+}
+
+BusCompany "1" o-- "0..*" Bus
+BusCompany "1" o-- "0..*" Line
+BusCompany "1" o-- "0..*" Trajectory
+BusCompany "1" -- "0..*" ApprovalRequest
+BusCompany "1" -- "0..*" Customer
+LineCategory "1" -- "0..*" Line
+Line "1" o-- "1..*" Trajectory
+Bus "0..*" -- "0..*" Trajectory
+Trajectory "1" *-- "0..*" Suspension
+Trajectory "1" *-- "0..*" ApprovalRequest
+TownAuthority "1" -- "0..*" ApprovalRequest
+Customer "1" *-- "1" MENSOCard
+MENSOCard "1" *-- "0..*" Trip
+Line "1" -- "0..*" Trip
+Bus "1" -- "0..*" Trip
+Customer "1" *-- "0..*" Invoice
+Invoice "0..1" -- "0..*" Trip
+Invoice "1" *-- "0..1" Payment
+@enduml

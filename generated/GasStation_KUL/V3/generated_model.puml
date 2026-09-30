@@ -1,0 +1,156 @@
+@startuml
+class OilCompany {
+}
+
+class GasStation {
+    location : String
+}
+
+class Customer {
+    status : CustomerStatus
+    consecutiveUnpaidInvoiceCount : Integer
+    blockingThreshold : Integer
+}
+
+class RefuelCard {
+    status : RefuelCardStatus
+}
+
+class RefuelTurn {
+    startTime : DateTime
+    endTime : DateTime
+    fuelQuantity : Decimal
+    grossAmount : Decimal
+}
+
+class Payment {
+    amount : Decimal
+    receivedAt : DateTime
+}
+
+class DirectPayment {
+    method : DirectPaymentMethod
+}
+
+class InvoicePayment {
+}
+
+class MonthlyInvoice {
+    invoicedMonth : YearMonth
+    issueDate : Date
+    turnover : Decimal
+    discount : Decimal
+    amountDue : Decimal
+    status : InvoiceStatus
+}
+
+class InvoiceDispatch {
+    sentAt : DateTime
+    type : DispatchType
+}
+
+class Pump {
+    status : PumpStatus
+}
+
+class Nozzle {
+    status : NozzleStatus
+}
+
+class GasolineType {
+    name : String
+}
+
+class Reservoir {
+    currentLevel : Decimal
+    reorderingLevel : Decimal
+    criticalLevel : Decimal
+}
+
+class ReservoirRefill {
+    startedAt : DateTime
+    completedAt : DateTime
+    quantity : Decimal
+    safeReleaseAt : DateTime
+}
+
+class DailyRefillReport {
+    reportDate : Date
+}
+
+class RefillReportEntry {
+    currentLevel : Decimal
+    quantityToOrder : Decimal
+}
+
+enum CustomerStatus {
+    NORMAL
+    SUSPENDED
+}
+
+enum RefuelCardStatus {
+    ACTIVE
+    BLOCKED
+}
+
+enum InvoiceStatus {
+    UNPAID
+    PAID
+}
+
+enum DirectPaymentMethod {
+    CASH
+    PERSONAL_CREDIT_CARD
+}
+
+enum DispatchType {
+    INITIAL
+    REMINDER
+}
+
+enum PumpStatus {
+    AVAILABLE
+    IN_USE
+    BLOCKED_CRITICAL_LEVEL
+    TEMPORARILY_BLOCKED
+}
+
+enum NozzleStatus {
+    REPLACED
+    TAKEN
+}
+
+Payment <|-- DirectPayment
+Payment <|-- InvoicePayment
+
+OilCompany "1" *-- "1..*" GasStation
+OilCompany "1" -- "0..*" Customer
+OilCompany "1" *-- "0..*" DailyRefillReport
+
+GasStation "1" *-- "1..*" Pump
+GasStation "1" -- "0..*" ReservoirRefill
+
+Customer "1" -- "0..1" RefuelCard
+Customer "1" -- "0..*" RefuelTurn
+Customer "1" -- "0..*" MonthlyInvoice
+
+RefuelCard "0..1" -- "0..*" RefuelTurn
+RefuelCard "1" -- "0..*" MonthlyInvoice
+
+Pump "1" *-- "1" Nozzle
+Pump "1" *-- "1" Reservoir
+Pump "0..*" -- "1" GasolineType
+Pump "1" -- "0..*" RefuelTurn
+
+Nozzle "1" -- "0..*" RefuelTurn
+
+Reservoir "1" *-- "0..*" ReservoirRefill
+
+RefuelTurn "1" -- "0..1" DirectPayment
+MonthlyInvoice "0..1" -- "0..*" RefuelTurn
+MonthlyInvoice "1" -- "0..1" InvoicePayment
+MonthlyInvoice "1" *-- "1..*" InvoiceDispatch
+
+DailyRefillReport "1" *-- "0..*" RefillReportEntry
+Pump "1" -- "0..*" RefillReportEntry
+@enduml

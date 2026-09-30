@@ -1,0 +1,85 @@
+@startuml
+class Employee {
+  name : String
+  socialSecurityNumber : String
+}
+
+class Driver {
+}
+
+class Planner {
+  username : String
+  password : String
+}
+
+class AdministrativeEmployee {
+  username : String
+  password : String
+  fieldOfActivity : String
+}
+
+class Customer {
+  name : String
+  billingAddress : String
+}
+
+class PartnerCompany {
+  name : String
+  address : String
+}
+
+class Vehicle {
+  licencePlate : String
+  mileage : Integer
+  category : VehicleCategory
+}
+
+enum VehicleCategory {
+  REFRIGERATED_TRUCK
+  SMALL_VAN
+  LOADING_PLATFORM
+  BOX_TRUCK
+}
+
+class Workshop {
+  name : String
+  address : String
+}
+
+class MaintenanceRecord {
+  type : MaintenanceType
+  duration : Duration
+  cost : Decimal
+}
+
+enum MaintenanceType {
+  REPAIR
+  INSPECTION
+}
+
+class Order {
+  requiredTransportTime : DateTime
+  packageSize : String
+  necessaryVehicleCategory : VehicleCategory
+  comment : String
+  startTime : DateTime
+  completionTime : DateTime
+  pickupAddress : String
+  deliveryAddress : String
+}
+
+Employee <|-- Driver
+Employee <|-- Planner
+Employee <|-- AdministrativeEmployee
+
+Vehicle "1" -- "0..*" MaintenanceRecord
+Workshop "1" -- "0..*" MaintenanceRecord
+Employee "1" -- "0..*" MaintenanceRecord
+
+Customer "1" -- "0..*" Order
+Planner "1" -- "0..*" Order
+Driver "1" -- "0..*" Order
+Vehicle "1" -- "0..*" Order
+AdministrativeEmployee "0..1" -- "0..*" Order
+PartnerCompany "0..1" -- "0..*" Order
+@enduml

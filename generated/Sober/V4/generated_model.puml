@@ -1,0 +1,60 @@
+@startuml
+class Car {
+}
+
+class SoberOwnedCar {
+}
+
+class PrivatelyRegisteredCar {
+}
+
+class Owner {
+}
+
+class Customer {
+  customerNumber : String
+  name : String
+}
+
+class TaxiRide {
+  pickupTime : DateTime
+  pickupLocation : String
+  dropOffTime : DateTime
+  dropOffLocation : String
+  duration : Duration
+  distance : Decimal
+}
+
+class RideHailing {
+  passengerCount : Integer
+  fee : Decimal
+  requestMethod : RequestMethod
+}
+
+class RideSharing {
+  customerCount : Integer
+  negotiatedFare : Decimal
+}
+
+class Accident {
+  accidentDate : Date
+  location : String
+  damageAmount : Decimal
+}
+
+enum RequestMethod {
+  APP
+  HAND_WAVE
+}
+
+Car <|-- SoberOwnedCar
+Car <|-- PrivatelyRegisteredCar
+TaxiRide <|-- RideHailing
+TaxiRide <|-- RideSharing
+
+Owner "1" -- "1..*" PrivatelyRegisteredCar
+Car "1" -- "0..*" TaxiRide
+Car "1" -- "0..*" Accident
+Customer "1" -- "0..*" RideHailing
+Customer "1..10" -- "0..*" RideSharing
+@enduml

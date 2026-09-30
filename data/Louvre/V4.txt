@@ -1,0 +1,7 @@
+Paris's Louvre Museum is enormous and has enough rooms to run many exhibitions concurrently. Exhibition planning begins no less than two years before opening. Consequently, even a single room requires simultaneous monitoring of several exhibitions at different stages. A small management system is needed to support their smooth running.
+
+The museum has designated internal locations suitable for exhibitions. These can be viewed as smaller museums within the larger one, occupying, for example, some or all of a floor or wing. A sequence of exhibitions is developed for every location.
+
+Each exhibition is allocated a museum employee who coordinates it. Planning first establishes a set of desired exhibition items. A Vincent Van Gogh exhibition might seek a work from his early period, a pencil drawing together with its corresponding painting, and a sunflower painting. For every desired item, suitable works are sought from collectors holding candidate pieces. Sometimes only a single unique work can satisfy an item; other items have several candidates held by different collectors. Van Gogh's multiple “Sunflower” paintings illustrate the latter case. For each exhibition item, the system records which pieces have been requested from which collectors.
+
+To support the passing on of knowledge, junior employees receive senior employees as coaches. The system also records these coaching links between employees.

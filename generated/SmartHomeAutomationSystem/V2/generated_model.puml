@@ -1,0 +1,140 @@
+@startuml
+class SHAS {
+}
+
+class InfrastructureMap {
+}
+
+class User {
+}
+
+class Owner {
+}
+
+class SmartHome {
+  physicalAddress : String
+}
+
+class Room {
+}
+
+class Device {
+  deviceIdentifier : String
+  type : String
+  active : Boolean
+}
+
+class SensorDevice {
+}
+
+class ActuatorDevice {
+}
+
+class SensorReading {
+  measuredValue : String
+  timestamp : DateTime
+}
+
+class CommandDefinition {
+  name : String
+}
+
+class ControlCommand {
+  timestamp : DateTime
+  status : String
+}
+
+class ActivityLog {
+}
+
+class AutomationRule {
+  active : Boolean
+}
+
+class Precondition {
+}
+
+class Expression {
+}
+
+class BooleanExpression {
+  operator : BooleanOperator
+}
+
+class RelationalTerm {
+  operator : String
+  comparisonValue : String
+}
+
+enum BooleanOperator {
+  AND
+  OR
+  NOT
+}
+
+class RuleAction {
+}
+
+class ActionStep {
+  position : Integer
+}
+
+class RuleTrigger {
+  timestamp : DateTime
+}
+
+class RuleDependency {
+}
+
+class RuleConflict {
+}
+
+User <|-- Owner
+Device <|-- SensorDevice
+Device <|-- ActuatorDevice
+Expression <|-- BooleanExpression
+Expression <|-- RelationalTerm
+
+SHAS "1" *-- "1" InfrastructureMap
+SHAS "1" -- "0..*" User
+SHAS "1" -- "0..*" SmartHome
+InfrastructureMap "1" -- "0..*" Device
+
+Owner "1" -- "0..*" SmartHome
+Owner "1" -- "0..*" AutomationRule
+
+SmartHome "1" *-- "1..*" Room
+SmartHome "1" *-- "1" ActivityLog
+SmartHome "1" *-- "0..*" AutomationRule
+
+Room "1" *-- "0..*" Device
+
+SensorDevice "1" -- "0..*" SensorReading
+ActuatorDevice "1" -- "0..*" ControlCommand
+ActuatorDevice "0..*" -- "0..*" CommandDefinition
+CommandDefinition "1" -- "0..*" ControlCommand
+
+ActivityLog "1" *-- "0..*" SensorReading
+ActivityLog "1" *-- "0..*" ControlCommand
+
+AutomationRule "1" *-- "1" Precondition
+AutomationRule "1" *-- "1" RuleAction
+AutomationRule "1" *-- "0..*" RuleTrigger
+
+Precondition "1" *-- "1" Expression
+BooleanExpression "0..1" *-- "1..*" Expression
+
+RuleAction "1" *-- "1..*" ActionStep
+CommandDefinition "1" -- "0..*" ActionStep
+Room "0..1" -- "0..*" ActionStep
+ActuatorDevice "0..1" -- "0..*" ActionStep
+
+RelationalTerm "0..*" -- "0..*" Room
+RelationalTerm "0..*" -- "0..*" SensorDevice
+RelationalTerm "0..*" -- "0..*" ActuatorDevice
+RelationalTerm "0..*" -- "0..*" SensorReading
+RelationalTerm "0..*" -- "0..*" ControlCommand
+
+RuleDependency "0..*" -- "2" AutomationRule
+RuleConflict "0..*" -- "2" AutomationRule
+@enduml

@@ -1,0 +1,128 @@
+@startuml
+class OilCompany {
+    name : String
+}
+
+class GasStation {
+    name : String
+}
+
+class Customer {
+    name : String
+    status : CustomerStatus
+    consecutiveUnpaidInvoices : Integer
+    blockingThreshold : Integer
+}
+
+enum CustomerStatus {
+    NORMAL
+    SUSPENDED
+}
+
+class RefuelCard {
+    status : RefuelCardStatus
+}
+
+enum RefuelCardStatus {
+    ACTIVE
+    BLOCKED
+}
+
+class RefuelTurn {
+    startTime : DateTime
+    endTime : DateTime
+    amount : Money
+    quantity : Decimal
+    paymentMethod : PaymentMethod
+}
+
+enum PaymentMethod {
+    CASH
+    PERSONAL_CREDIT_CARD
+    REFUEL_CARD
+}
+
+class MonthlyInvoice {
+    invoicedMonth : YearMonth
+    turnover : Money
+    discountAmount : Money
+    amountDue : Money
+}
+
+class InvoiceSending {
+    sentAt : DateTime
+}
+
+class InvoicePayment {
+    receivedAt : DateTime
+    amount : Money
+}
+
+class Pump {
+    status : PumpStatus
+    blockReason : PumpBlockReason
+}
+
+enum PumpStatus {
+    AVAILABLE
+    IN_USE
+    BLOCKED
+}
+
+enum PumpBlockReason {
+    CRITICAL_LEVEL
+    POST_REFILL_SETTLING
+}
+
+class Nozzle {
+    status : NozzleStatus
+}
+
+enum NozzleStatus {
+    DOCKED
+    TAKEN
+}
+
+class GasolineType {
+    name : String
+}
+
+class Reservoir {
+    currentQuantity : Decimal
+    reorderLevel : Decimal
+    criticalLevel : Decimal
+}
+
+class ReservoirRefill {
+    refillTime : DateTime
+    quantity : Decimal
+}
+
+class DailyReport {
+    reportDate : Date
+}
+
+class RefillReportEntry {
+    currentLevel : Decimal
+    quantityToOrder : Decimal
+}
+
+OilCompany "1" *-- "1..*" GasStation
+OilCompany "1" -- "0..*" Customer
+GasStation "1" *-- "1..*" Pump
+Customer "1" *-- "0..1" RefuelCard
+Customer "1" -- "0..*" RefuelTurn
+RefuelCard "0..1" -- "0..*" RefuelTurn
+RefuelCard "1" -- "0..*" MonthlyInvoice
+MonthlyInvoice "0..1" -- "0..*" RefuelTurn
+MonthlyInvoice "1" *-- "1..*" InvoiceSending
+MonthlyInvoice "1" *-- "0..1" InvoicePayment
+Pump "1" -- "0..*" RefuelTurn
+Pump "1" *-- "1" Nozzle
+Pump "0..*" -- "1" GasolineType
+Pump "1" *-- "1" Reservoir
+Reservoir "1" *-- "0..*" ReservoirRefill
+OilCompany "1" *-- "0..*" DailyReport
+DailyReport "1" *-- "0..*" RefillReportEntry
+Pump "1" -- "0..*" RefillReportEntry
+@enduml

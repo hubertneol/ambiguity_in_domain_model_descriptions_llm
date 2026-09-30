@@ -1,0 +1,29 @@
+Transform the provided natural-language domain description according to the V4 Paraphrase condition.
+
+Your task is to paraphrase the complete description while preserving all model-relevant information and the complete intended meaning of the original description.
+
+Rewrite the description using substantially different wording and/or sentence structure while keeping the model-relevant semantics equivalent to the original.
+
+You must preserve:
+- all classes or entities
+- all attributes
+- all relationships
+- all cardinalities or multiplicities
+- all constraints
+- the explicit or implicit status of the information
+
+Requirements:
+- Paraphrase the description substantially rather than making only minor lexical substitutions.
+- Do not add model-relevant information.
+- Do not remove model-relevant information.
+- Do not change the intended meaning.
+- Do not alter any class, attribute, relationship, multiplicity, or constraint.
+- Do not introduce ambiguity.
+- Do not introduce semantic anomalies.
+- Do not make explicit information implicit.
+- Do not make implicit information explicit.
+- Change only the linguistic formulation.
+
+Return only the paraphrased domain description.
+Do not explain the changes.
+Do not add headings, comments, notes, or analysis.

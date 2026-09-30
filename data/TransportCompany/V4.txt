@@ -1,0 +1,9 @@
+A transport company intends to modernize by adopting a computerized solution. A meeting with its managing director discussed the business's organization and structure. These are the resulting notes:
+
+My company currently has about 60 drivers plus 6–7 planners and administrative employees. Their names and social security numbers must be stored. Planners and administrative staff need username-and-password access to the system. We know the field of activity of each administrative employee.
+
+I also need customer records, particularly names and billing addresses, and vehicle management alongside customers and staff. Vehicle categories include refrigerated trucks, small vans, loading platforms, and box trucks. Each vehicle's licence plate and mileage should be recorded. When a vehicle requires repair or inspection, I want records of the workshop, whose name and address are known, the employee who brought the vehicle there, and the repair's duration and cost.
+
+Drivers can be allocated orders. Typically, a customer calls to say when transport is required and how large the package is. These details allow the planner to determine the necessary vehicle type. I want to know at all times which planner assigned an order to a vehicle. We must be able to attach a comment containing further order information and record when the driver begins and completes the order.
+
+I also need to know which driver completed each order and the vehicle used. Every order has a customer as its client, along with known pickup and delivery addresses. Customers may place orders directly with an administrative employee or through a partner company whose name and address are known.

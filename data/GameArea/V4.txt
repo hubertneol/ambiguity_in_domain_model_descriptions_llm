@@ -1,0 +1,5 @@
+Represent the game-area description below with an appropriate class diagram. Include at least one named role and at least one named association; setters and getters need not be modeled.
+
+A game area's name is a String. Its contents include one or more game elements and either one or two game pieces. A game element's position within the area is given by two coordinates: x is a protected long, and y is a private long. Shapes, objects, and opponents are the possible kinds of game element. A shape may connect to arbitrarily many other shapes. The game area recognizes precisely one opponent as the boss. Enemies hold a protected int value for their number of lives and support being killed.
+
+Using the textual class-diagram syntax learned with the DEX tool, write the classes game element, shape, object, and opponent from the class diagram, together with the connections among them. Disregard visibility modifiers.

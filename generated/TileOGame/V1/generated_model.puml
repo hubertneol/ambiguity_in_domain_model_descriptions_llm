@@ -1,0 +1,124 @@
+@startuml
+class TileOApplication {
+}
+
+class GameDesigner {
+}
+
+class Game {
+  status : GameStatus
+}
+
+class Board {
+}
+
+class Tile {
+  color : TileColor
+}
+
+class HiddenTile {
+}
+
+class ActionTile {
+  regularDurationTurns : Integer
+  remainingRegularTurns : Integer
+}
+
+class TileSide {
+  direction : SideDirection
+}
+
+class ConnectionPiece {
+  location : ConnectionLocation
+}
+
+class SpareConnectionPile {
+  initialSize : Integer
+}
+
+class ActionDeck {
+}
+
+class ActionCard {
+  actionType : ActionType
+  position : Integer
+}
+
+class Player {
+  playerNumber : Integer
+  losesNextTurn : Boolean
+}
+
+class PlayingPiece {
+  color : String
+}
+
+class StartingPosition {
+  playerNumber : Integer
+}
+
+class Die {
+}
+
+class Turn {
+  turnNumber : Integer
+  dieResult : Integer
+  active : Boolean
+}
+
+enum TileColor {
+  WHITE
+  BLACK
+}
+
+enum SideDirection {
+  RIGHT
+  LEFT
+  TOP
+  BOTTOM
+}
+
+enum ConnectionLocation {
+  BOARD
+  SPARE_PILE
+}
+
+enum ActionType {
+  ROLL_DIE_FOR_EXTRA_TURN
+  CONNECT_TWO_ADJACENT_TILES
+  REMOVE_CONNECTION_PIECE
+  MOVE_TO_ARBITRARY_OTHER_TILE
+  LOSE_NEXT_TURN
+}
+
+enum GameStatus {
+  DESIGN
+  IN_PROGRESS
+  ENDED
+}
+
+Tile <|-- HiddenTile
+Tile <|-- ActionTile
+
+TileOApplication "1" -- "0..1" Game
+GameDesigner "1" -- "0..*" Game
+Game "1" *-- "1" Board
+Game "1" *-- "1" ActionDeck
+Game "1" *-- "1" Die
+Game "1" *-- "1" SpareConnectionPile
+Game "1" *-- "0..*" ConnectionPiece
+Game "1" *-- "2..4" Player
+Game "1" *-- "2..4" StartingPosition
+Game "1" *-- "0..*" Turn
+Board "1" *-- "1..*" Tile
+Board "1" -- "1" HiddenTile
+Tile "1" *-- "4" TileSide
+ConnectionPiece "0..1" -- "0..2" TileSide
+SpareConnectionPile "0..1" o-- "0..*" ConnectionPiece
+ActionDeck "1" *-- "32" ActionCard
+Player "1" *-- "1" PlayingPiece
+Player "1" -- "0..*" Turn
+Tile "1" -- "0..*" PlayingPiece
+Tile "1" -- "0..*" StartingPosition
+Turn "0..1" -- "0..1" ActionCard
+@enduml

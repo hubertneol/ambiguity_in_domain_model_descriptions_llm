@@ -1,0 +1,11 @@
+The Flemish bus operator De Lijn owns buses serving lines with different destinations. It also has trajectories that require approval from town authorities. When approval is requested, the authorities may reject it without appeal or require revisions. Following revisions, the company may apply again, and this cycle may repeat several times. An approved trajectory joins the company's operations at the start of the next calendar year. Buses can be assigned to it from then onward. It can be temporarily suspended for various reasons and is eventually cancelled.
+
+Buses are given line numbers. A line resembles a trajectory but is not identical to it. For this case, a line groups several overlapping trajectories. A late-evening journey may omit the final section, producing a shorter trajectory, or a line may split into two alternative endpoints. Leuven's “Line 2 Campus” and “Line 2 Boskant”, for example, share some route sections and differ in others.
+
+De Lijn plans to trial a season ticket named MENSO. All bus lines have been categorized for this project. A MENSO ticket lasts one year, and each trip's price depends on the category of the line taken. The ticket's eventual cost therefore cannot be known beforehand. Users are invoiced at the end of each month for the trips of the past month.
+
+To use MENSO for a trip, the passenger inserts the card into the ticket machine beside the bus door on boarding. The system records the trip's time, date, and line. Passengers who forget their MENSO card must pay normally, either by buying a ticket or using another kind of card.
+
+The collected time, date, and line details are used to produce monthly invoices. Depending on the invoice total, customers receive a discount of at most 20%. Invoicing and payment are not required to alternate: the next invoice can arrive while the previous one remains unpaid.
+
+De Lijn also hopes MENSO will reveal useful information about customer behavior. Subscribers are asked for personal details, including home and work addresses and working hours. Combining these details with card-use records may reveal travel patterns that help De Lijn optimize bus routes and service frequencies.

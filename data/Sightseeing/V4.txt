@@ -1,0 +1,3 @@
+Cities each contain several attractions and have a name and a specified population count. An attraction records a name and address. A tourist attraction offers various guided tours, with a known duration and number for each tour.
+
+No tour may have more than 20 visitors. Particular visitors may receive discounts on particular tours, and the discount amount must be known. A tour also needs a guide. Both guides and visitors are people with names.

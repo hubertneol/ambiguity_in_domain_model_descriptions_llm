@@ -1,0 +1,15 @@
+A hipster acquaintance believes his idea for a Pizza Delivery with Entertainment app could become a billion-dollar startup. Having heard that you are taking a database management course, he asks you to prepare its UML class diagram, which he will then give to programmers to implement the app.
+
+The basic service lets customers order restaurant pizzas for delivery to an address they specify. They may choose an entertainment order: after bringing the pizza, the delivery person remains for a specified time to entertain the customers, perhaps with songs, jokes, or magic tricks.
+
+To become an app user, a person creates an account and enters a birth date, name, and address. Every user must be uniquely identifiable. Once the account exists, the app presents three choices.
+
+The first is business owner. Owners also provide their LinkedIn account so they can join the professional network. A business owner may own several pizza restaurants. For each restaurant, record its zip code, address, phone number, website, and opening hours.
+
+A restaurant may offer several pizzas, each with a recorded name, crust structure, and price. Example names include margarita and quattro stagioni; crusts might be classic Italian, deep dish, or cheese crust. Pizzas sold by different restaurants are distinct even when their names match, because their taste differs. They must remain distinguishable if the price also matches. For example, a $12 margarita at Pizza Pronto in New York differs from a $12 margarita at Pizza Rapido in Singapore.
+
+The second choice is hungry customer. These customers supply a delivery address and can place pizza orders. Each order receives an ID, and the app records its placement date and time. The customer can specify a latest delivery time and is asked how many people the order serves. Every order contains at least one pizza.
+
+Entertainment orders are a special, optional order type. If a customer wants entertainment while eating, record the usual order details plus the requested entertainment type and duration.
+
+The third choice is entertainer. Entertainers enter a stage name, a short personal biography, and a rate per 30 minutes. Precisely one entertainer fulfills each entertainment order. Entertainers choose the restaurant or restaurants they wish to work for. They state their availability by day, such as Monday, Tuesday, or Wednesday, separately for every restaurant they wish to work with.

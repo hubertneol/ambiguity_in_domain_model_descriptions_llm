@@ -1,0 +1,130 @@
+@startuml
+class HomeForElderly {
+}
+
+class Department {
+}
+
+class Room {
+}
+
+class Bed {
+}
+
+class StayCategory {
+  type : StayType
+  price : Decimal
+}
+
+enum StayType {
+  RH
+  RNH
+  SF
+}
+
+class Person {
+}
+
+class Inhabitant {
+}
+
+class Registration {
+  registrationDate : Date
+  basicIdentificationDetails : String
+}
+
+class AbilityAssessment {
+  eatingAssessment : String
+  dressingAssessment : String
+  personalCareAssessment : String
+  assistanceNeeds : String
+}
+
+class WaitingList {
+}
+
+class WaitingListEntry {
+}
+
+class Proposal {
+  offerDate : Date
+  responseDeadline : Date
+  responseDate : Date
+  status : ProposalStatus
+}
+
+enum ProposalStatus {
+  PENDING
+  ACCEPTED
+  REFUSED
+  INVALIDATED
+}
+
+class Stay {
+  intakeDate : Date
+  endDate : Date
+  status : StayStatus
+  endReason : StayEndReason
+}
+
+enum StayStatus {
+  ACTIVE
+  SUSPENDED
+  ENDED
+}
+
+enum StayEndReason {
+  DEATH
+  MOVE_ELSEWHERE
+}
+
+class Invoice {
+  billingMonth : Date
+  totalAmount : Decimal
+  outstandingBalance : Decimal
+  status : InvoiceStatus
+}
+
+enum InvoiceStatus {
+  UNPAID
+  PAID
+}
+
+class InvoiceItem {
+  amount : Decimal
+  discountAmount : Decimal
+}
+
+class CreditNote {
+  amount : Decimal
+}
+
+Person <|-- Inhabitant
+
+HomeForElderly "1" *-- "1..*" Department
+Department "1" *-- "1..*" Room
+Room "1" *-- "1..*" Bed
+StayCategory "1" -- "0..*" Bed
+
+Person "1" *-- "1" Registration
+Person "1" *-- "0..*" AbilityAssessment
+StayCategory "1" -- "0..*" AbilityAssessment
+
+StayCategory "1" -- "1" WaitingList
+WaitingList "1" *-- "0..*" WaitingListEntry
+Person "1" -- "0..*" WaitingListEntry
+
+WaitingListEntry "1" -- "0..*" Proposal
+Bed "1" -- "0..*" Proposal
+Proposal "0..1" -- "0..1" AbilityAssessment
+Proposal "0..1" -- "0..1" Stay
+
+Inhabitant "1" -- "0..*" Stay
+Bed "1" -- "0..*" Stay
+StayCategory "1" -- "0..*" Stay
+
+Inhabitant "1" -- "0..*" Invoice
+Invoice "1" *-- "1..*" InvoiceItem
+Stay "1" -- "0..*" InvoiceItem
+Invoice "1" *-- "0..1" CreditNote
+@enduml

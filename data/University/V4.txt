@@ -1,0 +1,7 @@
+A university comprises several faculties, each containing various institutes. Both faculties and institutes have names, and institute addresses are known. A dean who is employed by the university heads each faculty.
+
+The university's total employee count is known. Employees have names, social security numbers, and email addresses, and are divided into research and administrative staff.
+
+Each research assistant (RA) is assigned to one or more institutes, and their research field is known. RAs may also spend a specified number of hours on projects. Project names and starting and ending dates are known. RAs who teach courses are called lecturers.
+
+Every course has a unique numeric ID, a name, and a weekly duration expressed in hours.

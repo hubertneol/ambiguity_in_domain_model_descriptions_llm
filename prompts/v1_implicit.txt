@@ -1,0 +1,29 @@
+Transform the provided natural-language domain description according to the V1 Implicit Information condition.
+
+Your task is to make exactly one piece of model-relevant information implicit instead of explicit.
+
+Select exactly one piece of model-relevant information that is explicitly stated in the original description and rewrite the relevant part of the text so that this information is no longer stated directly but can still reasonably be inferred from the surrounding context.
+
+Model-relevant information may concern:
+- a class or entity
+- an attribute
+- a relationship
+- a cardinality or multiplicity
+- a constraint
+
+Requirements:
+- Introduce exactly one explicit-to-implicit modification.
+- Do not simply delete the selected information.
+- The selected information must remain reasonably inferable from the transformed text.
+- Preserve the overall domain and intended meaning.
+- Preserve all model-relevant information that is not part of the transformation.
+- Do not make any second model-relevant statement implicit.
+- Do not add new model-relevant information.
+- Do not introduce ambiguity.
+- Do not introduce contradictions or semantic anomalies.
+- Modify as little of the original description as necessary.
+- Keep the text natural and grammatically correct.
+
+Return only the transformed domain description.
+Do not explain the change.
+Do not add headings, comments, notes, or analysis.

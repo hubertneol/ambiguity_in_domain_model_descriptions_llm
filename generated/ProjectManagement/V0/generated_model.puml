@@ -1,0 +1,38 @@
+@startuml
+class University {
+}
+
+class Department {
+}
+
+class ResearchGroup {
+}
+
+class Researcher {
+}
+
+class ResearchProject {
+}
+
+class WorkPackage {
+}
+
+class TeamMemberAssignment {
+  status : AssignmentStatus
+}
+
+enum AssignmentStatus {
+  CURRENT
+  TERMINATED
+}
+
+University "1" -- "1..*" Department
+Department "1" -- "1..*" ResearchGroup
+ResearchGroup "1" -- "0..*" Researcher
+ResearchProject "1" *-- "1..*" WorkPackage
+ResearchGroup "1" -- "0..*" WorkPackage
+Researcher "1" -- "0..*" TeamMemberAssignment
+WorkPackage "1" -- "0..*" TeamMemberAssignment
+ResearchGroup "1" -- "0..*" TeamMemberAssignment : researcherGroup
+ResearchGroup "1" -- "0..*" TeamMemberAssignment : wpLeaderGroup
+@enduml

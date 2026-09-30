@@ -1,0 +1,73 @@
+@startuml
+class Customer {
+  vatNumber : String
+}
+
+class HeadOfficeAddress {
+  address : String
+}
+
+class DeliveryAddress {
+  address : String
+}
+
+class Product {
+  currentStock : Integer
+}
+
+class Order {
+  placedAt : DateTime
+  shippingStatus : OrderShippingStatus
+}
+
+class OrderLine {
+  quantity : Integer
+}
+
+class Invoice {
+  paymentTiming : PaymentTiming
+  paymentStatus : PaymentStatus
+  paidAt : DateTime
+}
+
+class Shipment {
+  status : ShipmentStatus
+  packedAt : DateTime
+  shippedAt : DateTime
+  receivedAt : DateTime
+}
+
+enum OrderShippingStatus {
+  NOT_SHIPPED
+  PARTIALLY_SHIPPED
+  FULLY_SHIPPED
+}
+
+enum PaymentTiming {
+  PAYMENT_AT_ORDER
+  PAYMENT_AFTER_DELIVERY
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+}
+
+enum ShipmentStatus {
+  PACKED
+  SHIPPED
+  RECEIVED
+  MISSING
+  DAMAGED
+}
+
+Customer "1" *-- "1" HeadOfficeAddress
+Customer "1" *-- "0..*" DeliveryAddress
+Customer "1" -- "0..*" Order
+DeliveryAddress "1" -- "0..*" Order
+Order "1" *-- "1..*" OrderLine
+Product "1" -- "0..*" OrderLine
+Order "1" *-- "1" Invoice
+Order "1" *-- "0..*" Shipment
+Shipment "0..1" -- "1..*" OrderLine
+@enduml

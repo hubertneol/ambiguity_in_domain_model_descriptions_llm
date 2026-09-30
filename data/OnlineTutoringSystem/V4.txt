@@ -1,0 +1,7 @@
+Students and tutors use OTS, and a tutor can also be a student. Tutors register with their name, email address, and bank account. They may then advertise online tutoring across subjects such as mathematics, science, and literature. For each subject offered, they provide their expertise level—for example, primary school, high school, or university—and the session's hourly rate, which may differ by subject. Tutors may state weekly availability, such as Thursdays between 10:00 and 11:30.
+
+Students register with a name and email address. They can browse offers for a subject and request tuition from a selected tutor, specifying the required level. The request should propose a date and time for the initial session. The tutor can accept that session or propose another time slot. After agreement, both student and tutor are expected to attend at that time. During a session they may arrange a subsequent session. The student pays after the session has taken place, using a credit card or wire transfer.
+
+Either party may cancel a session. A student who cancels fewer than 24 hours beforehand must pay 75% of the session price. A tutor who cancels within 24 hours must give that same student a 25% discount on their next session.
+
+At each month's end, the best tutors in each subject receive tutor-of-the-month awards.

@@ -1,0 +1,85 @@
+@startuml
+class Employee {
+  name : String
+  socialSecurityNumber : String
+}
+
+class Driver {
+}
+
+class Planner {
+  username : String
+  password : String
+}
+
+class AdministrativeStaff {
+  username : String
+  password : String
+  fieldOfActivity : String
+}
+
+class Customer {
+  name : String
+  billingAddress : String
+}
+
+class PartnerCompany {
+  name : String
+  address : String
+}
+
+class Vehicle {
+  licensePlateNumber : String
+  mileage : Integer
+  type : VehicleType
+}
+
+enum VehicleType {
+  REFRIGERATED_TRUCK
+  SMALL_VAN
+  LOADING_PLATFORM
+  BOX_TRUCK
+}
+
+class RepairShop {
+  name : String
+  address : String
+}
+
+class Maintenance {
+  type : MaintenanceType
+  duration : Duration
+  cost : Decimal
+}
+
+enum MaintenanceType {
+  REPAIR
+  INSPECTION
+}
+
+class TransportOrder {
+  requestedTime : DateTime
+  packageSize : String
+  requiredVehicleType : VehicleType
+  comment : String
+  startTime : DateTime
+  finishTime : DateTime
+  pickupAddress : String
+  deliveryAddress : String
+}
+
+Employee <|-- Driver
+Employee <|-- Planner
+Employee <|-- AdministrativeStaff
+
+Vehicle "1" -- "0..*" Maintenance
+RepairShop "1" -- "0..*" Maintenance
+Employee "1" -- "0..*" Maintenance
+
+Customer "1" -- "0..*" TransportOrder
+Planner "1" -- "0..*" TransportOrder
+Driver "1" -- "0..*" TransportOrder
+Vehicle "1" -- "0..*" TransportOrder
+AdministrativeStaff "0..1" -- "0..*" TransportOrder
+PartnerCompany "0..1" -- "0..*" TransportOrder
+@enduml
